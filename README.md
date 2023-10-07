@@ -10,4 +10,4 @@ First try of a fullstack webapp with fastapi an react. This project serves as a 
 
 - GUI
     - Home page about the auother (me) with technical skills
-    - Prject Backlog page
+    - Prject Backlog paget
