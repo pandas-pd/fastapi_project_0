@@ -3,9 +3,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from settings import DATABASE_URL
 
-# Define the database file path
-#database_file = 'sqlite.db'
-
 # Create a SQLite database engine
 engine = create_engine(DATABASE_URL, echo=True)  # 'echo=True' for debugging
 
@@ -16,8 +13,10 @@ session = Session()
 # Define a declarative base class
 Base = declarative_base()
 
-#import models:
-from db.models import skills, project_backlog
+#import models, add new here:
+from db.models import skills 
+from db.models import project_backlog
+from db.models import enums
 
 # Database setup
 # Create the database and tables if they don't exist
