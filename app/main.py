@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from api import skills  # Import your route modules
+from db.base import engine
 from db import base
 
 #docu can be found under /docs#/default/
@@ -15,11 +16,7 @@ app = FastAPI(
     version         = "0.1",
 )
 
-# Database setup
-# Create the database and tables if they don't exist
-base.Base.metadata.create_all(bind=base.engine)
-
-#include routes
+#include routes, add news to add to funcitonality
 routes : list =[
     skills.Endpoint.router,
     #add new here
@@ -28,5 +25,5 @@ routes : list =[
 for route in routes:
     app.include_router(route)
 
-#app.include_router(skills.Endpoint.router)
+app.include_router(skills.Endpoint.router)
 #app.include_router(project_backlog.router)

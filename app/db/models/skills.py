@@ -15,7 +15,7 @@ class Libraries(Base):
     __tablename__ = "skills.libraries_lb"
 
     id_lb = Column(Integer, primary_key=True, index=True)
-    fk_pl = Column(Integer, ForeignKey("skills.programming_languages_pl.id_pl"), ondelete = "SET NULL")
+    fk_pl = Column(Integer, ForeignKey("skills.programming_languages_pl.id_pl"))
 
     name = Column(String, index=True, nullable=False)
     description = Column(String, nullable=True)

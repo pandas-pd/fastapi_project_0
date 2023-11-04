@@ -16,6 +16,13 @@ session = Session()
 # Define a declarative base class
 Base = declarative_base()
 
+#import models:
+from db.models import skills, project_backlog
+
+# Database setup
+# Create the database and tables if they don't exist
+Base.metadata.create_all(bind=engine)
+
 """
 if test == False
 # Define a class for your table
