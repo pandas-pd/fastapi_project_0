@@ -23,8 +23,8 @@ class Libraries(Base):
 
     #columns
     id_lb           = Column(Integer, primary_key = True, index = True)
-    fk_pl           = Column(Integer, ForeignKey("skills.programming_languages_pl.id_pl", onupdate = "CASCADE"))
-    fk_sl           = Column(Integer, ForeignKey("enum.skill_level_sl.id_sl", onupdate = "CASCADE"))
+    fk_pl           = Column(Integer, ForeignKey("skills.programming_languages_pl.id_pl", onupdate = "CASCADE"), nullable = False)
+    fk_sl           = Column(Integer, ForeignKey("enum.skill_level_sl.id_sl", onupdate = "CASCADE"), nullable = True)
 
     name            = Column(String, index = True, nullable = False)
     description     = Column(String, nullable = True)
