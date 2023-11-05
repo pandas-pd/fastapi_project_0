@@ -9,11 +9,17 @@
     - Creating the sqlite database
     - Populating the sqlite database with the needed Enum values
 
-### On the database
+### Notes to self
 - If new default values likes enums should be added as a default to the database if not yet in exisitng, add the enum models and values to `setup.py`
+- currently working on:
+    - `setup.py`:
+        - Implement a setup pipeline
+        - Populate enum models
+    - `.\app\services\skills.py`:
+        - Create read funciton for programming languages
+        - Create write funciton for programming languages
 
 ## Usefull commands:
-
 - Activate and deactivate Environment on windows:
     - `.\env\Scripts\activate`
     - `deactivate`
@@ -25,9 +31,8 @@
 
 ## To be implemented
 - REST API
-    - Technical Skills (Programming languaes)
+    - Technical Skills (Programming languaes and libs)
     - Project Backlog with GitHub link
-
 - GUI
     - Home page about the auother (me) with technical skills
     - Prject Backlog paget
