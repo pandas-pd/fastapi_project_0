@@ -10,5 +10,3 @@ class Endpoint():
 
         content = Read.all_programming_languages()
         return content
-
-
