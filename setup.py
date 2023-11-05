@@ -55,7 +55,7 @@ class Setup():
         elif (os.path.exists(venv_path) is False):
             pass
 
-        #crate venv
+        #create venv
         result : str = subprocess.run(
             command     = ["python", "-m", "venv" ,venv_path],
             text = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE
