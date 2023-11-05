@@ -23,8 +23,8 @@ class Setup():
         venv_name : str     = "test_run"
 
         #setup venv
-        venv_path       = Setup.create_venv(venv_name)
-        Setup.activate_venv(venv_path)
+        venv_path : str     = Setup.create_venv(venv_name)
+        venv_active: bool   = Setup.activate_venv(venv_path)
 
         #setup database
         #create database
@@ -34,7 +34,7 @@ class Setup():
         """creates the venv if not already existing"""
 
         #generating paths for venv
-        dir : str       = os.path.dirname(os.path.abspath(__file__))
+        dir : str           = os.path.dirname(os.path.abspath(__file__))
         venv_path : str     = os.path.join(dir, venv_name)
 
         try:
@@ -66,7 +66,15 @@ class Setup():
 
     def activate_venv(venv_path):
         """acitvate the virtual venv"""
-        pass
+
+        try:
+            command     = os.path.join(venv_path, "Scripts", "activate")
+            subprocess.run([activate_script], shell=True)
+            return True
+
+        except:
+            print(f"Something went wrong when acitvating the given environment. Make the given venv path is valid\n{venv_path}")
+            return False
 
 
 def chat_gpt_sample():
