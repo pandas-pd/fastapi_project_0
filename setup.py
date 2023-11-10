@@ -8,19 +8,13 @@
 import os
 import subprocess
 
-#Models and session handler
-from app.db import setup as db_setup
-
-#from app.db.base import session
-#from app.db.models.enums import *
-
 class Setup():
 
     @staticmethod
     def main():
 
         #variables for setup
-        venv_name : str             = "test_run"
+        venv_name : str             = "venv"
         requirements_file : str     = os.path.join(
                                         os.path.dirname(os.path.abspath(__file__)),
                                         "requirements.txt"
@@ -30,9 +24,6 @@ class Setup():
         venv_path : str     = Setup.create_venv(venv_name)
         venv_active: bool   = Setup.activate_venv(venv_path)
         Setup.install_moduls(venv_name = venv_name, requirements_file = requirements_file)
-
-        #call database setup script to create the database and populate the needed enums
-        db_setup.main()
 
         return
 
@@ -81,13 +72,6 @@ class Setup():
         except:
             print(f"Something went wrong when acitvating the given environment. Make the given venv path is valid\n{venv_path}")
             return False
-
-    def install_libs():
-        pass
-
-def chat_gpt_sample():
-
-        return
 
     @staticmethod
     def install_moduls(venv_name, requirements_file):
