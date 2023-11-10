@@ -76,6 +76,8 @@ class Setup():
             print(f"Something went wrong when acitvating the given environment. Make the given venv path is valid\n{venv_path}")
             return False
 
+    def install_libs():
+        pass
 
 def chat_gpt_sample():
 
