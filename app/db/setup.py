@@ -2,10 +2,10 @@
 import inspect
 
 #import base for session handling
-from app.db import base
+import base
 
 #import all enum models which need to be populated
-from app.db.models.enums import Skill_level
+from models.enums import Skill_level
 
 class Controller():
 
