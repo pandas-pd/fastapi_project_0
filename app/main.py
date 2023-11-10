@@ -24,6 +24,3 @@ routes : list =[
 
 for route in routes:
     app.include_router(route)
-
-app.include_router(skills.Endpoint.router)
-#app.include_router(project_backlog.router)

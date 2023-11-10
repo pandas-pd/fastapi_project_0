@@ -1,8 +1,7 @@
 """
 - Creation of the virtual environment
 - Installation of the needed packages
-- Creating the sqlite database
-- Populating the sqlite database with the needed Enum values
+- Calling the scritp which creates and populates the database with enums (locates in app/db/setup.py)
 """
 
 #python libs
@@ -10,26 +9,34 @@ import os
 import subprocess
 
 #Models and session handler
-from app.settings import DATABASE_URL
+from app.db import setup as db_setup
 
 #from app.db.base import session
 #from app.db.models.enums import *
 
 class Setup():
 
+    @staticmethod
     def main():
 
         #variables for setup
-        venv_name : str     = "test_run"
+        venv_name : str             = "test_run"
+        requirements_file : str     = os.path.join(
+                                        os.path.dirname(os.path.abspath(__file__)),
+                                        "requirements.txt"
+        )
 
         #setup venv
         venv_path : str     = Setup.create_venv(venv_name)
         venv_active: bool   = Setup.activate_venv(venv_path)
+        Setup.install_moduls(venv_name = venv_name, requirements_file = requirements_file)
 
-        #setup database
-        #create database
-        #populate enums
+        #call database setup script to create the database and populate the needed enums
+        db_setup.main()
 
+        return
+
+    @staticmethod
     def create_venv(venv_name : str):
         """creates the venv if not already existing"""
 
@@ -56,21 +63,20 @@ class Setup():
             pass
 
         #create venv
-        result : str = subprocess.run(
-            command     = ["python", "-m", "venv" ,venv_path],
-            text = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE
-        )
+        command     = ["python", "-m", "venv" ,venv_path]
+        result : str = subprocess.run(command, text = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         print(result)
 
         return venv_path
 
+    @staticmethod
     def activate_venv(venv_path):
         """acitvate the virtual venv"""
 
+        command = os.path.join(venv_path, "Scripts", "activate")
+
         try:
-            command     = os.path.join(venv_path, "Scripts", "activate")
-            subprocess.run([activate_script], shell=True)
-            return True
+            subprocess.run(command, shell=True)
 
         except:
             print(f"Something went wrong when acitvating the given environment. Make the given venv path is valid\n{venv_path}")
@@ -81,28 +87,18 @@ class Setup():
 
 def chat_gpt_sample():
 
-    import subprocess
+        return
 
-    # Specify the name of your virtual environment and the Python executable (change these as needed)
-    venv_name = "my_venv"
-    python_executable = "python3"  # Change to "python" or "python3" depending on your Python installation
+    @staticmethod
+    def install_moduls(venv_name, requirements_file):
 
-    # Create a virtual environment
-    create_venv_command = [python_executable, "-m", "venv", venv_name]
-    subprocess.run(create_venv_command)
+        try:
+            command = [venv_name + "\\Scripts\\pip", "install", "-r", requirements_file]
+            subprocess.run(command)
+        except:
+            quit(f"Something went wrong while installing the moduls from {requirements_file}")
 
-    # Activate the virtual environment (for Windows)
-    activate_script = f".\\{venv_name}\\Scripts\\activate"
-
-    # Alternatively, for Unix-like systems (e.g., Linux, macOS), you can use the following:
-    # activate_script = f"source {venv_name}/bin/activate"
-
-    subprocess.run([activate_script], shell=True)
-
-    # Install Python modules in the virtual environment
-    install_modules_command = [venv_name + "\\Scripts\\pip", "install", "module_name"]
-    subprocess.run(install_modules_command)
-
+        return
 
 if __name__ == "__main__":
     Setup.main()
