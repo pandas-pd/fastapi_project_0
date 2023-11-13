@@ -1,11 +1,12 @@
 #import for automation and ease of use
-import inspect
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+import os
 
 #import base for session handling
 import base
-
-#import all enum models which need to be populated
-from models.enums import Skill_level
+from base import enums
 
 class Controller():
 
@@ -14,7 +15,7 @@ class Controller():
 
         #add new models here
         enum_models : list = [
-            Skill_level,
+            enums.Skill_level,
         ]
 
         for model in enum_models:
@@ -37,18 +38,18 @@ class Controller():
         #add populating functions here
         Data.skill_level()
 
-class Data(object):
+class Data():
 
     def skill_level():
 
         #declare data
         objects : dict = [
-            Skill_level(code = 0,       value = "undefined"),
-            Skill_level(code = 1,       value = "novice"),
-            Skill_level(code = 2,       value = "competent"),
-            Skill_level(code = 3,       value = "advanced"),
-            Skill_level(code = 4,       value = "proficient"),
-            Skill_level(code = 5,       value = "expert"),
+            enums.Skill_level(code = 0,       value = "undefined"),
+            enums.Skill_level(code = 1,       value = "novice"),
+            enums.Skill_level(code = 2,       value = "competent"),
+            enums.Skill_level(code = 3,       value = "advanced"),
+            enums.Skill_level(code = 4,       value = "proficient"),
+            enums.Skill_level(code = 5,       value = "expert"),
         ]
 
         #write to database
