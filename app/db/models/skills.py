@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger
 from sqlalchemy.orm import relationship
 from db.base import Base
+import time
 
 class Programming_languages(Base):
 
@@ -10,11 +11,10 @@ class Programming_languages(Base):
     id_pl           = Column(Integer, primary_key = True, index = True)
     fk_sl           = Column(Integer, ForeignKey("enum.skill_level_sl.id_sl", onupdate = "CASCADE"))
 
-    name            = Column(String, index = True, nullable = False)
-    comment         = Column(String, nullable = True)
+    name            = Column(String(75), index = True, nullable = False)
+    comment         = Column(String(100), nullable = True)
 
-    #relations:
-    children        = relationship("Libraries", backref = "parent")
+    timestamp       = Column(BigInteger, nullable = False)
 
 
 class Libraries(Base):
@@ -29,4 +29,7 @@ class Libraries(Base):
     name            = Column(String, index = True, nullable = False)
     description     = Column(String, nullable = True)
 
+    timestamp       = Column(BigInteger, nullable = False)
+
     #relations:
+    children        = relationship("Programming_languages", backref = "child")

@@ -10,3 +10,7 @@ class Endpoint():
 
         content = Read.all_programming_languages()
         return content
+
+    @router.post("/add_programming_language")
+    def write_programming_language():
+        pass
