@@ -3,9 +3,3 @@ Powered by:
 - python 3.10
 - fastapi
 - sqlalchemy
-
-## Skills
-**read skills**
-
-## Enums
-**read enums**
