@@ -5,7 +5,7 @@ class Endpoint():
 
     router = APIRouter()
 
-    @router.get("/get_skill_levels")
+    @router.get("/get_skill_levels", tags = ["enum"])
     def get_skill_levels():
 
         response = Read.skill_level()
