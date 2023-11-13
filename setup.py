@@ -1,29 +1,29 @@
 """
 - Creation of the virtual environment
 - Installation of the needed packages
-- Calling the scritp which creates and populates the database with enums (locates in app/db/setup.py)
+- Calling the scritp which creates and populates the database with enums (locates in app/db/Setup_env.py)
 """
 
 #python libs
 import os
 import subprocess
 
-class Setup():
+class Setup_env():
 
     @staticmethod
     def main():
 
-        #variables for setup
+        #variables for Setup_env
         venv_name : str             = "venv"
         requirements_file : str     = os.path.join(
                                         os.path.dirname(os.path.abspath(__file__)),
                                         "requirements.txt"
         )
 
-        #setup venv
-        venv_path : str     = Setup.create_venv(venv_name)
-        venv_active: bool   = Setup.activate_venv(venv_path)
-        Setup.install_moduls(venv_name = venv_name, requirements_file = requirements_file)
+        #Setup_env venv
+        venv_path : str     = Setup_env.create_venv(venv_name)
+        venv_active: bool   = Setup_env.activate_venv(venv_path)
+        Setup_env.install_moduls(venv_name = venv_name, requirements_file = requirements_file)
 
         return
 
@@ -85,4 +85,5 @@ class Setup():
         return
 
 if __name__ == "__main__":
-    Setup.main()
+
+    Setup_env.main()
