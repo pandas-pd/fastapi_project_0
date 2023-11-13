@@ -15,7 +15,6 @@ class Read():
 
         #fetch data
         result : object     = session.execute(query)
-        #header : tuple      = result.keys()
         content : list      = result.fetchall()
 
         #format data
