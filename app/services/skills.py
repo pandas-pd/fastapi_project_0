@@ -35,7 +35,7 @@ class Write():
         session.add(new_pl)
         session.commit()
 
-        message = {"message" : pl_key}
+        message : dict = {"message" : pl_key}
 
         return message
 
@@ -75,7 +75,44 @@ class Read():
         return response
 
 class Update():
-    pass
+
+    @staticmethod
+    def programming_language(body, response):
+
+        #entry validation
+        pl_valid_entry : bool       = Validator.programming_language(body.key)
+
+        if pl_valid_entry is False:
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid entry key was passed: {body.key}"}
+
+        if body.key_skill_level != None:
+            skill_level_valid : bool    = Validator.skill_level(body.key_skill_level)
+
+            if skill_level_valid == False:
+                response.status_code = status.HTTP_400_BAD_REQUEST
+                return {"message" : f"invalid skill level key was passed: {body.key_skill_level}"}
+
+        #update entries, inefficient but it works
+        value_col_matcher = [
+            (body.name,                 Programming_languages.name),
+            (body.key_skill_level,      Programming_languages.fk_sl),
+            (body.comment,              Programming_languages.comment),
+            (int(time.time()),          Programming_languages.timestamp),
+        ]
+
+        for col in value_col_matcher:
+
+            if col[0] == None:
+                continue
+
+            session.query(Programming_languages).filter(Programming_languages.key == body.key).update({col[1] : col[0]})
+            session.commit()
+
+        #return message
+        message : dict = {"message" : f"update programming language entry with key: {body.key}"}
+        return message
+
 
 class Delete():
 
@@ -83,16 +120,16 @@ class Delete():
     def programming_language(body, response):
 
         #entry validation
-        pl_valid_entry : bool      = Validator.programming_language(body.key)
+        pl_valid_entry : bool       = Validator.programming_language(body.key)
 
         if pl_valid_entry is False:
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid entry key was given: {body.key_skill_level}"}
+            return {"message" : f"invalid entry key was passed: {body.key_skill_level}"}
 
         #delete entry
         session.query(Programming_languages).filter(Programming_languages.key == body.key).delete()
         session.commit()
 
         #return
-        message = {"message" : f"deleted programming_language entry with key: {body.key}"}
+        message : dict = {"message" : f"deleted programming_language entry with key: {body.key}"}
         return message
