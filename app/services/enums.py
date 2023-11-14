@@ -8,7 +8,7 @@ class Read():
 
         #define query
         query = select(
-            Skill_level.code, Skill_level.value,
+            Skill_level.key, Skill_level.value,
         ).select_from(
             Skill_level
         )
