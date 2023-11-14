@@ -9,7 +9,7 @@ class Skill_level(Base):
     #columns
     id_sl       = Column(Integer, primary_key = True, index = True)
 
-    code         = Column(Integer, nullable = False)
+    key         = Column(Integer, nullable = False)
     value        = Column(String(50), nullable = True)
 
     #relations

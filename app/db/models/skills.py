@@ -13,7 +13,7 @@ class Programming_languages(Base):
 
     name            = Column(String(75), index = True, nullable = False)
     comment         = Column(String(100), nullable = True)
-
+    key             = Column(Integer, nullable = False, unique = True)
     timestamp       = Column(BigInteger, nullable = False)
 
 
@@ -28,7 +28,7 @@ class Libraries(Base):
 
     name            = Column(String, index = True, nullable = False)
     description     = Column(String, nullable = True)
-
+    key             = Column(Integer, nullable = False, unique = True)
     timestamp       = Column(BigInteger, nullable = False)
 
     #relations:
