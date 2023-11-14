@@ -15,7 +15,7 @@ description = file.read()
 
 #instanciate app
 app = FastAPI(
-    title           = "Backen for webapp",
+    title           = "Backend for webapp",
     description     = description,
     version         = "0.1",
 )
