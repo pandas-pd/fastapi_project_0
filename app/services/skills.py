@@ -46,14 +46,12 @@ class Read():
     def all_programming_languages():
         """reads all skill from the corresponing model withoug filters"""
 
-        column_names = Programming_languages.__table__.columns.keys()
-
         query = select(
+            Programming_languages.key,
             Programming_languages.name,
             Programming_languages.comment,
+            Skill_level.key,
             Programming_languages.timestamp,
-            Skill_level.code,
-            Skill_level.code,
         ).join_from(
             Programming_languages,
             Skill_level,
@@ -61,11 +59,18 @@ class Read():
 
         content = session.execute(query).fetchall()
 
-        #to be formated
-        response = {
-            "cols" : column_names,
-            "content" : content,
-        }
+        #foramt data
+        response : list = []
+        for row in content:
+
+            item : dict = {
+                "key"           : row[0],
+                "name"          : row[1],
+                "comment"       : row[2],
+                "skill_level"   : row[3],
+                "timestamp"     : row[4],
+            }
+            response.append(item)
 
         return response
 
