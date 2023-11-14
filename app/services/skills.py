@@ -13,12 +13,12 @@ class Write():
     @staticmethod
     def programming_language(body, response):
 
-        skill_level_valid : bool = Validator.skill_level(int(body.skill_level))
+        skill_level_valid : bool = Validator.skill_level(int(body.key_skill_level))
 
         #validate skill level
         if skill_level_valid is False:
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid skill level key was given: {body.skill_level}"}
+            return {"message" : f"invalid skill level key was given: {body.key_skill_level}"}
 
         #generate key and
         pl_key = Generator.model_key(model = Programming_languages)
@@ -26,7 +26,7 @@ class Write():
 
         #write entry
         new_pl = Programming_languages(
-            fk_sl       = body.skill_level,
+            fk_sl       = body.key_skill_level,
             name        = body.name,
             comment     = body.comment,
             key         = pl_key,
@@ -78,4 +78,21 @@ class Update():
     pass
 
 class Delete():
-    pass
+
+    @staticmethod
+    def programming_language(body, response):
+
+        #entry validation
+        pl_valid_entry : bool      = Validator.programming_language(body.key)
+
+        if pl_valid_entry is False:
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid entry key was given: {body.key_skill_level}"}
+
+        #delete entry
+        session.query(Programming_languages).filter(Programming_languages.key == body.key).delete()
+        session.commit()
+
+        #return
+        message = {"message" : f"deleted programming_language entry with key: {body.key}"}
+        return message

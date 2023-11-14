@@ -13,7 +13,13 @@ class Endpoint():
         return response
 
     @router.post("/add_programming_language", tags = ["skills"])
-    def write_programming_language(body : Skills.add_programming_language, response: Response):
+    def add_programming_language(body : Skills.add_programming_language, response: Response):
 
         response  = Write.programming_language(body, response)
+        return response
+
+    @router.delete("/delete_programming_language", tags = ["skills"])
+    def delete_programming_language(body : Skills.delete_programming_language, response : Response):
+
+        response = Delete.programming_language(body, response)
         return response
