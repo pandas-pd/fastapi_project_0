@@ -44,12 +44,12 @@ class Data():
 
         #declare data
         objects : dict = [
-            enums.Skill_level(code = 0,       value = "undefined"),
-            enums.Skill_level(code = 1,       value = "novice"),
-            enums.Skill_level(code = 2,       value = "competent"),
-            enums.Skill_level(code = 3,       value = "advanced"),
-            enums.Skill_level(code = 4,       value = "proficient"),
-            enums.Skill_level(code = 5,       value = "expert"),
+            enums.Skill_level(key = 0,       value = "undefined"),
+            enums.Skill_level(key = 1,       value = "novice"),
+            enums.Skill_level(key = 2,       value = "competent"),
+            enums.Skill_level(key = 3,       value = "advanced"),
+            enums.Skill_level(key = 4,       value = "proficient"),
+            enums.Skill_level(key = 5,       value = "expert"),
         ]
 
         #write to database
