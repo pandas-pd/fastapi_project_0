@@ -18,6 +18,7 @@
     - `.\app\services\skills.py`:
         - Create read funciton for programming languages
         - Create write funciton for programming languages
+- post forwarding on yallo box: https://portforward.com/arris/tg3492lg-yl/
 
 ## Usefull commands:
 - Activate and deactivate Environment on windows:
