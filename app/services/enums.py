@@ -4,6 +4,7 @@ from db.models.enums import Skill_level
 
 class Read():
 
+    @staticmethod
     def skill_level():
 
         #define query
