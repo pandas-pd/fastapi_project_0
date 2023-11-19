@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response, status
 from services.skills import *
-from api.models import Skills
+from api.api_models import Skills
 
 class Endpoint():
 
