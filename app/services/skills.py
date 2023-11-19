@@ -20,13 +20,13 @@ class Write():
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid skill level key was given: {body.key_skill_level}"}
 
-        #generate key
+        #generate key and fetch keys
         pl_key = Generator.model_key(model = Programming_languages)
-        print(pl_key)
+        fk_sl = Key_to_id.skill_level(key = body.key_skill_level)
 
         #write entry
         new_pl = Programming_languages(
-            fk_sl       = body.key_skill_level,
+            fk_sl       = fk_sl,
             name        = body.name,
             comment     = body.comment,
             key         = pl_key,
@@ -47,8 +47,9 @@ class Write():
             skill_level_valid : bool                = Validator.skill_level(body.key_skill_level)
         else:
             skill_level_valid : bool                = True
+            body.key_skill_level                    = 0 # 0 = undefined
 
-        programming_language_valid : bool       = Validator.programming_language(body.key_programming_language)
+        programming_language_valid : bool           = Validator.programming_language(body.key_programming_language)
 
         if skill_level_valid is False:
             response.status_code = status.HTTP_400_BAD_REQUEST
@@ -58,13 +59,15 @@ class Write():
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid programming language key was given: {body.key_programming_language}"}
 
-        #generate library key
+        #generate library key and fetch programming language ids
         lb_key = Generator.model_key(Libraries)
+        fk_pl = Key_to_id.programming_languages(body.key_programming_language)
+        fk_sl = Key_to_id.skill_level(body.key_skill_level)
 
         #write entry
         new_lb = Libraries(
-            fk_pl       = body.key_programming_language,
-            fk_sl       = body.key_skill_level,
+            fk_pl       = fk_pl,
+            fk_sl       = fk_sl,
             name        = body.name,
             comment     = body.comment,
             key         = lb_key,
@@ -80,7 +83,7 @@ class Write():
 class Read():
 
     @staticmethod
-    def all_programming_languages():
+    def programming_languages():
         """reads all skill from the corresponing model withoug filters"""
 
         query = select(
@@ -89,10 +92,8 @@ class Read():
             Programming_languages.comment,
             Skill_level.key,
             Programming_languages.timestamp,
-        ).join_from(
-            Programming_languages,
-            Skill_level,
-        )
+        ).select_from(Programming_languages
+        ).join(Skill_level, isouter = False)
 
         content = session.execute(query).fetchall()
 
@@ -112,21 +113,25 @@ class Read():
         return response
 
     @staticmethod
-    def all_libraries():
+    def libraries(key_programming_language : int):
         """read all skills from the libraries table"""
+
+        print("\n\nRESTRUCTURE THIS JSON YOU DUMBASS\n\n")
 
         query = select(
             Libraries.key,
             Libraries.name,
             Libraries.comment,
             Skill_level.key,
+            Libraries.fk_pl,
             Programming_languages.key,
             Libraries.timestamp,
-        ).join_from(
-            Libraries,
-            Programming_languages,
-            Skill_level,
-        )
+        ).select_from(Libraries
+        ).join(Programming_languages, Libraries.programming_langauge, isouter = True
+        ).join(Skill_level, Libraries.skill_level, isouter = True)
+
+        if key_programming_language != None:
+            query = query.filter(Programming_languages.key == key_programming_language)
 
         content = session.execute(query).fetchall()
 

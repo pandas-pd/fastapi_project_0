@@ -17,7 +17,7 @@ class Endpoint():
     @router.get("/get_programming_languages", tags = ["skills"])
     def get_programming_languages():
 
-        response = Read.all_programming_languages()
+        response = Read.programming_languages()
         return response
 
     @router.put("/update_programming_language", tags = ["skills"])
@@ -40,8 +40,8 @@ class Endpoint():
         response = Write.library(body, response)
         return response
 
-    @router.get("/get_libraries", tags = ["skills"])
-    def get_libraries():
+    @router.get("/get_libraries/", tags = ["skills"])
+    def get_libraries(key_programming_language : int = None):
 
-        response = Read.all_libraries()
+        response = Read.libraries(key_programming_language)
         return response

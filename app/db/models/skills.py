@@ -16,6 +16,9 @@ class Programming_languages(Base):
     key             = Column(Integer, nullable = False, unique = True)
     timestamp       = Column(BigInteger, nullable = False)
 
+    #relations
+    skill_level     = relationship("Skill_level", foreign_keys = [fk_sl])
+
 
 class Libraries(Base):
 
@@ -31,5 +34,6 @@ class Libraries(Base):
     key             = Column(Integer, nullable = False, unique = True)
     timestamp       = Column(BigInteger, nullable = False)
 
-    #relations:
-    children        = relationship("Programming_languages", backref = "child")
+    #relations
+    programming_langauge        = relationship("Programming_languages", foreign_keys=[fk_pl])
+    skill_level                 = relationship("Skill_level", foreign_keys = [fk_sl])
