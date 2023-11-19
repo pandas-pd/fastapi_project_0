@@ -1,7 +1,7 @@
 from db.base import session
 from sqlalchemy import select, insert, delete, update
 from db.models.enums import Skill_level
-from db.models.skills import Programming_languages
+from db.models.skills import Programming_languages, Libraries
 import random
 
 class Validator():
@@ -61,3 +61,33 @@ class Generator():
             key = random.randint(100_000, 999_999)
 
         return key
+
+
+class Key_to_id():
+
+    @staticmethod
+    def skill_level(key : int) -> int:
+
+        query = select(Skill_level.id_sl).select_from(Skill_level).where(Skill_level.key == key)
+        content = session.execute(query).fetchone()
+
+        id = int(content[0])
+        return id
+
+    @staticmethod
+    def programming_languages(key : int) -> int:
+
+        query = select(Programming_languages.id_pl).select_from(Programming_languages).where(Programming_languages.key == key)
+        content = session.execute(query).fetchone()
+
+        id = int(content[0])
+        return id
+
+    @staticmethod
+    def libraries(key : int) -> int:
+
+        query = select(Libraries.id_lb).select_from(Libraries).where(Libraries).where(Libraries.key == key)
+        content = session.execute(query).fetchone()
+
+        id = int(content[0])
+        return id
