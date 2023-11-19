@@ -1,4 +1,4 @@
-#database file
+#database file, add as dynamic path to minimize seutp errors
 DATABASE_URL = "sqlite:///sqlite.db"
 
 #other settings
