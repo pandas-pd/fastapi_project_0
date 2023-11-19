@@ -27,7 +27,7 @@ class Libraries(Base):
     fk_sl           = Column(Integer, ForeignKey("enum.skill_level_sl.id_sl", onupdate = "CASCADE"), nullable = True)
 
     name            = Column(String, index = True, nullable = False)
-    description     = Column(String, nullable = True)
+    comment         = Column(String, nullable = True)
     key             = Column(Integer, nullable = False, unique = True)
     timestamp       = Column(BigInteger, nullable = False)
 

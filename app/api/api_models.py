@@ -17,3 +17,9 @@ class Skills():
     class delete_programming_language(BaseModel):
         key : int
         comment : Optional[str]
+
+    class add_library(BaseModel):
+        name : str
+        key_programming_language : int
+        key_skill_level : Optional[int]
+        comment : Optional[str]

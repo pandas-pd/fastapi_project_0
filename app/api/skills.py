@@ -34,3 +34,14 @@ class Endpoint():
 
     # Libraries
 
+    @router.post("/add_library", tags = ["skills"])
+    def add_library(body : Skills.add_library, response : Response):
+
+        response = Write.library(body, response)
+        return response
+
+    @router.get("/get_libraries", tags = ["skills"])
+    def get_libraries():
+
+        response = Read.all_libraries()
+        return response

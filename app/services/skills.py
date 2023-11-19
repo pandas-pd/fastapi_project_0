@@ -13,14 +13,14 @@ class Write():
     @staticmethod
     def programming_language(body, response):
 
+         #validate skill level
         skill_level_valid : bool = Validator.skill_level(int(body.key_skill_level))
 
-        #validate skill level
         if skill_level_valid is False:
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid skill level key was given: {body.key_skill_level}"}
 
-        #generate key and
+        #generate key
         pl_key = Generator.model_key(model = Programming_languages)
         print(pl_key)
 
@@ -39,6 +39,43 @@ class Write():
 
         return message
 
+    @staticmethod
+    def library(body, response):
+
+        #validated skill level
+        if body.key_skill_level != None:
+            skill_level_valid : bool                = Validator.skill_level(body.key_skill_level)
+        else:
+            skill_level_valid : bool                = True
+
+        programming_language_valid : bool       = Validator.programming_language(body.key_programming_language)
+
+        if skill_level_valid is False:
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid skill level key was given: {body.key_skill_level}"}
+
+        elif programming_language_valid is False:
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid programming language key was given: {body.key_programming_language}"}
+
+        #generate library key
+        lb_key = Generator.model_key(Libraries)
+
+        #write entry
+        new_lb = Libraries(
+            fk_pl       = body.key_programming_language,
+            fk_sl       = body.key_skill_level,
+            name        = body.name,
+            comment     = body.comment,
+            key         = lb_key,
+            timestamp   = int(time.time())
+        )
+
+        session.add(new_lb)
+        session.commit()
+
+        message : dict = {"message" : lb_key}
+        return message
 
 class Read():
 
@@ -73,6 +110,43 @@ class Read():
             response.append(item)
 
         return response
+
+    @staticmethod
+    def all_libraries():
+        """read all skills from the libraries table"""
+
+        query = select(
+            Libraries.key,
+            Libraries.name,
+            Libraries.comment,
+            Skill_level.key,
+            Programming_languages.key,
+            Libraries.timestamp,
+        ).join_from(
+            Libraries,
+            Programming_languages,
+            Skill_level,
+        )
+
+        content = session.execute(query).fetchall()
+
+        #foramt data
+        response : list = []
+        for row in content:
+
+            item : dict = {
+                "key"                   : row[0],
+                "name"                  : row[1],
+                "comment"               : row[2],
+                "skill_level"           : row[3],
+                "timestamp"             : row[4],
+                "programming_language"  : row[5],
+                "timestamp"             : row[6]
+            }
+            response.append(item)
+
+        return response
+
 
 class Update():
 
