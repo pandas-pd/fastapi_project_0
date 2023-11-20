@@ -41,6 +41,22 @@ class Validator():
         else:
             return False
 
+    @staticmethod
+    def library(key : int) -> bool:
+
+        #fetch data
+        query       = select(Libraries.key).select_from(Libraries).where(Libraries.key == key)
+        content     = session.execute(query).fetchone() #key is unique
+
+        if content == None:
+            return False
+        else:
+            return True
+
+        print("\n\nContent of fetch one:")
+        print(content[0])
+
+        return
 
 class Generator():
 

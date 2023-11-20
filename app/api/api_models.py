@@ -23,3 +23,9 @@ class Skills():
         key_programming_language : int
         key_skill_level : Optional[int]
         comment : Optional[str]
+
+    class update_library(BaseModel):
+        key : int
+        name : Optional[str]
+        key_skill_level : Optional[int]
+        comment : Optional[str]

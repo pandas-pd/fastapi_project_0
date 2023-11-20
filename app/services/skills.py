@@ -49,13 +49,11 @@ class Write():
             skill_level_valid : bool                = True
             body.key_skill_level                    = 0 # 0 = undefined
 
-        programming_language_valid : bool           = Validator.programming_language(body.key_programming_language)
-
         if skill_level_valid is False:
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid skill level key was given: {body.key_skill_level}"}
 
-        elif programming_language_valid is False:
+        elif Validator.programming_language(body.key_programming_language) is False:
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid programming language key was given: {body.key_programming_language}"}
 
@@ -116,15 +114,13 @@ class Read():
     def libraries(key_programming_language : int):
         """read all skills from the libraries table"""
 
-        print("\n\nRESTRUCTURE THIS JSON YOU DUMBASS\n\n")
-
         query = select(
+            Programming_languages.key,
             Libraries.key,
             Libraries.name,
             Libraries.comment,
             Skill_level.key,
             Libraries.fk_pl,
-            Programming_languages.key,
             Libraries.timestamp,
         ).select_from(Libraries
         ).join(Programming_languages, Libraries.programming_langauge, isouter = True
@@ -135,20 +131,22 @@ class Read():
 
         content = session.execute(query).fetchall()
 
-        #foramt data
-        response : list = []
+        #format data
+        response : dict = {}
+
+        for row in content:
+            response[row[0]] = []
+
         for row in content:
 
-            item : dict = {
-                "key"                   : row[0],
-                "name"                  : row[1],
-                "comment"               : row[2],
-                "skill_level"           : row[3],
-                "timestamp"             : row[4],
-                "programming_language"  : row[5],
-                "timestamp"             : row[6]
-            }
-            response.append(item)
+            response[row[0]].append({
+                "key_library"               : row[1],
+                "name_library"              : row[2],
+                "comment"                   : row[3],
+                "skill_level"               : row[4],
+                "timestamp"                 : row[5],
+                "timestamp"                 : row[6]
+            })
 
         return response
 
@@ -158,10 +156,8 @@ class Update():
     @staticmethod
     def programming_language(body, response):
 
-        #entry validation
-        pl_valid_entry : bool       = Validator.programming_language(body.key)
-
-        if pl_valid_entry is False:
+        #validation
+        if (Validator.programming_language(body.key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid entry key was passed: {body.key}"}
 
@@ -191,6 +187,15 @@ class Update():
         #return message
         message : dict = {"message" : f"update programming language entry with key: {body.key}"}
         return message
+
+    @staticmethod
+    def library(body, response):
+
+        #validation
+        if (Validator.library(key = body.key) == False):
+            pass
+
+        return None
 
 
 class Delete():

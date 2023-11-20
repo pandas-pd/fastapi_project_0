@@ -45,3 +45,9 @@ class Endpoint():
 
         response = Read.libraries(key_programming_language)
         return response
+
+    @router.put("/update_library", tags = ["skills"])
+    def update_library(body : Skills.update_library, response : Response):
+
+        response = Update.library(body, response)
+        return response
