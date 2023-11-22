@@ -29,3 +29,7 @@ class Skills():
         name : Optional[str]
         key_skill_level : Optional[int]
         comment : Optional[str]
+
+    class delete_library(BaseModel):
+        key : int
+        comment : Optional[str]

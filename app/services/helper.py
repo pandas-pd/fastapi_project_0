@@ -10,36 +10,27 @@ class Validator():
     def skill_level(key : int) -> bool:
 
         #fetch data
-        query       = select(Skill_level.key).select_from(Skill_level)
-        content      = session.execute(query).fetchall()
+        query       = select(Skill_level.key).select_from(Skill_level).where(Skill_level.key == key)
+        content      = session.execute(query).fetchone() #key is unique
 
-        #create list with available codes
-        keys : list         = []
-        for row in content:
-            keys.append(row[0])
-
-        #check validity
-        if (key in keys):
-            return True
-        else:
+        #validate key
+        if content == None:
             return False
+        else:
+            return True
 
     @staticmethod
     def programming_language(key : int) -> bool:
 
         #fetch data
-        query       = select(Programming_languages.key).select_from(Programming_languages)
-        content     = session.execute(query).fetchall()
+        query       = select(Programming_languages.key).select_from(Programming_languages).where(Programming_languages.key == key)
+        content     = session.execute(query).fetchone() #key is unique
 
-        #create list with availbale entries
-        keys : list         = []
-        for row in content:
-            keys.append(row[0])
-
-        if (key in keys):
-            return True
-        else:
+        #validate key
+        if content == None:
             return False
+        else:
+            return True
 
     @staticmethod
     def library(key : int) -> bool:
@@ -53,10 +44,6 @@ class Validator():
         else:
             return True
 
-        print("\n\nContent of fetch one:")
-        print(content[0])
-
-        return
 
 class Generator():
 

@@ -41,13 +41,19 @@ class Endpoint():
         return response
 
     @router.get("/get_libraries/", tags = ["skills"])
-    def get_libraries(key_programming_language : int = None):
+    def get_libraries(key_programming_language : int, response : Response):
 
-        response = Read.libraries(key_programming_language)
+        response = Read.libraries(key_programming_language, response)
         return response
 
     @router.put("/update_library", tags = ["skills"])
     def update_library(body : Skills.update_library, response : Response):
 
         response = Update.library(body, response)
+        return response
+
+    @router.delete("/delete_library", tags = ["skills"])
+    def delete_library(body: Skills.delete_library, response : Response):
+
+        response = Delete.library(body, response)
         return response

@@ -9,7 +9,7 @@ class Programming_languages(Base):
 
     #columns
     id_pl           = Column(Integer, primary_key = True, index = True)
-    fk_sl           = Column(Integer, ForeignKey("enum.skill_level_sl.id_sl", onupdate = "CASCADE"))
+    fk_sl           = Column(Integer, ForeignKey("enum.skill_level_sl.id_sl", onupdate = "RESTRICT"))
 
     name            = Column(String(75), index = True, nullable = False)
     comment         = Column(String(100), nullable = True)
@@ -26,7 +26,7 @@ class Libraries(Base):
 
     #columns
     id_lb           = Column(Integer, primary_key = True, index = True)
-    fk_pl           = Column(Integer, ForeignKey("skills.programming_languages_pl.id_pl", onupdate = "CASCADE"), nullable = False)
+    fk_pl           = Column(Integer, ForeignKey("skills.programming_languages_pl.id_pl", onupdate = "RESTRICT"), nullable = False)
     fk_sl           = Column(Integer, ForeignKey("enum.skill_level_sl.id_sl", onupdate = "CASCADE"), nullable = True)
 
     name            = Column(String, index = True, nullable = False)

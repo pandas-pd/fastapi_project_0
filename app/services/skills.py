@@ -13,10 +13,8 @@ class Write():
     @staticmethod
     def programming_language(body, response):
 
-         #validate skill level
-        skill_level_valid : bool = Validator.skill_level(int(body.key_skill_level))
-
-        if skill_level_valid is False:
+        #validte key
+        if (Validator.skill_level(int(body.key_skill_level)) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid skill level key was given: {body.key_skill_level}"}
 
@@ -78,6 +76,7 @@ class Write():
         message : dict = {"message" : lb_key}
         return message
 
+
 class Read():
 
     @staticmethod
@@ -111,41 +110,38 @@ class Read():
         return response
 
     @staticmethod
-    def libraries(key_programming_language : int):
+    def libraries(key_programming_language : int, response):
         """read all skills from the libraries table"""
 
+        #validation
+        if (Validator.programming_language(key = key_programming_language) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid porgramming_language key was provided: {key_programming_language}"}
+
         query = select(
-            Programming_languages.key,
             Libraries.key,
             Libraries.name,
             Libraries.comment,
             Skill_level.key,
-            Libraries.fk_pl,
             Libraries.timestamp,
         ).select_from(Libraries
         ).join(Programming_languages, Libraries.programming_langauge, isouter = True
-        ).join(Skill_level, Libraries.skill_level, isouter = True)
-
-        if key_programming_language != None:
-            query = query.filter(Programming_languages.key == key_programming_language)
+        ).join(Skill_level, Libraries.skill_level, isouter = True
+        ).filter(Programming_languages.key == key_programming_language)
 
         content = session.execute(query).fetchall()
 
         #format data
-        response : dict = {}
-
-        for row in content:
-            response[row[0]] = []
+        response : list = []
 
         for row in content:
 
-            response[row[0]].append({
-                "key_library"               : row[1],
-                "name_library"              : row[2],
-                "comment"                   : row[3],
-                "skill_level"               : row[4],
-                "timestamp"                 : row[5],
-                "timestamp"                 : row[6]
+            response.append({
+                "key_library"               : row[0],
+                "name_library"              : row[1],
+                "comment"                   : row[2],
+                "skill_level"               : row[3],
+                "timestamp"                 : row[4],
             })
 
         return response
@@ -191,29 +187,69 @@ class Update():
     @staticmethod
     def library(body, response):
 
-        #validation
+        #validation entry and skill level key
         if (Validator.library(key = body.key) == False):
-            pass
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid entry key was passed: {body.key}"}
 
-        return None
+        elif ((body.key_skill_level != None) and (Validator.skill_level(key = body.key_skill_level) == False)):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid skill level key was passed: {body.key_skill_level}"}
+
+        #translate key
+        if (body.key_skill_level != None):
+            fk_sl = Key_to_id.skill_level(key = body.key_skill_level)
+        else:
+            fk_sl = None
+
+        #update entries, inefficient but it works
+        value_col_matcher = [
+            (body.name,                 Libraries.name),
+            (fk_sl,                     Libraries.fk_sl),
+            (body.comment,              Libraries.comment),
+            (int(time.time()),          Libraries.timestamp),
+        ]
+
+        for col in value_col_matcher:
+
+            if col[0] == None:
+                continue #skipp not needed values
+
+            session.query(Libraries).filter(Libraries.key == body.key).update({col[1] : col[0]})
+            session.commit()
+
+        #return message
+        message : dict = {"message" : f"update library language entry with key: {body.key}"}
+        return message
 
 
 class Delete():
 
     @staticmethod
     def programming_language(body, response):
+        """deletes all library entries as well"""
 
-        #entry validation
-        pl_valid_entry : bool       = Validator.programming_language(body.key)
-
-        if pl_valid_entry is False:
+        #validate entry
+        if (Validator.programming_language(body.key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid entry key was passed: {body.key_skill_level}"}
+            return {"message" : f"invalid entry key was passed: {body.key}"}
 
         #delete entry
         session.query(Programming_languages).filter(Programming_languages.key == body.key).delete()
         session.commit()
 
         #return
-        message : dict = {"message" : f"deleted programming_language entry with key: {body.key}"}
-        return message
+        return {"message" : f"deleted programming_language entry with key: {body.key}"}
+
+    @staticmethod
+    def library(body, response):
+
+        #validate entry
+        if (Validator.library(key = body.key) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid entry key was passes: {body.key}"}
+
+        session.query(Libraries).filter(Libraries.key == body.key).delete()
+        session.commit()
+
+        return {"message" : f"deleted libray entry with key: {body.key}"}
