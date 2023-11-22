@@ -10,8 +10,21 @@ class Skill_level(Base):
     id_sl       = Column(Integer, primary_key = True, index = True)
 
     key         = Column(Integer, nullable = False)
-    value        = Column(String(50), nullable = True)
+    value       = Column(String(50), nullable = True)
 
     #relations
     children        = relationship("Programming_languages", backref = "parent")
     children        = relationship("Libraries", backref = "parent")
+
+class Project_status(Base):
+
+    __tablename__ = "enum.project_status"
+
+    #columns
+    id_ps       = Column(Integer, primary_key = True, index = True)
+
+    key         = Column(Integer, nullable = False)
+    value       = Column(String(50), nullable = True)
+
+    #relations
+    children        = relationship("Projects", backref = "parent")

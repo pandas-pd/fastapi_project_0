@@ -16,6 +16,7 @@ class Controller():
         #add new models here
         enum_models : list = [
             enums.Skill_level,
+            enums.Project_status,
         ]
 
         for model in enum_models:
@@ -37,9 +38,11 @@ class Controller():
 
         #add populating functions here
         Data.skill_level()
+        Data.project_status()
 
 class Data():
 
+    @staticmethod
     def skill_level():
 
         #declare data
@@ -57,6 +60,27 @@ class Data():
         base.session.commit()
 
         print("skill_level enum populated")
+        return
+
+    @staticmethod
+    def project_status():
+
+        #declare data
+        objects : dict [
+            enums.Project_status(key = 0,       value = "undefined"),
+            enums.Project_status(key = 1,       value = "idea"),
+            enums.Project_status(key = 2,       value = "concept"),
+            enums.Project_status(key = 3,       value = "in progress"),
+            enums.Project_status(key = 4,       value = "done"),
+            enums.Project_status(key = 5,       value = "cancelled"),
+        ]
+
+        base.session.bulk_save_objects(objects)
+        base.session.commit()
+
+        print("project_status enum populated")
+        return
+
         return
 
 if __name__ == "__main__":
