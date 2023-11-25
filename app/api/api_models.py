@@ -33,3 +33,12 @@ class Skills():
     class delete_library(BaseModel):
         key : int
         comment : Optional[str]
+
+class Projects():
+
+    class add_project(BaseModel):
+        name : str
+        description : str
+        sequence_number : Optional[str]
+        link : Optional[str]
+        key_project_status : int

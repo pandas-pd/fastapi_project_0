@@ -23,8 +23,8 @@ session = Session()
 Base = declarative_base()
 
 #import models, add new here:
-from db.models import skills 
-from db.models import project_backlog
+from db.models import skills
+from db.models import projects
 from db.models import enums
 
 # Database setup. Create the database and tables if they don't exist

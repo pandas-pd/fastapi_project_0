@@ -18,7 +18,7 @@ class Skill_level(Base):
 
 class Project_status(Base):
 
-    __tablename__ = "enum.project_status"
+    __tablename__ = "enum.project_status_ps"
 
     #columns
     id_ps       = Column(Integer, primary_key = True, index = True)

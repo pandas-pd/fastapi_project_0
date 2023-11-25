@@ -238,6 +238,8 @@ class Delete():
         session.query(Programming_languages).filter(Programming_languages.key == body.key).delete()
         session.commit()
 
+        #implement that all added libs will be deleted
+
         #return
         return {"message" : f"deleted programming_language entry with key: {body.key}"}
 
