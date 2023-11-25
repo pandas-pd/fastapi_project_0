@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api import skills, enums  # Import your route modules
+from api import skills, enums, projects # Import your route modules
 from db.base import engine
 from db import base
 import os
@@ -17,13 +17,14 @@ description = file.read()
 app = FastAPI(
     title           = "Backend for webapp",
     description     = description,
-    version         = "0.1",
+    version         = "0.2",
 )
 
 #include routes, add news to add to funcitonality
 routes : list =[
     skills.Endpoint.router,
     enums.Endpoint.router,
+    projects.Endpoint.router,
     #add new here
 ]
 
