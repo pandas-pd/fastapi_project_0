@@ -66,7 +66,7 @@ class Data():
     def project_status():
 
         #declare data
-        objects : dict [
+        objects : dict = [
             enums.Project_status(key = 0,       value = "undefined"),
             enums.Project_status(key = 1,       value = "idea"),
             enums.Project_status(key = 2,       value = "concept"),
