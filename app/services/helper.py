@@ -1,7 +1,10 @@
 from db.base import session
 from sqlalchemy import select, insert, delete, update
-from db.models.enums import Skill_level
+
+from db.models.enums import Skill_level, Project_status
 from db.models.skills import Programming_languages, Libraries
+from db.models.projects import Projects
+
 import random
 
 class Validator():
@@ -44,26 +47,42 @@ class Validator():
         else:
             return True
 
+    @staticmethod
+    def project_status(key : int) -> bool:
 
-class Generator():
+        #fetch enum data
+        query       = select(Project_status.key).select_from(Project_status).where(Project_status.key == key)
+        conten      = session.execute(query).fetchone() #key is unique
+
+        if conten == None:
+            return False
+        else:
+            return True
 
     @staticmethod
-    def model_key(model : object) -> int:
+    def sequence_number(number : int) -> bool:
+        """validates order number, can be in range [1, n+1])"""
 
-        #fetch keys in model
-        keys : list = []
-        query       = select(model.key).select_from(model)
-        content     = session.execute(query).fetchall()
+        #fetch empty data
+        if number == None:
+            return True
 
-        for row in content:
-            keys.append(int(row[0]))
+        #fetch data and order it
+        query           = select(Projects.sequence_number).select_from(Projects).where(Projects.sequence_number != None)
+        conten          = session.execute(query).fetchall()
+        sequence        = [row[0] for row in conten]
 
-        #generate new key
-        key = None
-        while (key == None or key in keys):
-            key = random.randint(100_000, 999_999)
+        sequence.sort()
 
-        return key
+        #validate order number (can be in range [0, n+1]). rearanging is done in separate funciton
+        if (len(sequence) == 0) and (number == 1):
+            return True
+
+        elif (len(sequence) > 0) and ( (number in sequence) or (number - 1 == sequence[-1])):
+            return True
+
+        else:
+            return False
 
 
 class Key_to_id():
@@ -94,3 +113,40 @@ class Key_to_id():
 
         id = int(content[0])
         return id
+
+    @staticmethod
+    def project_status(key : int) -> int:
+
+        query = select(Project_status.id_ps).select_from(Project_status).where(Project_status.key == key)
+        content = session.execute(query).fetchone()
+
+        id = int(content[0])
+        return id
+
+
+class DB():
+
+    @staticmethod
+    def generate_model_key(model : object) -> int:
+
+        #fetch keys in model
+        keys : list = []
+        query       = select(model.key).select_from(model)
+        content     = session.execute(query).fetchall()
+
+        for row in content:
+            keys.append(int(row[0]))
+
+        #generate new key
+        key = None
+        while (key == None or key in keys):
+            key = random.randint(100_000, 999_999)
+
+        return key
+
+
+    @staticmethod
+    def update_project_sequence(tba_sequence_number : int) -> None:
+        """shifts the sequence number of the projects table when entering or updating an entry"""
+
+        pass
