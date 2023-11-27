@@ -19,7 +19,7 @@ class Write():
             return {"message" : f"invalid skill level key was given: {body.key_skill_level}"}
 
         #generate key and fetch keys
-        pl_key = Generator.model_key(model = Programming_languages)
+        pl_key = DB.generate_model_key(model = Programming_languages)
         fk_sl = Key_to_id.skill_level(key = body.key_skill_level)
 
         #write entry
@@ -56,7 +56,7 @@ class Write():
             return {"message" : f"invalid programming language key was given: {body.key_programming_language}"}
 
         #generate library key and fetch programming language ids
-        lb_key = Generator.model_key(Libraries)
+        lb_key = DB.generate_model_key(Libraries)
         fk_pl = Key_to_id.programming_languages(body.key_programming_language)
         fk_sl = Key_to_id.skill_level(body.key_skill_level)
 
