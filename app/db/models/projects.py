@@ -5,7 +5,7 @@ import time
 
 class Projects(Base):
 
-    __tablename__ = "project.projects"
+    __tablename__ = "project.projects_pr"
 
     #columns
     id_pr           = Column(Integer, primary_key = True, index = True)
@@ -14,6 +14,7 @@ class Projects(Base):
     name            = Column(String(100), nullable = False)
     description     = Column(String(500), nullable = True)
     sequence_number = Column(Integer, nullable = True)
+    key             = Column(Integer, nullable = False, unique = True)
     link            = Column(String(250), nullable = True)
 
     #relationships
