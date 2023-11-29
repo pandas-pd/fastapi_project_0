@@ -4,9 +4,12 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
+#import database url
+from app.settings import DATABASE_URL
+
 #import base for session handling
-import base
-from base import enums
+from app.db import base
+from app.db.base import enums
 
 class Controller():
 
