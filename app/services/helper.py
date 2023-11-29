@@ -63,22 +63,7 @@ class Validator():
     def sequence_number(number : int) -> bool:
         """validates order number, can be in range [1, n+1])"""
 
-        #fetch empty data
-        if number == None:
-            return True
-
-        #fetch data and order it
-        query           = select(Projects.sequence_number).select_from(Projects).where(Projects.sequence_number != None)
-        conten          = session.execute(query).fetchall()
-        sequence        = [row[0] for row in conten]
-
-        sequence.sort()
-
-        #validate order number (can be in range [0, n+1]). rearanging is done in separate funciton
-        if (len(sequence) == 0) and (number == 1):
-            return True
-
-        elif (len(sequence) > 0) and ( (number in sequence) or (number - 1 == sequence[-1])):
+        if (number == None) or (number > 0):
             return True
 
         else:

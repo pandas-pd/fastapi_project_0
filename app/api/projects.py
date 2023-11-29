@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response, status
 from services.projects import *
-from api.api_models import Projects 
+from api.api_models import Projects
 
 class Endpoint():
 
@@ -9,7 +9,7 @@ class Endpoint():
     #project
 
     @router.post("/add_project", tags = ["projects"])
-    def add_project(body = Projects.add_project, response = Response):
+    def add_project(body : Projects.add_project, response : Response):
 
         response = Write.project(body = body, response = response)
         return response
