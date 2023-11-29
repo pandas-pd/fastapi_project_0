@@ -14,5 +14,5 @@ class Endpoint():
     @router.get("/get_project_status", tags = ["enum"])
     def get_project_status():
 
-        response = {"message" : "implement this you rice cracker"}
+        response = Read.project_status()
         return response
