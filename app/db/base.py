@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
-#needed to run the setup.py script for the models
+#needed to run the setup.py script for the models. Could all be packed into the setup_db.py but i am lazy
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
