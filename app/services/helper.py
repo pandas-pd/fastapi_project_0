@@ -143,10 +143,3 @@ class DB():
             key = random.randint(100_000, 999_999)
 
         return key
-
-
-    @staticmethod
-    def update_project_sequence(tba_sequence_number : int) -> None:
-        """shifts the sequence number of the projects table when entering or updating an entry"""
-
-        pass
