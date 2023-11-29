@@ -13,3 +13,9 @@ class Endpoint():
 
         response = Write.project(body = body, response = response)
         return response
+
+    @router.get("/get_projects", tags = ["projects"])
+    def get_projects():
+
+        response = Read.project()
+        return response

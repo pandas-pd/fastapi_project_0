@@ -14,8 +14,9 @@ class Projects(Base):
     name            = Column(String(100), nullable = False)
     description     = Column(String(500), nullable = True)
     sequence_number = Column(Integer, nullable = True)
-    key             = Column(Integer, nullable = False, unique = True)
     link            = Column(String(250), nullable = True)
+    key             = Column(Integer, nullable = False, unique = True)
+    timestamp       = Column(BigInteger, nullable = False)
 
     #relationships
     porject_status  = relationship("Project_status", backref = "parent")

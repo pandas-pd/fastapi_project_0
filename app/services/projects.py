@@ -40,6 +40,7 @@ class Write():
             description     = body.description,
             sequence_number = sequence_number,
             link            = body.link,
+            timestamp       = int(time.time()),
         )
 
         session.add(new_pr)
@@ -49,11 +50,42 @@ class Write():
 
         return message
 
+
 class Read():
 
     @staticmethod
-    def project(body, response):
-        pass
+    def project():
+
+        query = select(
+            Projects.key,
+            Projects.name,
+            Projects.description,
+            Projects.sequence_number,
+            Projects.link,
+            Project_status.key,
+            Projects.timestamp,
+        ).select_from(Projects
+        ).join(Project_status, isouter = True)
+
+        conten = session.execute(query).fetchall()
+
+        #format data
+        response : list = []
+        for row in conten:
+
+            item : dict = {
+                "key"               : row[0],
+                "name"              : row[1],
+                "description"       : row[2],
+                "sequence_number"   : row[3],
+                "link"              : row[4],
+                "project_status"    : row[5],
+                "timestamp"         : row[6],
+            }
+            response.append(item)
+
+        return response
+
 
 class Udpdate():
 
