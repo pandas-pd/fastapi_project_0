@@ -39,6 +39,6 @@ class Projects():
     class add_project(BaseModel):
         name : str
         description : str
-        sequence_number : Optional[str]
+        sequence_number : Optional[int]
         link : Optional[str]
         key_project_status : int
