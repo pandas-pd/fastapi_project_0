@@ -93,7 +93,7 @@ class Udpdate():
     def project(body, response):
 
         #validate key
-        if (Validator.project_key(body.key) == False):
+        if (Validator.project(body.key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid project key was given: {body.key}"}
 
@@ -128,14 +128,24 @@ class Udpdate():
 
         return {"message" : f"update project entry with key: {body.key}"}
 
+
 class Delete():
 
     @staticmethod
     def project(body, response):
 
-        #validate inputs
-        pass
+        #delete entry
+        if (Validator.project(key = body.key) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid project key was given: {body.key}"}
 
+        #handle sequence
+        Sequence_logic.sequence_update_on_delete(key = body.key)
+
+        session.query(Projects).filter(Projects.key == body.key).delete()
+        session.commit()
+
+        return {"message" : f"deleted libray entry with key: {body.key}"}
 
 
 class Sequence_logic():
@@ -207,9 +217,25 @@ class Sequence_logic():
         return
 
     @staticmethod
-    def sequence_update_on_delete(tbd_sequence_number : int) -> None:
+    def sequence_update_on_delete(key : int) -> None:
         """shifts the sequence number of the projects table when deleting an entry"""
-        pass
+
+        #fetch data
+        query                           = select(Projects.sequence_number).select_from(Projects).filter(Projects.key == key)
+        content                         = session.execute(query).fetchone()
+        sequence_number_tbd : int       = content[0]
+
+        #no changes needed
+        if (sequence_number_tbd == None):
+            return
+
+        session.query(Projects).filter(Projects.sequence_number > sequence_number_tbd).update({
+            Projects.sequence_number : Projects.sequence_number - 1,
+        })
+        session.commit()
+
+        return
+
 
     @staticmethod
     def adjust_payload_sequence_number(sequence_number : int, insert : bool = True) -> int:

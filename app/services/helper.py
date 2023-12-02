@@ -70,7 +70,7 @@ class Validator():
             return False
 
     @staticmethod
-    def project_key(key : int) -> bool:
+    def project(key : int) -> bool:
 
         query       = select(Projects.key).select_from(Projects).where(Projects.key == key)
         conten      = session.execute(query).fetchone()
