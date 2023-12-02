@@ -220,11 +220,14 @@ class Delete():
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid entry key was passed: {body.key}"}
 
+        #deleting matching libraries
+        id_pl = Key_to_id.programming_languages(key = body.key)
+        session.query(Libraries).filter(Libraries.fk_pl == id_pl).delete()
+        session.commit()
+
         #delete entry
         session.query(Programming_languages).filter(Programming_languages.key == body.key).delete()
         session.commit()
-
-        #implement that all added libs will be deleted
 
         #return
         return {"message" : f"deleted programming_language entry with key: {body.key}"}
