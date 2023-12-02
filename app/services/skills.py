@@ -157,28 +157,21 @@ class Update():
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid entry key was passed: {body.key}"}
 
-        if body.key_skill_level != None:
-            skill_level_valid : bool    = Validator.skill_level(body.key_skill_level)
+        if (Validator.skill_level(body.key_skill_level) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid skill level key was passed: {body.key_skill_level}"}
 
-            if skill_level_valid == False:
-                response.status_code = status.HTTP_400_BAD_REQUEST
-                return {"message" : f"invalid skill level key was passed: {body.key_skill_level}"}
+        #fetch_key
+        fk_sl = Key_to_id.skill_level(key = body.key_skill_level)
 
         #update entries, inefficient but it works
-        value_col_matcher = [
-            (body.name,                 Programming_languages.name),
-            (body.key_skill_level,      Programming_languages.fk_sl),
-            (body.comment,              Programming_languages.comment),
-            (int(time.time()),          Programming_languages.timestamp),
-        ]
-
-        for col in value_col_matcher:
-
-            if col[0] == None:
-                continue
-
-            session.query(Programming_languages).filter(Programming_languages.key == body.key).update({col[1] : col[0]})
-            session.commit()
+        session.query(Projects).filter(Projects.key == body.key).update({
+            Programming_languages.name          : body.name,
+            Programming_languages.fk_sl         : fk_sl,
+            Programming_languages.comment       : body.comment,
+            Programming_languages.timestamp     : int(time.time())
+        })
+        session.commit()
 
         #return message
         message : dict = {"message" : f"update programming language entry with key: {body.key}"}
@@ -203,20 +196,13 @@ class Update():
             fk_sl = None
 
         #update entries, inefficient but it works
-        value_col_matcher = [
-            (body.name,                 Libraries.name),
-            (fk_sl,                     Libraries.fk_sl),
-            (body.comment,              Libraries.comment),
-            (int(time.time()),          Libraries.timestamp),
-        ]
-
-        for col in value_col_matcher:
-
-            if col[0] == None:
-                continue #skipp not needed values
-
-            session.query(Libraries).filter(Libraries.key == body.key).update({col[1] : col[0]})
-            session.commit()
+        session.query(Libraries).filter(Libraries.key == body.key).update({
+            Libraries.name              : body.name,
+            Libraries.fk_sl             : fk_sl,
+            Libraries.comment           : body.comment,
+            Libraries.timestamp         : int(time.time()),
+        })
+        session.commit()
 
         #return message
         message : dict = {"message" : f"update library language entry with key: {body.key}"}
