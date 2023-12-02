@@ -10,8 +10,8 @@ class Skills():
 
     class update_programming_language(BaseModel):
         key : int
-        name : Optional[str]
-        key_skill_level : Optional[int]
+        name : str
+        key_skill_level : int
         comment : Optional[str]
 
     class delete_programming_language(BaseModel):
@@ -26,7 +26,7 @@ class Skills():
 
     class update_library(BaseModel):
         key : int
-        name : Optional[str]
+        name : str
         key_skill_level : Optional[int]
         comment : Optional[str]
 
@@ -42,3 +42,15 @@ class Projects():
         sequence_number : Optional[int]
         link : Optional[str]
         key_project_status : int
+
+    class update_project(BaseModel):
+        key : int
+        name : str
+        description : Optional[str]
+        sequence_number : Optional[int]
+        link : Optional[str]
+        key_project_status : int
+
+    class delete_project(BaseModel):
+        key : int
+        comment : Optional[str]

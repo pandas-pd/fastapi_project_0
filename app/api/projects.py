@@ -19,3 +19,15 @@ class Endpoint():
 
         response = Read.project()
         return response
+
+    @router.put("/update_project", tags = ["projects"])
+    def update_project(body: Projects.update_project, response : Response):
+
+        response = Udpdate.project(body = body, response = response)
+        return response
+
+    @router.delete("/delete_project", tags = ["projects"])
+    def delete_project(body: Projects.delete_project, response: Response):
+
+        response = Delete.project()
+        return response
