@@ -69,6 +69,17 @@ class Validator():
         else:
             return False
 
+    @staticmethod
+    def project_key(key : int) -> bool:
+
+        query       = select(Projects.key).select_from(Projects).where(Projects.key == key)
+        conten      = session.execute(query).fetchone()
+
+        if conten == None:
+            return False
+        else:
+            return True
+
 
 class Key_to_id():
 
