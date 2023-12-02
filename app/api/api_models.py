@@ -16,7 +16,6 @@ class Skills():
 
     class delete_programming_language(BaseModel):
         key : int
-        comment : Optional[str]
 
     class add_library(BaseModel):
         name : str
@@ -32,7 +31,6 @@ class Skills():
 
     class delete_library(BaseModel):
         key : int
-        comment : Optional[str]
 
 class Projects():
 
@@ -53,4 +51,3 @@ class Projects():
 
     class delete_project(BaseModel):
         key : int
-        comment : Optional[str]

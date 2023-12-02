@@ -132,7 +132,11 @@ class Delete():
 
     @staticmethod
     def project(body, response):
+
+        #validate inputs
         pass
+
+
 
 class Sequence_logic():
 
