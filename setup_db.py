@@ -93,7 +93,8 @@ class Data():
         #declate data
         objects : dict = [
             enums.User_role(key = 0,        value = "admin"),
-            enums.User_role(key = 1,        value = "guest"),
+            enums.User_role(key = 1,        value = "editor"),
+            enums.User_role(key = 2,        value = "guest"),
         ]
 
         #write to database
