@@ -52,3 +52,7 @@ class Projects():
 
     class delete_project(BaseModel):
         key : int
+
+class Users():
+
+    pass
