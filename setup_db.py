@@ -20,6 +20,7 @@ class Controller():
         enum_models : list = [
             enums.Skill_level,
             enums.Project_status,
+            enums.User_role,
         ]
 
         for model in enum_models:
@@ -42,6 +43,7 @@ class Controller():
         #add populating functions here
         Data.skill_level()
         Data.project_status()
+        Data.user_role()
 
 class Data():
 
@@ -78,13 +80,30 @@ class Data():
             enums.Project_status(key = 5,       value = "cancelled"),
         ]
 
+        #write to database
         base.session.bulk_save_objects(objects)
         base.session.commit()
 
         print("project_status enum populated")
         return
 
+    @staticmethod
+    def user_role():
+
+        #declate data
+        objects : dict = [
+            enums.User_role(key = 0,        value = "admin"),
+            enums.User_role(key = 1,        value = "guest"),
+        ]
+
+        #write to database
+        base.session.bulk_save_objects(objects)
+        base.session.commit()
+
+        print("role enum populated")
         return
+
+
 
 if __name__ == "__main__":
     Controller.main()

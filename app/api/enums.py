@@ -16,3 +16,9 @@ class Endpoint():
 
         response = Read.project_status()
         return response
+
+    @router.get("/get_user_roles", tags = ["enum"])
+    def get_user_roles():
+
+        response = Read.user_roles()
+        return response

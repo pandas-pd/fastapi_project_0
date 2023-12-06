@@ -1,6 +1,6 @@
 from db.base import session
 from sqlalchemy import select, insert, delete, update
-from db.models.enums import Skill_level, Project_status
+from db.models.enums import Skill_level, Project_status, User_role
 
 class Read():
 
@@ -26,6 +26,23 @@ class Read():
 
         #define query
         query = select(Project_status.key, Project_status.value).select_from(Project_status)
+
+        #fetch data
+        result : object     = session.execute(query)
+        content : list      = result.fetchall()
+
+        #format data
+        response : dict = {}
+        for row in content:
+            response[int(row[0])] = str(row[1])
+
+        return response
+
+    @staticmethod
+    def user_roles() -> dict:
+
+        #define query
+        query = select(User_role.key, User_role.value).select_from(User_role)
 
         #fetch data
         result : object     = session.execute(query)

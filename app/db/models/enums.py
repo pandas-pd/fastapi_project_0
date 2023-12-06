@@ -16,6 +16,7 @@ class Skill_level(Base):
     children        = relationship("Programming_languages", backref = "parent")
     children        = relationship("Libraries", backref = "parent")
 
+
 class Project_status(Base):
 
     __tablename__ = "enum.project_status_ps"
@@ -28,3 +29,17 @@ class Project_status(Base):
 
     #relations
     children        = relationship("Projects", backref = "parent")
+
+
+class User_role(Base):
+
+    __tablename__ = "enum.role_ro"
+
+    #columns
+    id_ro       = Column(Integer, primary_key = True, index = True)
+
+    key         = Column(Integer, nullable = False)
+    value       = Column(String(50), nullable = False)
+
+    #relations
+    #children    = relationship("", backref = "parent")
