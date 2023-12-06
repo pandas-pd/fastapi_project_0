@@ -165,7 +165,7 @@ class Update():
         fk_sl = Key_to_id.skill_level(key = body.key_skill_level)
 
         #update entries, inefficient but it works
-        session.query(Projects).filter(Projects.key == body.key).update({
+        session.query(Programming_languages).filter(Programming_languages.key == body.key).update({
             Programming_languages.name          : body.name,
             Programming_languages.fk_sl         : fk_sl,
             Programming_languages.comment       : body.comment,
