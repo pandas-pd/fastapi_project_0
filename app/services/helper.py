@@ -1,9 +1,10 @@
 from db.base import session
 from sqlalchemy import select, insert, delete, update
 
-from db.models.enums import Skill_level, Project_status
+from db.models.enums import Skill_level, Project_status, User_role
 from db.models.skills import Programming_languages, Libraries
 from db.models.projects import Projects
+from db.models.users import Users, User_roles
 
 import random
 
@@ -79,6 +80,36 @@ class Validator():
             return False
         else:
             return True
+
+    @staticmethod
+    def username(username : str) -> bool:
+
+        query       = select(Users.username).select_from(Users).filter(Users.username == username)
+        content     = session.execute(query).fetchall()
+
+        if len(content) == 0:
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def e_mail(e_mail : str) -> bool:
+        
+        if e_mail == None:
+            return True
+
+        at_index : int      = e_mail.find("@")
+
+        if at_index == -1:
+            return False
+
+        domain : str        = e_mail[at_index :]
+        dot_index : int     = domain.find(".")
+
+        if (dot_index == -1) or (dot_index == 1) or :
+            return False
+
+        #joel.tauss@gmail.com
 
 
 class Key_to_id():

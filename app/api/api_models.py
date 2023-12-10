@@ -55,4 +55,8 @@ class Projects():
 
 class Users():
 
-    pass
+    class add_user(BaseModel):
+        username : str
+        e_mail : Optional[str]
+        password : str
+        comment : str

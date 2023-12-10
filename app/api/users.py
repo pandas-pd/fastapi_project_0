@@ -6,4 +6,11 @@ class Endpoint():
 
     router = APIRouter()
 
-    # Programming Languages
+    #Users
+    @router.post("/users/user", tags = ["user"])
+    def add_user(body : Users.add_user, response : Response):
+
+        response = Write.user(body = body, response = Response)
+        return response
+
+    #Roles

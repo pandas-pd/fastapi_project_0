@@ -10,10 +10,10 @@ class Users(Base):
     #columns
     id_us           = Column(Integer, primary_key = True, index = True)
 
-    username        = Column(String(100), nullable = False)
+    username        = Column(String(100), nullable = False, unique = True)
     e_mail          = Column(String(100), nullable = True)
     salt            = Column(String(50), nullable = False)
-    password_hash   = Column(String(72), nullable = False) #bcrypt limit
+    password_hash   = Column(String(200), nullable = False) #bcrypt limit
     comment         = Column(String(100), nullable = True)
 
     key             = Column(Integer, nullable = False, unique = True)
