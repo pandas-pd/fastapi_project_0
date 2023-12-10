@@ -26,6 +26,7 @@ Base = declarative_base()
 from db.models import skills
 from db.models import projects
 from db.models import enums
+from db.models import users
 
 # Database setup. Create the database and tables if they don't exist
 Base.metadata.create_all(bind=engine)
