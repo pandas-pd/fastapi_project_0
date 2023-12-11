@@ -106,10 +106,11 @@ class Validator():
         domain : str        = e_mail[at_index :]
         dot_index : int     = domain.find(".")
 
-        if (dot_index == -1) or (dot_index == 1) or :
+        if (dot_index == -1) or (dot_index == 1):
             return False
 
-        #joel.tauss@gmail.com
+        else:
+            return True
 
 
 class Key_to_id():

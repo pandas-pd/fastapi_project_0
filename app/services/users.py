@@ -3,6 +3,8 @@ from sqlalchemy import select, insert, delete, update
 from fastapi import status
 import time
 
+import bcrypt
+
 from db.models.users import Users, User_roles
 from db.models.enums import User_role
 
@@ -21,6 +23,8 @@ class Write():
         if (Validator.e_mail(body.e_mail) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"given username already exists: {body.username}"}
+
+        
 
         return
 
@@ -46,3 +50,10 @@ class Delete():
     @staticmethod
     def user(body, response):
         pass
+
+class Password_handler():
+
+    @staticmethod
+    def salt_and_hash(password : str) -> str:
+
+        salt : bytes        = bcrypt.gensalt(rounds = 12)
