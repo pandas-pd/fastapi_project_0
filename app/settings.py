@@ -8,6 +8,10 @@ DATABASE_URL : str              = "sqlite:///" + os.path.join(settings_dir, db_u
 #database file, add as dynamic path to minimize seutp errors
 #DATABASE_URL = "sqlite:///sqlite.db"
 
+#password settings
+ENCODING  : str         = "utf-8"
+SALT_ROUNDS : int       = 12
+
 #other settings
-TIME_ZONE = None #not in use
-LANGUAGE = "EN" #not in use
+TIME_ZONE : str         = None #not in use
+LANGUAGE : str          = "EN" #not in use

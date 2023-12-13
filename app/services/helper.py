@@ -84,6 +84,14 @@ class Validator():
     @staticmethod
     def username(username : str) -> bool:
 
+        #forbidden charaters in user name like spaces
+        forbidden_chars : list = ["&", "=", "'", ",", ".", "/", "\\"]
+
+        for char in username:
+            if char in forbidden_chars:
+                return False
+
+        #checking for duplicates in datatbase
         query       = select(Users.username).select_from(Users).filter(Users.username == username)
         content     = session.execute(query).fetchall()
 
@@ -94,9 +102,6 @@ class Validator():
 
     @staticmethod
     def e_mail(e_mail : str) -> bool:
-        
-        if e_mail == None:
-            return True
 
         at_index : int      = e_mail.find("@")
 
