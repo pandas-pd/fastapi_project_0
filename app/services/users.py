@@ -12,6 +12,7 @@ from settings import ENCODING, SALT_ROUNDS
 
 from services.helper import *
 
+
 class Write():
 
     @staticmethod
@@ -24,7 +25,7 @@ class Write():
 
         if (Validator.e_mail(body.e_mail) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"given username already exists: {body.username}"}
+            return {"message" : f"invalid e-mail adress given: {body.e_mail}"}
 
         #generate key, password salt and password hash
         salt, hashed_password       = Password_handler.salt_and_hash(body.password)
@@ -50,9 +51,33 @@ class Write():
 class Read():
 
     @staticmethod
-    def user(body, response):
-        pass
+    def user():
 
+        #query
+        query = select(
+            Users.key,
+            Users.username,
+            Users.e_mail,
+            Users.comment,
+            Users.timestamp,
+        ).select_from(Users)
+
+        content = session.execute(query).fetchall()
+
+        #format data
+        response : list = []
+        for row in content:
+
+            item : dict = {
+                "key"           : row[0],
+                "username"      : row[1],
+                "e_mail"        : row[2],
+                "comment"       : row[3],
+                "timestamp"     : row[4],
+            }
+            response.append(item)
+
+        return response
 
 
 class Update():

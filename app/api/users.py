@@ -13,4 +13,16 @@ class Endpoint():
         response = Write.user(body = body, response = Response)
         return response
 
+    @staticmethod
+    @router.get("/users/user")
+    def get_users():
+
+        response = Read.user()
+        return response
+
+    @router.put("/users/user", tags = ["user"])
+    def update_user():
+        pass
+
+
     #Roles

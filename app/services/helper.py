@@ -117,6 +117,20 @@ class Validator():
         else:
             return True
 
+    @staticmethod
+    def user(key : int = None) -> bool:
+
+        if key == None:
+            return True
+
+        query       = select(Users.key).select_from(Users).where(Users.key == key)
+        conten      = session.execute(query).fetchone()
+
+        if conten == None:
+            return False
+        else:
+            return True
+
 
 class Key_to_id():
 
