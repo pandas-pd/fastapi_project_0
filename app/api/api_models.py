@@ -59,4 +59,18 @@ class Users():
         username : str
         e_mail : str
         password : str
-        comment : str
+        comment : Optional[str]
+
+    class update_user(BaseModel):
+        key : int
+        username : str
+        e_mail : str
+        comment : Optional[str]
+
+    class update_password(BaseModel):
+        key : int
+        password : str
+        comment : Optional[str]
+
+    class delete_user(BaseModel):
+        key : int

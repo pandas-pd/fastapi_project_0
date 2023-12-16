@@ -21,11 +21,11 @@ class Write():
         #validte username (must be unique)
         if (Validator.username(body.username) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"given username already exists: {body.username}"}
+            return {"message" : f"invalid or duplicat username was given: {body.username}"}
 
         if (Validator.e_mail(body.e_mail) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid e-mail adress given: {body.e_mail}"}
+            return {"message" : f"invalid  or duplicat e-mail adress given: {body.e_mail}"}
 
         #generate key, password salt and password hash
         salt, hashed_password       = Password_handler.salt_and_hash(body.password)
@@ -84,7 +84,32 @@ class Update():
 
     @staticmethod
     def user(body, response):
-        pass
+
+        #validate inputs
+        if (Validator.user(key = body.key) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return{"message" : f"invalid user_key was given: {body.key}"}
+
+        if (Validator.username(username = body.username, initial = False, key_user = body.key) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid or duplicat username was given: {body.username}"}
+
+        if (Validator.e_mail(e_mail = body.e_mail) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid or duplicat e_mail was given {body.e_mail}"}
+
+        #query update
+        query = session.query(Users).filter(Users.key == body.key).update({
+            Users.username              : body.username,
+            Users.e_mail                : body.e_mail,
+            Users.comment               : body.comment,
+            Users.timestamp             : int(time.time()),
+        })
+        session.commit()
+
+        #reponse
+        message : dict = {"message" : f"update user entry with key: {body.key}"}
+        return message
 
 
 

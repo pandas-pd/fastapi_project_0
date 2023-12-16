@@ -14,14 +14,24 @@ class Endpoint():
         return response
 
     @staticmethod
-    @router.get("/users/user")
+    @router.get("/users/user", tags = ["user"])
     def get_users():
 
         response = Read.user()
         return response
 
     @router.put("/users/user", tags = ["user"])
-    def update_user():
+    def update_user(body : Users.update_user, response : Response):
+
+        response = Update.user(body = body, response = Response)
+        return response
+
+    @router.put("users/password", tags = ["user"])
+    def update_password(body : Users.update_password, response : Response):
+        pass
+
+    @router.delete("/users/user", tags = ["user"])
+    def delete_user(body : Users.delete_user, response : Response):
         pass
 
 

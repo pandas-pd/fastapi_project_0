@@ -82,7 +82,7 @@ class Validator():
             return True
 
     @staticmethod
-    def username(username : str) -> bool:
+    def username(username : str, initial : bool = True, key_user : int = None) -> bool:
 
         #forbidden charaters in user name like spaces
         forbidden_chars : list = ["&", "=", "'", ",", ".", "/", "\\"]
@@ -91,7 +91,16 @@ class Validator():
             if char in forbidden_chars:
                 return False
 
-        #checking for duplicates in datatbase
+        #check on update if old == new
+        if initial == False:
+
+            query       = select(Users.username).select_from(Users).filter(Users.key == key_user)
+            content      = session.execute(query).fetchone() #is unuqie
+
+            if (str(username) == str(content[0])):
+                return True
+
+        #checking for duplicates in datatbase if new entry
         query       = select(Users.username).select_from(Users).filter(Users.username == username)
         content     = session.execute(query).fetchall()
 
