@@ -47,6 +47,18 @@ class Write():
         message : dict = {"message" : us_key}
         return message
 
+    @staticmethod
+    def role(body, response):
+
+        #validation
+        if (Validator.user(body.key_user) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid user key was given: {body.key_user}"}
+
+        #key hanlidng
+
+        #writing entry
+
 
 class Read():
 
@@ -112,12 +124,27 @@ class Update():
         return message
 
 
-
 class Delete():
 
     @staticmethod
     def user(body, response):
-        pass
+
+        #validate inputs
+        if (Validator.user(key = body.key) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return{"message" : f"invalid user_key was given: {body.key}"}
+
+        #delete roles bond to User
+        id_us = Key_to_id.users(key = body.key)
+        query = session.query(User_roles).filter(User_roles.fk_us == id_us).delete()
+        session.commit(query)
+
+        #delete user
+        query = session.query(Users).filter(Users.key == body.key).delete()
+        session.commit(query)
+
+        message : dict = {"message" : f"deleted user and realted role entries with user key: {body.key}"}
+        return message
 
 
 class Password_handler():
@@ -139,4 +166,11 @@ class Password_handler():
     def password_match(username : str, password : str) -> bool:
 
         #password_match : bool = bcrypt.checkpw(password_input.encode(encoding), stored_hashed_password.encode(encoding))
+        pass
+
+    @staticmethod
+    def reset_password():
+        pass
+
+    def change_password():
         pass

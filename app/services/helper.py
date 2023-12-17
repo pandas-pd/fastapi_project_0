@@ -143,10 +143,12 @@ class Validator():
 
 class Key_to_id():
 
+    """ToDo: Clean up this mess"""
+
     @staticmethod
     def skill_level(key : int) -> int:
 
-        query = select(Skill_level.id_sl).select_from(Skill_level).where(Skill_level.key == key)
+        query = select(Skill_level.id_sl).select_from(Skill_level).filter(Skill_level.key == key)
         content = session.execute(query).fetchone()
 
         id = int(content[0])
@@ -155,7 +157,7 @@ class Key_to_id():
     @staticmethod
     def programming_languages(key : int) -> int:
 
-        query = select(Programming_languages.id_pl).select_from(Programming_languages).where(Programming_languages.key == key)
+        query = select(Programming_languages.id_pl).select_from(Programming_languages).filter(Programming_languages.key == key)
         content = session.execute(query).fetchone()
 
         id = int(content[0])
@@ -164,7 +166,7 @@ class Key_to_id():
     @staticmethod
     def libraries(key : int) -> int:
 
-        query = select(Libraries.id_lb).select_from(Libraries).where(Libraries).where(Libraries.key == key)
+        query = select(Libraries.id_lb).select_from(Libraries).where(Libraries).filter(Libraries.key == key)
         content = session.execute(query).fetchone()
 
         id = int(content[0])
@@ -173,7 +175,16 @@ class Key_to_id():
     @staticmethod
     def project_status(key : int) -> int:
 
-        query = select(Project_status.id_ps).select_from(Project_status).where(Project_status.key == key)
+        query = select(Project_status.id_ps).select_from(Project_status).filter(Project_status.key == key)
+        content = session.execute(query).fetchone()
+
+        id = int(content[0])
+        return id
+
+    @staticmethod
+    def users(key : int) -> int:
+
+        query = select(Users.id_us).select_from(Users).filter(Users.key == key)
         content = session.execute(query).fetchone()
 
         id = int(content[0])
