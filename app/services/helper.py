@@ -10,6 +10,7 @@ import random
 
 class Validator():
 
+
     @staticmethod
     def skill_level(key : int) -> bool:
 
@@ -132,14 +133,24 @@ class Validator():
         if key == None:
             return True
 
-        query       = select(Users.key).select_from(Users).where(Users.key == key)
-        conten      = session.execute(query).fetchone()
+        query       = select(Users.key).select_from(Users).filter(Users.key == key)
+        content      = session.execute(query).fetchone()
 
-        if conten == None:
+        if content == None:
             return False
         else:
             return True
 
+    @staticmethod
+    def user_role(key : int) -> bool:
+
+        query       = select(User_role.key).select_from(User_role).filter(User_role.key == key)
+        content     = session.execute(query).fetchone()
+
+        if content == None:
+            return False
+        else:
+            return True
 
 class Key_to_id():
 
@@ -185,6 +196,15 @@ class Key_to_id():
     def users(key : int) -> int:
 
         query = select(Users.id_us).select_from(Users).filter(Users.key == key)
+        content = session.execute(query).fetchone()
+
+        id = int(content[0])
+        return id
+
+    @staticmethod
+    def role(key : int) -> int:
+
+        query = select(User_role.id_ro).select_from(User_role).filter(User_role.key == key)
         content = session.execute(query).fetchone()
 
         id = int(content[0])

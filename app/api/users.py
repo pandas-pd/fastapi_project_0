@@ -47,7 +47,8 @@ class Endpoint():
         return response
 
     @router.delete("users/role", tags = ["role"])
-    def delete_role(body : Users.delete_user)
+    def delete_role(body : Users.delete_user):
+        pass
 
 
     #password management

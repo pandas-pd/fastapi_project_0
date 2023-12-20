@@ -55,9 +55,28 @@ class Write():
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid user key was given: {body.key_user}"}
 
+        if (Validator.user_role(body.key_role) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid role key was given: {body.key_role}"}
+
         #key hanlidng
+        ur_key      = DB.generate_model_key(model = User_roles)
+        fk_us       = Key_to_id.users(key = body.key_user)
+        fk_ro       = Key_to_id.role(key = body.key_role)
 
         #writing entry
+        new_ur = User_roles(
+            fk_ro               = fk_ro,
+            fk_us               = fk_us,
+            key                 = ur_key,
+            timestamp           = int(time.time())
+        )
+
+        session.add(new_ur)
+        session.commit()
+
+        message : dict = {"message" : ur_key}
+        return message
 
 
 class Read():
