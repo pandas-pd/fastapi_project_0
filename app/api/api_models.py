@@ -75,6 +75,11 @@ class Users():
     class delete_user(BaseModel):
         key : int
 
+    class add_role(BaseModel):
+        key_user : int
+        key_role : int
+        comment : Optional[str]
+
 class Passwords():
 
     class reset_password(BaseModel):
@@ -82,13 +87,3 @@ class Passwords():
 
     class update_password(BaseModel):
         pass
-
-class Roles():
-
-    class add_role(BaseModel):
-        key_role : int
-        key_user : int
-        comment : Optional(str)
-
-    class delete_role(BaseModel):
-        key : int

@@ -10,7 +10,6 @@ import random
 
 class Validator():
 
-
     @staticmethod
     def skill_level(key : int) -> bool:
 
@@ -142,6 +141,27 @@ class Validator():
             return True
 
     @staticmethod
+    def user_roles_duplicates(key_user : int, key_role):
+
+        #fetch all roles for given user
+        query = select(
+            User_role.key,
+        ).select_from(User_roles
+        ).join(User_role, User_roles.role
+        ).join(Users, User_roles.user
+        ).filter(Users.key == key_user)
+
+        content = session.execute(query).fetchall()
+
+        #compile all available roles
+        roles : list = [row[0] for row in content]
+
+        if (key_role in roles):
+            return False
+        else:
+            return True
+
+    @staticmethod
     def user_role(key : int) -> bool:
 
         query       = select(User_role.key).select_from(User_role).filter(User_role.key == key)
@@ -151,6 +171,7 @@ class Validator():
             return False
         else:
             return True
+
 
 class Key_to_id():
 

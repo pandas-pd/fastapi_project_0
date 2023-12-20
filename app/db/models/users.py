@@ -30,9 +30,11 @@ class User_roles(Base):
     id_ur           = Column(Integer, primary_key = True, index = True)
     fk_ro           = Column(Integer, ForeignKey("enum.role_ro.id_ro", onupdate = "CASCADE"), nullable = False)
     fk_us           = Column(Integer, ForeignKey("users.users_us.id_us", onupdate = "CASCADE", ondelete = "RESTRICT"))
+    comment         = Column(String(100), nullable = True)
 
     key             = Column(Integer, nullable = False, unique = True)
     timestamp       = Column(BigInteger, nullable = False)
 
     #relations
-    #tbd
+    user            = relationship("Users", foreign_keys = [fk_us])
+    role            = relationship("User_role", foreign_keys = [fk_ro])

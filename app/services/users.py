@@ -59,6 +59,10 @@ class Write():
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid role key was given: {body.key_role}"}
 
+        if (Validator.user_roles_duplicates(key_user = body.key_user, key_role = body.key_role) == False):
+            response.status_code = status.HTTP_409_CONFLICT
+            return {"message" : f"role already exists for given user, role : {body.key_role}, user : {body.key_user}"}
+
         #key hanlidng
         ur_key      = DB.generate_model_key(model = User_roles)
         fk_us       = Key_to_id.users(key = body.key_user)
@@ -69,6 +73,7 @@ class Write():
             fk_ro               = fk_ro,
             fk_us               = fk_us,
             key                 = ur_key,
+            comment             = body.comment,
             timestamp           = int(time.time())
         )
 
@@ -107,6 +112,39 @@ class Read():
                 "timestamp"     : row[4],
             }
             response.append(item)
+
+        return response
+
+    @staticmethod
+    def roles(key_user : int, response : object):
+
+        #validait key
+        if (Validator.user(key = key_user) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid user key was given: {key_user}"}
+
+        #qurey data
+        query = select(
+            User_roles.key,
+            User_role.key,
+            User_roles.timestamp,
+        ).select_from(User_roles
+        ).join(User_role, User_roles.role
+        ).join(Users, User_roles.user
+        ).filter(Users.key == key_user)
+
+        content = session.execute(query).fetchall()
+
+        #format data
+        response : list = []
+
+        for row in content:
+
+            response.append({
+                "key_user_role"             : row[0],
+                "role"                      : row[1],
+                "timestamp"                 : row[2],
+            })
 
         return response
 
@@ -156,11 +194,11 @@ class Delete():
         #delete roles bond to User
         id_us = Key_to_id.users(key = body.key)
         query = session.query(User_roles).filter(User_roles.fk_us == id_us).delete()
-        session.commit(query)
+        session.commit()
 
         #delete user
         query = session.query(Users).filter(Users.key == body.key).delete()
-        session.commit(query)
+        session.commit()
 
         message : dict = {"message" : f"deleted user and realted role entries with user key: {body.key}"}
         return message
