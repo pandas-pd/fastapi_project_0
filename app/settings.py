@@ -13,9 +13,13 @@ ENCODING  : str         = "utf-8"
 SALT_ROUNDS : int       = 12
 
 #auth settings (do not push into public repository)
-SECRET_KEY : str                        = "0MWV5n8wEKX1RCbKtX2PQoHzTuRneiTIPucuzYoVFWU7WKgL29AU0_59Xa_LkFGF"
-ALGORITHM : str                         = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES : int       = 60 * 24 * 30 # 30 days
+JWT_SECRET_KEY : str                        = "0MWV5n8wEKX1RCbKtX2PQoHzTuRneiTIPucuzYoVFWU7WKgL29AU0_59Xa_LkFGF"
+JWT_ALGORITHM : str                         = "HS256"
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES : int       = 60 * 24 * 30 # 30 days
+
+#mailer settings (do not push to public repository)
+EMAIL_SENDER : str            = "pythonmailer418@gmail.com"
+EMAIL_PASSWORD : str          = "ukbxhznembqulfva"
 
 #other settings
 TIME_ZONE : str         = None #not in use
