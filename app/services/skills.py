@@ -6,7 +6,7 @@ import time
 from db.models.skills import Programming_languages, Libraries
 from db.models.enums import Skill_level
 
-from services.helper import *
+from services.helper_general import *
 
 class Write():
 

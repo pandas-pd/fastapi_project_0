@@ -172,6 +172,16 @@ class Validator():
         else:
             return True
 
+    @staticmethod
+    def user_roles(key : int):
+
+        query       = select(User_roles.key).select_from(User_roles).filter(User_roles == key)
+        content     = session.execute(query).fetchall()
+
+        if content == None:
+            return False
+        else:
+            return True
 
 class Key_to_id():
 

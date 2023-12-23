@@ -3,14 +3,11 @@ from sqlalchemy import select, insert, delete, update
 from fastapi import status
 import time
 
-import bcrypt
-
 from db.models.users import Users, User_roles
 from db.models.enums import User_role
 
-from settings import ENCODING, SALT_ROUNDS
-
-from services.helper import *
+from services.helper_general import *
+from services.helper_auth import Password_handler
 
 
 class Write():
@@ -203,31 +200,17 @@ class Delete():
         message : dict = {"message" : f"deleted user and realted role entries with user key: {body.key}"}
         return message
 
-
-class Password_handler():
-
     @staticmethod
-    def salt_and_hash(password : str) -> str:
+    def role(body, response):
 
-        #generate salt and hash
-        salt : bytes                    = bcrypt.gensalt(rounds = SALT_ROUNDS)
-        hashed_password : bytes         = bcrypt.hashpw(password.encode(ENCODING), salt)
+        #validate inputs
+        if (Validator.user_roles(key = body.key) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid role_key was goven: {body.key}"}
 
-        #endcoding for explicity
-        s_salt : str                    = salt.decode(ENCODING)
-        s_hashed_password : str         = hashed_password.decode(ENCODING)
+        #delete roles entry
+        query = session.query(User_roles).filter(User_roles.key == body.key).delete()
+        session.commit()
 
-        return s_salt, s_hashed_password
-
-    @staticmethod
-    def password_match(username : str, password : str) -> bool:
-
-        #password_match : bool = bcrypt.checkpw(password_input.encode(encoding), stored_hashed_password.encode(encoding))
-        pass
-
-    @staticmethod
-    def reset_password():
-        pass
-
-    def change_password():
-        pass
+        message : dict = {"message" : f"delted user role and with role key: {body.key}"}
+        return message

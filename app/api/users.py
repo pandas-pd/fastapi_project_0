@@ -46,8 +46,10 @@ class Endpoint():
         return response
 
     @router.delete("/users/role", tags = ["role"])
-    def delete_role(body : Users.delete_user):
-        pass
+    def delete_role(body : Users.delete_user, response : Response):
+
+        response = Delete.role(body = body, response = response)
+        return response
 
 
     """
