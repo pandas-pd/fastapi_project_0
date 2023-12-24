@@ -127,6 +127,7 @@ class Udpdate():
             Projects.timestamp          : int(time.time())
         })
 
+        session.commit()
         return {"message" : f"update project entry with key: {body.key}"}
 
 
