@@ -52,13 +52,15 @@ class Endpoint():
         return response
 
 
-    """
     #password management
     @router.put("users/password", tags = ["user, password"])
     def update_password(body : Users.update_password, response : Response):
-        pass
+
+        response = Update.password(body = body, response = response)
+        return response
+
 
     @router.post("users/reset_password", tags = ["user, password"])
     def reset_password(body : Users.reset_password, response : Response):
         pass
-    """
+

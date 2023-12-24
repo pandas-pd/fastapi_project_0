@@ -1,5 +1,8 @@
 import bcrypt
+from db.base import session
+from sqlalchemy import select, insert, delete, update
 
+from db.models.users import Users
 from settings import ENCODING, SALT_ROUNDS
 
 
@@ -19,14 +22,17 @@ class Password_handler():
         return s_salt, s_hashed_password
 
     @staticmethod
-    def password_match(username : str, password : str) -> bool:
+    def password_match(password : str, username : str = None, user_key : int = None) -> bool:
 
-        #password_match : bool = bcrypt.checkpw(password_input.encode(encoding), stored_hashed_password.encode(encoding))
-        pass
+        #retrieve password hash with salt
+        if (user_key != None):
+            query = select(Users.password_hash).select_from(Users).filter(Users.key == user_key)
 
-    @staticmethod
-    def reset_password():
-        pass
+        elif (username != None):
+            query = select(Users.password_hash).select_from(Users).filter(Users.username == username)
 
-    def change_password():
-        pass
+        content                 = session.execute(query).fetchone()
+        hashed_password :str    = content[0]
+
+        password_match : bool   = bcrypt.checkpw(password.encode(ENCODING), hashed_password.encode(ENCODING))
+        return password_match

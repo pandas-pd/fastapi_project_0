@@ -177,6 +177,34 @@ class Update():
         message : dict = {"message" : f"update user entry with key: {body.key}"}
         return message
 
+    @staticmethod
+    def password(body, response):
+
+        #validation inputs
+        if (Validator.user(key = body.key_user) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid user_key was given: {body.key_user}"}
+
+        if (Password_handler.password_match(password = body.password_old, user_key = body.key_user) == False):
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return {"message" : f"invalid password was provided"}
+
+        #create new password hash and salt
+        salt, hashed_password = Password_handler.salt_and_hash(body.password_new)
+
+        query = session.query(Users).filter(Users.key == body.key_user).update({
+            Users.password_hash         : hashed_password,
+            Users.salt                  : salt,
+            Users.comment               : body.comment,
+            Users.timestamp             : int(time.time()),
+        })
+
+        session.commit()
+
+        #respons
+        message : dict = {"message" : f"updated password for user with key: {body.key_user}"}
+        return message
+
 
 class Delete():
 

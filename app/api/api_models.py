@@ -68,8 +68,9 @@ class Users():
         comment : Optional[str]
 
     class update_password(BaseModel):
-        key : int
-        password : str
+        key_user : int
+        password_old : str
+        password_new : str
         comment : Optional[str]
 
     class delete_user(BaseModel):
