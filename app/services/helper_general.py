@@ -10,6 +10,10 @@ import random
 
 class Validator():
 
+    """todo: clean up this mess"""
+
+    ### Generic, should be fixed
+
     @staticmethod
     def skill_level(key : int) -> bool:
 
@@ -61,16 +65,6 @@ class Validator():
             return True
 
     @staticmethod
-    def sequence_number(number : int) -> bool:
-        """validates order number, can be in range [1, n+1])"""
-
-        if (number == None) or (number > 0):
-            return True
-
-        else:
-            return False
-
-    @staticmethod
     def project(key : int) -> bool:
 
         query       = select(Projects.key).select_from(Projects).where(Projects.key == key)
@@ -80,6 +74,41 @@ class Validator():
             return False
         else:
             return True
+
+    @staticmethod
+    def user_role(key : int) -> bool:
+
+        query       = select(User_role.key).select_from(User_role).filter(User_role.key == key)
+        content     = session.execute(query).fetchone()
+
+        if content == None:
+            return False
+        else:
+            return True
+
+    @staticmethod
+    def user_roles(key : int):
+
+        query       = select(User_roles.key).select_from(User_roles).filter(User_roles == key)
+        content     = session.execute(query).fetchall()
+
+        if content == None:
+            return False
+        else:
+            return True
+
+
+    ### none generi
+
+    @staticmethod
+    def sequence_number(number : int) -> bool:
+        """validates order number, can be in range [1, n+1])"""
+
+        if (number == None) or (number > 0):
+            return True
+
+        else:
+            return False
 
     @staticmethod
     def username(username : str, initial : bool = True, key_user : int = None) -> bool:
@@ -161,86 +190,52 @@ class Validator():
         else:
             return True
 
-    @staticmethod
-    def user_role(key : int) -> bool:
-
-        query       = select(User_role.key).select_from(User_role).filter(User_role.key == key)
-        content     = session.execute(query).fetchone()
-
-        if content == None:
-            return False
-        else:
-            return True
-
-    @staticmethod
-    def user_roles(key : int):
-
-        query       = select(User_roles.key).select_from(User_roles).filter(User_roles == key)
-        content     = session.execute(query).fetchall()
-
-        if content == None:
-            return False
-        else:
-            return True
 
 class Key_to_id():
 
-    """ToDo: Clean up this mess"""
+    """todo: clean up this mess"""
+
+    def __handler(query):
+
+        content = session.execute(query).fetchone()
+        id = int(content[0])
+        return id
 
     @staticmethod
     def skill_level(key : int) -> int:
 
         query = select(Skill_level.id_sl).select_from(Skill_level).filter(Skill_level.key == key)
-        content = session.execute(query).fetchone()
-
-        id = int(content[0])
-        return id
+        return int(Key_to_id.__handler(query))
 
     @staticmethod
     def programming_languages(key : int) -> int:
 
         query = select(Programming_languages.id_pl).select_from(Programming_languages).filter(Programming_languages.key == key)
-        content = session.execute(query).fetchone()
-
-        id = int(content[0])
-        return id
+        return int(Key_to_id.__handler(query))
 
     @staticmethod
     def libraries(key : int) -> int:
 
         query = select(Libraries.id_lb).select_from(Libraries).where(Libraries).filter(Libraries.key == key)
-        content = session.execute(query).fetchone()
-
-        id = int(content[0])
-        return id
+        return int(Key_to_id.__handler(query))
 
     @staticmethod
     def project_status(key : int) -> int:
 
         query = select(Project_status.id_ps).select_from(Project_status).filter(Project_status.key == key)
-        content = session.execute(query).fetchone()
-
-        id = int(content[0])
-        return id
+        return int(Key_to_id.__handler(query))
 
     @staticmethod
     def users(key : int) -> int:
 
         query = select(Users.id_us).select_from(Users).filter(Users.key == key)
-        content = session.execute(query).fetchone()
-
-        id = int(content[0])
-        return id
+        return int(Key_to_id.__handler(query))
 
     @staticmethod
     def role(key : int) -> int:
 
         query = select(User_role.id_ro).select_from(User_role).filter(User_role.key == key)
-        content = session.execute(query).fetchone()
-
-        id = int(content[0])
-        return id
-
+        return int(Key_to_id.__handler(query))
 
 class DB():
 
