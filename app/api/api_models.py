@@ -32,7 +32,6 @@ class Skills():
     class delete_library(BaseModel):
         key : int
 
-
 class Projects():
 
     class add_project(BaseModel):
@@ -67,12 +66,6 @@ class Users():
         e_mail : str
         comment : Optional[str]
 
-    class update_password(BaseModel):
-        key_user : int
-        password_old : str
-        password_new : str
-        comment : Optional[str]
-
     class delete_user(BaseModel):
         key : int
 
@@ -81,10 +74,16 @@ class Users():
         key_role : int
         comment : Optional[str]
 
+    class delete_role(BaseModel):
+        key : int
+
 class Passwords():
 
     class reset_password(BaseModel):
         pass
 
     class update_password(BaseModel):
-        pass
+        key_user : int
+        password_old : str
+        password_new : str
+        comment : Optional[str]

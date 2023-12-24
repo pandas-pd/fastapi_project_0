@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response, status
 from services.users import *
-from api.api_models import Users
+from api.api_models import Users, Passwords
 
 class Endpoint():
 
@@ -46,21 +46,19 @@ class Endpoint():
         return response
 
     @router.delete("/users/role", tags = ["role"])
-    def delete_role(body : Users.delete_user, response : Response):
+    def delete_role(body : Users.delete_role, response : Response):
 
         response = Delete.role(body = body, response = response)
         return response
 
 
     #password management
-    @router.put("users/password", tags = ["user, password"])
-    def update_password(body : Users.update_password, response : Response):
+    @router.put("/users/password", tags = ["user, password"])
+    def update_password(body : Passwords.update_password, response : Response):
 
         response = Update.password(body = body, response = response)
         return response
 
-
-    @router.post("users/reset_password", tags = ["user, password"])
-    def reset_password(body : Users.reset_password, response : Response):
+    @router.post("/users/reset_password", tags = ["user, password"])
+    def reset_password(body : Passwords.reset_password, response : Response):
         pass
-
