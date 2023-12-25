@@ -98,7 +98,7 @@ class Validator():
             return True
 
 
-    ### none generi
+    ### none general
 
     @staticmethod
     def sequence_number(number : int) -> bool:
@@ -114,7 +114,7 @@ class Validator():
     def username(username : str, initial : bool = True, key_user : int = None) -> bool:
 
         #forbidden charaters in user name like spaces
-        forbidden_chars : list = ["&", "=", "'", ",", ".", "/", "\\"]
+        forbidden_chars : list = ["&", "=", "'", ",", ".", "/", "\\", "@"]
 
         for char in username:
             if char in forbidden_chars:
@@ -186,6 +186,29 @@ class Validator():
         roles : list = [row[0] for row in content]
 
         if (key_role in roles):
+            return False
+        else:
+            return True
+
+    @staticmethod
+    def username_on_reset(username : str):
+
+        query       = select(Users.username).select_from(Users).filter(Users.username == username)
+        content     = session.execute(query).fetchone()
+
+        if content == None:
+            return False
+        else:
+            return True
+
+    @staticmethod
+    def e_mail_on_reset(e_mail : str):
+        """deprecated"""
+
+        query       = select(Users.e_mail).select_from(Users).filter(Users.e_mail == e_mail)
+        content     = session.execute(query).fetchone()
+
+        if content == None:
             return False
         else:
             return True

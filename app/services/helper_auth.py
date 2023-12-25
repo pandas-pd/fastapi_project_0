@@ -1,6 +1,7 @@
 import bcrypt
 from db.base import session
 from sqlalchemy import select, insert, delete, update
+import secrets
 
 from db.models.users import Users
 from settings import ENCODING, SALT_ROUNDS
@@ -36,3 +37,11 @@ class Password_handler():
 
         password_match : bool   = bcrypt.checkpw(password.encode(ENCODING), hashed_password.encode(ENCODING))
         return password_match
+
+    @staticmethod
+    def generate_password(length : int):
+
+        password : str      = secrets.token_urlsafe(length)
+        password : str      = password[:length]
+
+        return password

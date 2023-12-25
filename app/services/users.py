@@ -8,6 +8,7 @@ from db.models.enums import User_role
 
 from services.helper_general import *
 from services.helper_auth import Password_handler
+from services.helper_email import E_mail
 
 
 class Write():
@@ -203,6 +204,39 @@ class Update():
 
         #respons
         message : dict = {"message" : f"updated password for user with key: {body.key_user}"}
+        return message
+
+    @staticmethod
+    def reset_password(body, response):
+
+        if (Validator.username_on_reset(body.username) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : f"invalid username was provided: {body.username}"}
+
+        #fetch user key (clumsy but works)
+        query   = select(Users.id_us, Users.e_mail).select_from(Users).filter(Users.username == body.username)
+
+        content                 = session.execute(query).fetchone()
+        id_us                   = content[0]
+        e_mail                  = content[1]
+
+        password : str          = Password_handler.generate_password(length = 6)
+        salt, password_hash     = Password_handler.salt_and_hash(password)
+
+        #save new password
+        query = session.query(Users).filter(Users.id_us == id_us).update({
+            Users.password_hash             : password_hash,
+            Users.salt                      : salt,
+            Users.comment                   : "password reset",
+            Users.timestamp                 : int(time.time()),
+        })
+        session.commit()
+
+        #send new password to user
+        E_mail.message(to = e_mail, subject = "password reset", body = f"Password was reset for user {body.username}. Your new initial password is:\n{password}")
+        del password
+
+        message : dict = {"message" : f"password reset successfull"}
         return message
 
 

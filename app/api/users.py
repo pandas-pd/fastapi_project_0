@@ -61,4 +61,6 @@ class Endpoint():
 
     @router.post("/users/reset_password", tags = ["user, password"])
     def reset_password(body : Passwords.reset_password, response : Response):
-        pass
+
+        response = Update.reset_password(body = body, response = response)
+        return response

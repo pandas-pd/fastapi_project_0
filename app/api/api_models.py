@@ -80,7 +80,7 @@ class Users():
 class Passwords():
 
     class reset_password(BaseModel):
-        pass
+        username : str
 
     class update_password(BaseModel):
         key_user : int

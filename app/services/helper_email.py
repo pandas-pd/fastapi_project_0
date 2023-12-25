@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 import cdsapi
 
-from app.settings import EMAIL_SENDER, EMAIL_PASSWORD
+from settings import EMAIL_SENDER, EMAIL_PASSWORD
 
 class E_mail():
 
@@ -22,11 +22,13 @@ class E_mail():
 
         return
 
-    def message(to : str = "test@test.com", subject : str = "test", body : str = "sample", ):
+    def message(to : str = "test@test.com", subject : str = "test", body : str = "sample"):
 
         recipients = [to]
 
         try:
             E_mail.__send_email(subject = subject, body = body, recipients = recipients)
+            return True
         except:
             print("An error occured while sending the mail")
+            return False
