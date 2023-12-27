@@ -53,13 +53,13 @@ class Endpoint():
 
 
     #password management
-    @router.put("/users/password", tags = ["user, password"])
+    @router.put("/users/password", tags = ["password"])
     def update_password(body : Passwords.update_password, response : Response):
 
         response = Update.password(body = body, response = response)
         return response
 
-    @router.post("/users/reset_password", tags = ["user, password"])
+    @router.post("/users/reset_password", tags = ["password"])
     def reset_password(body : Passwords.reset_password, response : Response):
 
         response = Update.reset_password(body = body, response = response)

@@ -7,7 +7,7 @@ from db.models.users import Users, User_roles
 from db.models.enums import User_role
 
 from services.helper_general import *
-from services.helper_auth import Password_handler
+from services.helper_password import Password_handler
 from services.helper_email import E_mail
 
 
