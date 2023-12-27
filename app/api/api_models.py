@@ -87,3 +87,12 @@ class Passwords():
         password_old : str
         password_new : str
         comment : Optional[str]
+
+class Authentication():
+
+    class login(BaseModel):
+        username : str
+        password : str
+
+    class logout(BaseModel):
+        pass

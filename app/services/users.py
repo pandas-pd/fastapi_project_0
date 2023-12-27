@@ -209,7 +209,7 @@ class Update():
     @staticmethod
     def reset_password(body, response):
 
-        if (Validator.username_on_reset(body.username) == False):
+        if (Validator.username_on_existing(body.username) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message" : f"invalid username was provided: {body.username}"}
 

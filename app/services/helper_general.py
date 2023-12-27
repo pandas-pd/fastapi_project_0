@@ -191,7 +191,7 @@ class Validator():
             return True
 
     @staticmethod
-    def username_on_reset(username : str):
+    def username_on_existing(username : str):
 
         query       = select(Users.username).select_from(Users).filter(Users.username == username)
         content     = session.execute(query).fetchone()

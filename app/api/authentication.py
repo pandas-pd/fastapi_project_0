@@ -1,4 +1,25 @@
 #this is an example, needs to be done correctly
+from fastapi import APIRouter, Response, status
+from services.authentication import *
+from api.api_models import Authentication
+
+class Endpoints():
+
+    router = APIRouter()
+
+    @router.post("/login", tags = ["authentication"])
+    def login(body : Authentication.login, response : Response):
+
+        response = Services.login(body = body, response = response)
+        return response
+
+    @router.post("/logout", tags = ["authentication"])
+    def logout(body : Authentication.logout, response : Response):
+
+        response = Services.logout(body = body, response = response)
+        return response
+
+
 
 """
 from fastapi import FastAPI, Depends, HTTPException

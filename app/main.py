@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api import skills, enums, projects, users # Import your route modules
+from api import skills, enums, projects, users, authentication # Import your route modules
 from db.base import engine
 from db import base
 import os
@@ -26,6 +26,7 @@ routes : list =[
     enums.Endpoint.router,
     projects.Endpoint.router,
     users.Endpoint.router,
+    authentication.Endpoints.router,
     #add new here
 ]
 
