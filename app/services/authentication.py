@@ -3,8 +3,9 @@ from sqlalchemy import select
 
 from db.base import session
 from db.models.users import Users, User_roles
+from db.models.enums import User_role
 
-from services.helper_authentication import JWT_handler, Authentication
+from services.helper_authentication import JWT_handler, Authentication_schema
 from services.helper_general import Validator
 from services.helper_password import Password_handler
 
@@ -26,9 +27,10 @@ class Services():
         #fetch user key and role to create jwt
         query = select(
             Users.key,
-            User_roles.key,
-        ).select_from(Users
-        ).join(User_roles, User_roles.user, isouter = True
+            User_role.key,
+        ).select_from(User_roles
+        ).join(Users, User_roles.user, isouter = True
+        ).join(User_role, User_roles.role, isouter = True
         ).filter(Users.username == body.username)
 
         content = session.execute(query).fetchall()
