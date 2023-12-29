@@ -46,7 +46,7 @@ class JWT_handler():
         jwt_dict : dict = JWT_handler.decode_jwt(jwt_encoded, encrypted = False)
         exp = int(jwt_dict["exp"])
 
-        if exp < time.time():
+        if (exp < time.time()):
             return False
 
         return True
