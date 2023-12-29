@@ -13,13 +13,6 @@ class Endpoints():
         response = Services.login(body = body, response = response)
         return response
 
-    @router.post("/logout", tags = ["authentication"])
-    def logout(body : Authentication.logout, response : Response):
-
-        response = Services.logout(body = body, response = response)
-        return response
-
-
 
 """
 from fastapi import FastAPI, Depends, HTTPException

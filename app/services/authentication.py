@@ -2,7 +2,7 @@ from fastapi import status
 from sqlalchemy import select
 
 from db.base import session
-from db.models.users import Users
+from db.models.users import Users, User_roles
 
 from services.helper_authentication import JWT_handler, Authentication
 from services.helper_general import Validator
@@ -23,11 +23,28 @@ class Services():
             response.status_code = status.HTTP_401_UNAUTHORIZED
             return {"message" : f"invalid password was provided"}
 
-        #fetch user key to create jwt
-        query               = select(Users.key).select_from(Users).filter(Users.username == body.username)
-        us_key : int        = session.execute(query).fetchone()[0]
+        #fetch user key and role to create jwt
+        query = select(
+            Users.key,
+            User_roles.key,
+        ).select_from(Users
+        ).join(User_roles, User_roles.user, isouter = True
+        ).filter(Users.username == body.username)
 
-        #create jwt
+        content = session.execute(query).fetchall()
+
+        key_user : int = None
+        key_roles : list = []
+
+        for row in content:
+            key_user = int(row[0])
+            key_roles.append(int(row[1]))
+
+        #create and return jwt
+        jwt = JWT_handler.issue_jwt(key_user = key_user, key_roles = key_roles)
+        message : dict = {"access_token": jwt, "token_type": "bearer"}
+
+        return message
 
 
     @staticmethod

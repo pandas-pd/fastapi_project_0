@@ -14,7 +14,7 @@ class Setup_env():
     def main():
 
         #variables for Setup_env
-        venv_name : str             = "venv"
+        venv_name : str             = "env"
         requirements_file : str     = os.path.join(
                                         os.path.dirname(os.path.abspath(__file__)),
                                         "requirements.txt"

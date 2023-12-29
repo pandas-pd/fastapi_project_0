@@ -33,7 +33,6 @@ class JWT_handler():
 
         return jwt
 
-
     @staticmethod
     def verify_jwt(jwt : bytes) -> bool:
 
@@ -52,7 +51,6 @@ class JWT_handler():
 
         return True
 
-
     @staticmethod
     def decode_jwt(jwt_encoded, encrypted : bool) -> dict:
 
@@ -63,11 +61,6 @@ class JWT_handler():
         jws_dict : dict         = json.loads(jws_decoded)
 
         return jws_dict
-
-
-
-
-
 
 
 
