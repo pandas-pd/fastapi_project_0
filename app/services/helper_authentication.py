@@ -1,47 +1,73 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError, jwt
+from jose import jws, JWSError
 from datetime import datetime, timedelta
 from typing import Optional
+import time
+import json
 
-from settings import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_ACCESS_TOKEN_EXPIRE_MINUTES
+from settings import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_ACCESS_TOKEN_EXPIRE_MINUTES, JWT_ISS
 
 
 class JWT_handler():
 
     oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-    # Function to create a JWT token
     @staticmethod
-    def create_jwt_token(data: dict, expires_delta: timedelta):
+    def issue_jwt(key_user : int, key_roles : list) -> bytes:
 
-        data : dict  = {
-            "issuer"                : None,
-            "user_key"              : None,
-            "user_role"             : None,
-            "expires"               : None,
+        exp = int(time.time() + (JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60))
+
+        claims : dict = {
+            "iss"       : JWT_ISS,
+            "exp"       : exp,
+            "sub"       : key_user,
+            "roles"     : key_roles,
         }
 
-        #expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        jwt : str = jws.sign(
+            payload = claims,
+            key = JWT_SECRET_KEY,
+            algorithm = JWT_ALGORITHM,
+        )
 
-        to_encode = data.copy()
-    
-        expire = datetime.utcnow() + expires_delta
-        to_encode.update({"exp": expire})
-
-        encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm = JWT_ALGORITHM)
-
-        return encoded_jwt
+        return jwt
 
 
-    # Function to decode the JWT token
     @staticmethod
-    def decode_jwt_token(token: str):
+    def verify_jwt(jwt : bytes) -> bool:
+
+        #check integrety
         try:
-            payload = jwt.decode(token, JWT_SECRET_KEY, algorithms = [JWT_ALGORITHM])
-            return payload
-        except JWTError:
-            raise HTTPException(status_code=401, detail="Invalid credentials")
+            jwt_encoded = jws.verify(token = jwt, key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
+        except JWSError:
+            return False
+
+        #check exp
+        jwt_dict : dict = JWT_handler.decode_jwt(jwt_encoded, encrypted = False)
+        exp = int(jwt_dict["exp"])
+
+        if exp < time.time():
+            return False
+
+        return True
+
+
+    @staticmethod
+    def decode_jwt(jwt_encoded, encrypted : bool) -> dict:
+
+        if (encrypted):
+            jwt_encoded = jws.verify(token = jwt_encoded, key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
+
+        jws_decoded : str       = jwt_encoded.decode("utf-8")
+        jws_dict : dict         = json.loads(jws_decoded)
+
+        return jws_dict
+
+
+
+
+
 
 
 
