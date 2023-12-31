@@ -61,9 +61,3 @@ class JWT_handler():
         jws_dict : dict         = json.loads(jws_decoded)
 
         return jws_dict
-
-
-
-class Authentication_schema():
-
-    pass

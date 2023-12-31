@@ -5,7 +5,7 @@ from db.base import session
 from db.models.users import Users, User_roles
 from db.models.enums import User_role
 
-from services.helper_authentication import JWT_handler, Authentication_schema
+from services.helper_authentication import JWT_handler
 from services.helper_general import Validator
 from services.helper_password import Password_handler
 
@@ -48,11 +48,27 @@ class Services():
 
         return message
 
-
     @staticmethod
-    def logout(body, response):
-        pass
+    def permission_handler(response : object, jwt : bytes, required_roles : list, user_dependent : bool = False, key_user : int = None) -> bool:
+        """if a request is user dependent, but an admin role is given and the admin role is possible, then admin can read the data anyway"""
 
-    @staticmethod
-    def check_permission():
-        pass
+        #check jwt token
+        if (JWT_handler.verify_jwt(jwt) == False):
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return False
+
+        jwt_dict : dict = JWT_handler.decode_jwt(jwt_encoded = jwt, encrypted = True)
+
+        #check role requirements
+
+        role_permission : bool = False
+
+        for role in jwt_dict["roles"]:
+            if (role in required_roles):
+                role_permission = True
+
+        if (role_permission == False):
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return False
+
+        return True
