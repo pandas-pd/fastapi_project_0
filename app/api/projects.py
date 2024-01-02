@@ -1,15 +1,22 @@
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, Response, status, Depends
 from services.projects import *
 from api.api_models import Projects
 
+from services.authentication import Services
+from services.helper_authentication import JWT_handler
+
 class Endpoint():
+
 
     router = APIRouter()
 
     #project
 
     @router.post("/project/project", tags = ["projects"])
-    def add_project(body : Projects.add_project, response : Response):
+    def add_project(body : Projects.add_project, response : Response, claims : str = Depends(JWT_handler.verify_jwt)):
+
+        if (Services.permission_handler(response = response, claims = claims, required_roles = [0]) == False):
+            return None
 
         response = Write.project(body = body, response = response)
         return response

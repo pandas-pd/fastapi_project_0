@@ -1,4 +1,5 @@
 import os
+from fastapi.security import OAuth2PasswordBearer
 
 #pathing
 db_url : str                    = "sqlite.db"
@@ -15,6 +16,8 @@ SALT_ROUNDS : int       = 12
 #auth settings (do not push into public repository)
 JWT_SECRET_KEY : str                        = "0MWV5n8wEKX1RCbKtX2PQoHzTuRneiTIPucuzYoVFWU7WKgL29AU0_59Xa_LkFGF"
 JWT_ALGORITHM : str                         = "HS256"
+JWT_ENCODING : str                          = "utf-8"
+
 JWT_ISS : str                               = "www.sample_url.com"
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES : int       = 43200 # == 30 days
 
