@@ -40,6 +40,7 @@ class Projects():
         sequence_number : Optional[int]
         link : Optional[str]
         key_project_status : int
+        is_public : bool
 
     class update_project(BaseModel):
         key : int
@@ -48,6 +49,7 @@ class Projects():
         sequence_number : Optional[int]
         link : Optional[str]
         key_project_status : int
+        is_public : bool
 
     class delete_project(BaseModel):
         key : int

@@ -41,6 +41,7 @@ class Write():
             description     = body.description,
             sequence_number = sequence_number,
             link            = body.link,
+            is_public       = body.is_public,
             timestamp       = int(time.time()),
         )
 
@@ -55,7 +56,42 @@ class Write():
 class Read():
 
     @staticmethod
-    def project():
+    def projects():
+
+        query = select(
+            Projects.key,
+            Projects.name,
+            Projects.description,
+            Projects.sequence_number,
+            Projects.link,
+            Projects.is_public,
+            Project_status.key,
+            Projects.timestamp,
+        ).select_from(Projects
+        ).join(Project_status, isouter = True)
+
+        conten = session.execute(query).fetchall()
+
+        #format data
+        response : list = []
+        for row in conten:
+
+            item : dict = {
+                "key"               : row[0],
+                "name"              : row[1],
+                "description"       : row[2],
+                "sequence_number"   : row[3],
+                "link"              : row[4],
+                "is_public"         : row[5],
+                "project_status"    : row[6],
+                "timestamp"         : row[7],
+            }
+            response.append(item)
+
+        return response
+
+    @staticmethod
+    def public_projects():
 
         query = select(
             Projects.key,
@@ -66,7 +102,8 @@ class Read():
             Project_status.key,
             Projects.timestamp,
         ).select_from(Projects
-        ).join(Project_status, isouter = True)
+        ).join(Project_status, isouter = True
+        ).filter(Projects.is_public == True)
 
         conten = session.execute(query).fetchall()
 
@@ -86,6 +123,7 @@ class Read():
             response.append(item)
 
         return response
+
 
 
 class Udpdate():
@@ -124,6 +162,7 @@ class Udpdate():
             Projects.description        : body.description,
             Projects.sequence_number    : sequence_number,
             Projects.link               : body.link,
+            Projects.is_public          : body.is_public,
             Projects.timestamp          : int(time.time())
         })
 

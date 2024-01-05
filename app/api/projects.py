@@ -1,16 +1,15 @@
 from fastapi import APIRouter, Response, status, Depends
-from fastapi.security import HTTPAuthorizationCredentials
 
 from services.projects import *
-
 from api.api_models import Projects
 
+#auth
+from fastapi.security import HTTPAuthorizationCredentials
 from services.authentication import Services
 from services.helper_authentication import JWT_handler
 from settings import auth_schema
 
 class Endpoint():
-
 
     router = APIRouter()
 
@@ -25,10 +24,16 @@ class Endpoint():
         response = Write.project(body = body, response = response)
         return response
 
-    @router.get("/project/project", tags = ["projects"])
+    @router.get("/project/project/all", tags = ["projects"])
     def get_projects():
 
-        response = Read.project()
+        response = Read.projects()
+        return response
+
+    @router.get("/project/project/public")
+    def get_public_projects():
+
+        response = Read.public_projects()
         return response
 
     @router.put("/project/project", tags = ["projects"])

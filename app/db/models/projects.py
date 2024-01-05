@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger
+from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger, Boolean
 from sqlalchemy.orm import relationship
 from db.base import Base
 import time
@@ -15,6 +15,7 @@ class Projects(Base):
     description     = Column(String(500), nullable = True)
     sequence_number = Column(Integer, nullable = True)
     link            = Column(String(250), nullable = True)
+    is_public       = Column(Boolean, nullable = False)
     key             = Column(Integer, nullable = False, unique = True)
     timestamp       = Column(BigInteger, nullable = False)
 
