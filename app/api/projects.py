@@ -42,6 +42,9 @@ class Endpoint():
     @router.put("/project/project", tags = ["projects"])
     def update_project(body: Projects.update_project, response : Response, token : HTTPAuthorizationCredentials = Depends(auth_schema)):
 
+        claims : dict = JWT_handler.verify_jwt(token = token)
+        Services.permission_handler(claims = claims, required_roles = [0,1])
+
         response = Udpdate.project(body = body, response = response)
         return response
 
