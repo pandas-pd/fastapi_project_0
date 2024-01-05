@@ -2,6 +2,12 @@ from fastapi import APIRouter, Response, status
 from services.users import *
 from api.api_models import Users, Passwords
 
+#auth
+from fastapi.security import HTTPAuthorizationCredentials
+from services.authentication import Services
+from services.helper_authentication import JWT_handler
+from settings import auth_schema
+
 class Endpoint():
 
     router = APIRouter()
