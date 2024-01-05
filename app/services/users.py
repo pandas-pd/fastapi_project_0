@@ -85,7 +85,40 @@ class Write():
 class Read():
 
     @staticmethod
-    def user():
+    def all_users():
+
+        #query
+        query_users = select(
+            Users.key,
+            Users.username,
+            Users.e_mail,
+            Users.comment,
+            Users.timestamp,
+        ).select_from(Users)
+
+        content_users = session.execute(query_users).fetchall()
+
+        #format data
+        response : list = []
+        for row in content_users:
+
+            roles : list = Read.roles(key_user = row[0]) #not the best way to handle this but it works
+
+            item : dict = {
+                "key"           : row[0],
+                "username"      : row[1],
+                "e_mail"        : row[2],
+                "comment"       : row[3],
+                "timestamp"     : row[4],
+                "roles"         : roles,
+            }
+
+            response.append(item)
+
+        return response
+
+    @staticmethod
+    def user(key_user : int):
 
         #query
         query = select(
@@ -94,27 +127,26 @@ class Read():
             Users.e_mail,
             Users.comment,
             Users.timestamp,
-        ).select_from(Users)
+        ).select_from(Users
+        ).filter(Users.key == key_user)
 
-        content = session.execute(query).fetchall()
+        content = session.execute(query).fetchone()
+        roles = Read.roles(key_user = key_user)
 
-        #format data
-        response : list = []
-        for row in content:
-
-            item : dict = {
-                "key"           : row[0],
-                "username"      : row[1],
-                "e_mail"        : row[2],
-                "comment"       : row[3],
-                "timestamp"     : row[4],
-            }
-            response.append(item)
+        response : dict = {
+            "key"           : content[0],
+            "username"      : content[1],
+            "e_mail"        : content[2],
+            "comment"       : content[3],
+            "timestamp"     : content[4],
+            "roles"         : roles,
+        }
 
         return response
 
+
     @staticmethod
-    def roles(key_user : int, response : object):
+    def roles(key_user : int, response : object = None):
 
         #validait key
         if (Validator.user(key = key_user) == False):

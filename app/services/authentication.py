@@ -25,11 +25,22 @@ class Services():
             return {"message" : f"invalid password was provided"}
 
         #fetch user key and role to create jwt
+
+        """
         query = select(
             Users.key,
             User_role.key,
         ).select_from(User_roles
         ).join(Users, User_roles.user, isouter = True
+        ).join(User_role, User_roles.role, isouter = True
+        ).filter(Users.username == body.username)
+        """
+
+        query = select(
+            Users.key,
+            User_role.key,
+        ).select_from(Users
+        ).outerjoin(User_roles, Users.id_us == User_roles.fk_us
         ).join(User_role, User_roles.role, isouter = True
         ).filter(Users.username == body.username)
 
@@ -40,7 +51,9 @@ class Services():
 
         for row in content:
             key_user = int(row[0])
-            key_roles.append(int(row[1]))
+
+            if (row[1] != None):
+                key_roles.append(int(row[1]))
 
         #create and return jwt
         jwt = JWT_handler.issue_jwt(key_user = key_user, key_roles = key_roles)
@@ -63,12 +76,7 @@ class Services():
             raise JWT_handler.credentials_exception
 
         #check user dependency
-        if (user_dependent == True):
-
-            if (0 in claims["roles"]): #admi overrite for user data
-                return None
-
-            elif (int(claims["sub"]) != key_user):
+        if (user_dependent == True) and (int(claims["sub"]) != key_user):
                 raise JWT_handler.credentials_exception
 
         return None
