@@ -113,7 +113,7 @@ class Data():
         #declate data
         objects : dict = [
             enums.User_role(key = 0,        value = "admin"), #if changed, look at the authenticaiton schema handler in services.authentication.permission_handler
-            enums.User_role(key = 1,        value = "guest"),
+            enums.User_role(key = 1,        value = "editor"),
         ]
 
         #write to database

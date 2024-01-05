@@ -49,7 +49,7 @@ class Services():
         return message
 
     @staticmethod
-    def permission_handler(response : object, claims : dict, required_roles : list, user_dependent : bool = False, key_user : int = None) -> bool:
+    def permission_handler(claims : dict, required_roles : list, user_dependent : bool = False, key_user : int = None) -> None:
         """if a request is user dependent, but an admin role is given and the admin role is possible, then admin can read the data anyway"""
 
         #check role requirements
@@ -60,17 +60,15 @@ class Services():
                 role_permission = True
 
         if (role_permission == False):
-            response.status_code = status.HTTP_401_UNAUTHORIZED
-            return False
+            raise JWT_handler.credentials_exception
 
         #check user dependency
         if (user_dependent == True):
 
             if (0 in claims["roles"]): #admi overrite for user data
-                return True
+                return None
 
             elif (int(claims["sub"]) != key_user):
-                response.status_code = status.HTTP_401_UNAUTHORIZED
-                return False
+                raise JWT_handler.credentials_exception
 
-        return True
+        return None

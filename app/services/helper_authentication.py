@@ -1,15 +1,19 @@
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from jose import jws, JWSError
-from datetime import datetime, timedelta
-from typing import Optional
+
 import time
 import json
-
 
 from settings import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_ACCESS_TOKEN_EXPIRE_MINUTES, JWT_ISS, JWT_ENCODING
 
 
 class JWT_handler():
+
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid bearer",
+        headers={"Authorization": "bearer"},
+    )
 
     @staticmethod
     def issue_jwt(key_user : int, key_roles : list) -> bytes:
@@ -32,29 +36,23 @@ class JWT_handler():
         return jwt
 
     @staticmethod
-    def verify_jwt(request : Request) -> dict:
-
-        credentials_exception = HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid bearer",
-            headers={"Authorization": "bearer"},
-        )
+    def verify_jwt(token : object) -> dict:
 
         #get Auth header field with bearer
-        bearer = request.headers.get("Authorization")
+        jwt = token.credentials
 
         #check integrety
         try:
-            jwt_encoded = jws.verify(token = bearer, key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
+            jwt_encoded = jws.verify(token = jwt, key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
         except:
-            raise credentials_exception
+            raise JWT_handler.credentials_exception
 
         #check exp
         jwt_dict : dict = JWT_handler.decode_jwt(jwt_encoded, encrypted = False)
         exp = int(jwt_dict["exp"])
 
         if (exp < time.time()):
-            raise credentials_exception
+            raise JWT_handler.credentials_exception
 
         return jwt_dict
 

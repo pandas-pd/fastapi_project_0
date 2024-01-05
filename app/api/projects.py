@@ -1,9 +1,13 @@
 from fastapi import APIRouter, Response, status, Depends
+from fastapi.security import HTTPAuthorizationCredentials
+
 from services.projects import *
+
 from api.api_models import Projects
 
 from services.authentication import Services
 from services.helper_authentication import JWT_handler
+from settings import auth_schema
 
 class Endpoint():
 
@@ -13,10 +17,10 @@ class Endpoint():
     #project
 
     @router.post("/project/project", tags = ["projects"])
-    def add_project(body : Projects.add_project, response : Response, claims : str = Depends(JWT_handler.verify_jwt)):
+    def add_project(body : Projects.add_project, response : Response, token : HTTPAuthorizationCredentials = Depends(auth_schema)): #Depends(JWT_handler.verify_jwt)
 
-        if (Services.permission_handler(response = response, claims = claims, required_roles = [0]) == False):
-            return None
+        claims : dict = JWT_handler.verify_jwt(token = token)
+        Services.permission_handler(claims = claims, required_roles = [0])
 
         response = Write.project(body = body, response = response)
         return response
