@@ -21,6 +21,7 @@
 - run `setup_env.py`
 - run `setup_db.py`
 - create and overvrite the sample api key and secret in `settings.py`
+- enter mailing server credentials in `settings.py`
 - launch server
 
 ## Usefull commands:
