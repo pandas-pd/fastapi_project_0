@@ -1,9 +1,9 @@
 # fastapi project 0 - Webapp: About me
 
 ## About this app
-- First try of a fullstack webapp with fastapi an react. This project serves as a strating point and a learning experience for the auother
+- First try of a fullstack webapp with fastapi and a simple front end (to be implemented). This project serves as a strating point and a learning experience for the auther
 - The App was developed with python 3.10. Thus python 3.10 or higher is reccomeded
-- The `setup.py` file needs to be run first for the app to funciton propperly. Could be replaced by an deployment pipeline. Automatically handles:
+- The `setup_env.py` and `setup_db.py` file needs to be run first for the app to funciton propperly. Could be replaced by an deployment pipeline. Automatically handles:
     - Creation of the virtual environment
     - Installation of the needed packages
     - Creating the sqlite database
@@ -15,10 +15,13 @@
     - `setup.py`:
         - Implement a setup pipeline
         - Populate enum models
-    - `.\app\services\skills.py`:
-        - Create read funciton for programming languages
-        - Create write funciton for programming languages
 - post forwarding on yallo box: https://portforward.com/arris/tg3492lg-yl/
+
+## Setup
+- run `setup_env.py`
+- run `setup_db.py`
+- create and overvrite the sample api key and secret in `settings.py`
+- launch server
 
 ## Usefull commands:
 - Activate and deactivate Environment on windows:
@@ -31,9 +34,7 @@
     - *webadress*/redoc
 
 ## To be implemented
-- REST API
-    - Technical Skills (Programming languaes and libs)
-    - Project Backlog with GitHub link
 - GUI
     - Home page about the auother (me) with technical skills
-    - Prject Backlog paget
+    - Prject Backlog page
+    - Role management
