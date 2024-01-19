@@ -1,5 +1,13 @@
 # fastapi project 0 - Webapp: About me
 
+## To be implemented
+- Cookie Auth: https://indominusbyte.github.io/fastapi-jwt-auth/usage/jwt-in-cookies/
+    - Current Auth: HTTP Bearer (only suitable for Webservices, vulnerable to XSS)
+- GUI
+    - Home page about the auother (me) with technical skills
+    - Prject Backlog page
+    - Role management
+
 ## About this app
 - First try of a fullstack webapp with fastapi and a simple front end (to be implemented). This project serves as a strating point and a learning experience for the auther
 - The App was developed with python 3.10. Thus python 3.10 or higher is reccomeded
@@ -33,9 +41,3 @@
 - Access documentation:
     - *webadress*/docs
     - *webadress*/redoc
-
-## To be implemented
-- GUI
-    - Home page about the auother (me) with technical skills
-    - Prject Backlog page
-    - Role management
