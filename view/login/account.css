@@ -1,0 +1,42 @@
+.centered-fields{
+    max-width: 400;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20;
+    /*border: 1px solid #ccc;*/
+}
+
+/* ---------- Login form ---------- */
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10;
+    margin: 5;
+    border-radius: var(--border-radius-button);
+}
+
+.login-form input[type="submit"] {
+    width: 100%;
+    background-color: var(--button-color);
+    color: var(--font-color-1);
+    margin: 5;
+    padding: 10;
+    border: none;
+    border-radius: var(--border-radius-button);
+    cursor: pointer;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: var(--button-color-hover);
+}
+
+.additional-links a {
+    color: var(--font-color-2);
+    padding-left: 20;
+    padding-right: 20;
+}
+
+.additional-links a:hover{
+    color: var(--font-color-3);
+}

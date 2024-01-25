@@ -5,6 +5,8 @@
 
     --background-color-navbar: rgb(40, 45, 55);
     --border-navbar: 1px solid rgb(255, 255, 255);
+    --button-color:  rgba(139, 83, 185, 0.712);
+    --button-color-hover : rgb(139, 83, 185);
 
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
@@ -13,6 +15,8 @@
     --font-family: 'Monaco', monospace;
 
     --container-width: 800;
+
+    --border-radius-button: 5px;
 }
 
 /* ---------- body and main container ----------  */

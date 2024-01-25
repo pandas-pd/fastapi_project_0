@@ -3,23 +3,29 @@
 <head>
     <title>Joel Tauss</title>
     <link rel = "stylesheet" href = "../commonStyles.css">
+    <link rel = "stylesheet" href = "account.css">
 </head>
 
 <body>
 
-    <nav class="header">
-        <ul class = "nav-bar">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../skills/skills.html">Skills</a></li>
-            <li><a href="../projects/projects.html">Projects</a></li>
-            <li><a href="../users/users.html">Users</a></li>
-            <li><a href="../login/login.html">Login</a></li>
-        </ul>
-    </nav>
+    <div class = "centered-fields">
 
-    <div class = "centered-container">
         <h1>Login</h1>
-        <p>some sample text</p>
+
+        <div class="login-form">
+            <form id="loginForm">
+                <input type = "text" id = "username" placeholder = "Username" required>
+                <input type = "password" id = "password" placeholder = "Password" required>
+                <input type = "submit" value = "Login" onclick="login()">
+            </form>
+        </div>
+        <script src="../apiServices.js"></script>
+
+        <div class = "additional-links">
+            <a href="">Reset password</a>
+            <a href="">Create Account</a>
+        </div>
+
     </div>
 
 </body>

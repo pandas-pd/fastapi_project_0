@@ -41,3 +41,8 @@
 - Access documentation:
     - *webadress*/docs
     - *webadress*/redoc
+
+# View Page
+
+## Notes to self:
+Mockup: https://moqups.com/
