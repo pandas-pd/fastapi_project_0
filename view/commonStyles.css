@@ -1,0 +1,73 @@
+/* ---------- properties ----------  */
+
+:root{
+    --background-color-body : rgb(40, 45, 55);
+
+    --background-color-navbar: rgb(40, 45, 55);
+    --border-navbar: 1px solid rgb(255, 255, 255);
+
+    --font-color-1: rgb(255, 255, 255);
+    --font-color-2: rgba(225, 225, 225, 0.6);
+    --font-color-3: rgb(126, 38, 197);
+
+    --font-family: 'Monaco', monospace;
+
+    --container-width: 1000;
+}
+
+/* ---------- body and main container ----------  */
+
+body {
+    background-color: var(--background-color-body);
+    font-family: var(--font-family);
+    color: var(--font-color-1);
+    margin: 0;
+}
+
+.centered-container{
+    max-width: var(--container-width);
+    margin: 0 auto;
+    text-align: left;
+    padding: 0;
+    /*border: 1px solid #ccc;*/
+}
+
+/* ---------- Header and navbar ----------  */
+
+.header{
+    background-color: var(--background-color-navbar);
+    border-bottom: 1px solid var(--font-color-1);
+}
+
+.nav-bar{
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+    background-color: var(--background-color-navbar);
+}
+
+.nav-bar li{
+    float: left;
+}
+.nav-bar li:last-child {
+    float: right; /*used for the login button */
+}
+
+.nav-bar li a{
+    display: block;
+    color: var(--font-color-2);
+    padding-top: 20;
+    padding-bottom: 20;
+    padding-right: 30;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-bar li a:hover{
+    color: var(--font-color-3);
+    font-weight: bold;
+}
+
+/* ---------- interactive elements ----------  */

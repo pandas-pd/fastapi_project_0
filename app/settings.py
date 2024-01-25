@@ -29,3 +29,4 @@ EMAIL_PASSWORD : str          = "ukbxhznembqulfva"
 #other settings
 TIME_ZONE : str         = None #not in use
 LANGUAGE : str          = "EN" #not in use
+VERSION : float         = 1.0
