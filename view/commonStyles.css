@@ -8,11 +8,11 @@
 
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
-    --font-color-3: rgb(126, 38, 197);
+    --font-color-3: rgb(139, 83, 185);
 
     --font-family: 'Monaco', monospace;
 
-    --container-width: 1000;
+    --container-width: 800;
 }
 
 /* ---------- body and main container ----------  */
