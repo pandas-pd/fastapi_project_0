@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from api import skills, enums, projects, users, authentication # Import your route modules
+from fastapi.middleware.cors import CORSMiddleware
 from db.base import engine
 from db import base
 import os
+from settings import ORIGINS
 
 #make all moduls accessable form everywhere
 import sys
@@ -18,6 +20,15 @@ app = FastAPI(
     title           = "Backend for webapp",
     description     = description,
     version         = "0.2",
+)
+
+#add CORS middleware (for whitelisting frontend App)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = ORIGINS,
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"],
 )
 
 #include routes, add news to add to funcitonality
