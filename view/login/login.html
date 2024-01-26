@@ -1,9 +1,13 @@
 <html lang = "en">
 
 <head>
+
     <title>Joel Tauss</title>
+
     <link rel = "stylesheet" href = "../commonStyles.css">
     <link rel = "stylesheet" href = "account.css">
+    <script src="../apiServices.js"></script>
+
 </head>
 
 <body>
@@ -13,13 +17,10 @@
         <h1>Login</h1>
 
         <div class="login-form">
-            <form id="loginForm">
                 <input type = "text" id = "username" placeholder = "Username" required>
                 <input type = "password" id = "password" placeholder = "Password" required>
-                <input type = "submit" value = "Login" onclick="login()">
-            </form>
+                <input type = "submit" value = "Login" onclick="Authentication.login()">
         </div>
-        <script src="../apiServices.js"></script>
 
         <div class = "additional-links">
             <a href="">Reset password</a>
