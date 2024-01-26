@@ -1,16 +1,58 @@
-const endpoint = "";
+class API{
 
+    static endpoint = "";
+    static cookiePath = "";
+    static header = {'Content-Type': 'application/json'}
 
-function login(){
+    constructor(method, call, body){
+        this.method = method;
+        this.url = API.endpoint + call;
+        this.body = body;
+    }
 
-    //get items
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+    callPublic(){
 
-    //get jwt token as cookie from backend
+        try{
 
-    //redirect to home
+            const response = await fetch( this.url,{
+                method: this.method,
+                headers: API.header,
+                body : JSON.stringify(this.body)
+            });
 
-    return null;
+            if (response.ok) {
+                const data = await response.json();
+            }
+        }
+    };
+
+    callPrivat(call, method, body){
+        //some
+    }
 
 }
+
+class Authentication{
+
+    static login(){
+
+        //get items
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+
+        //create call instance
+        const api = new API(
+            method = "POST",
+            call = "/login",
+            body = {"username" : username, "password" : password},
+        )
+
+        await api.callPublic();
+
+        //redirect to home
+
+        return null;
+
+    }
+}
+
