@@ -1,4 +1,4 @@
-from fastapi import status
+from fastapi import status, HTTPException
 from sqlalchemy import select
 
 from db.base import session
@@ -9,6 +9,8 @@ from services.helper_authentication import JWT_handler
 from services.helper_general import Validator
 from services.helper_password import Password_handler
 
+from settings import JWT_NAME, JWT_SECURE, JWT_ACCESS_TOKEN_EXPIRE_SECONDS
+
 
 class Services():
 
@@ -17,12 +19,10 @@ class Services():
 
         #verify inputs
         if (Validator.username_on_existing(username = body.username) == False):
-            response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid username was given: {body.username}"}
+            raise HTTPException(status_code=401,detail="Bad username or password")
 
         if (Password_handler.password_match(password = body.password, username = body.username) == False):
-            response.status_code = status.HTTP_401_UNAUTHORIZED
-            return {"message" : f"invalid password was provided"}
+            raise HTTPException(status_code=401,detail="Bad username or password")
 
         #fetch user key and role to create jwt
 
@@ -55,11 +55,23 @@ class Services():
             if (row[1] != None):
                 key_roles.append(int(row[1]))
 
-        #create and return jwt
+        #create and set
         jwt = JWT_handler.issue_jwt(key_user = key_user, key_roles = key_roles)
-        message : dict = {"access_token": jwt, "token_type": "bearer"}
 
-        return message
+        response.set_cookie(
+            key = JWT_NAME,
+            value = jwt,
+            secure = JWT_SECURE,
+            max_age = JWT_ACCESS_TOKEN_EXPIRE_SECONDS,
+        )
+
+        return {"message" : "Login successful"}
+
+    @staticmethod
+    def logout(response):
+
+        response.delete_cookie(key = JWT_NAME)
+        return {"message" : "Logout successful"}
 
     @staticmethod
     def permission_handler(claims : dict, required_roles : list, user_dependent : bool = False, key_user : int = None) -> None:

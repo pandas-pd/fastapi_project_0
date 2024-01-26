@@ -1,5 +1,5 @@
 #this is an example, needs to be done correctly
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, Response, status, Request
 from services.authentication import *
 from api.api_models import Authentication
 
@@ -12,6 +12,13 @@ class Endpoints():
 
         response = Services.login(body = body, response = response)
         return response
+
+    @router.post("/logout", tags = ["authentication"])
+    def logout(request : Request, response : Response):
+
+        response = Services.logout(response = response)
+        return response
+
 
 
 """

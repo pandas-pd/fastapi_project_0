@@ -3,6 +3,7 @@
 ## To be implemented
 - Cookie Auth: https://indominusbyte.github.io/fastapi-jwt-auth/usage/jwt-in-cookies/
     - Current Auth: HTTP Bearer (only suitable for Webservices, vulnerable to XSS)
+- Set https in prod env: https://medium.com/@mariovanrooij/adding-https-to-fastapi-ad5e0f9e084e
 - GUI
     - Home page about the auother (me) with technical skills
     - Prject Backlog page
@@ -24,6 +25,7 @@
         - Implement a setup pipeline
         - Populate enum models
 - post forwarding on yallo box: https://portforward.com/arris/tg3492lg-yl/
+- mock-up guis: https://moqups.com/
 
 ## Setup
 - run `setup_env.py`
@@ -43,6 +45,3 @@
     - *webadress*/redoc
 
 # View Page
-
-## Notes to self:
-Mockup: https://moqups.com/

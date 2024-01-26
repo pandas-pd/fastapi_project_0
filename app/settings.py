@@ -1,5 +1,5 @@
 import os
-from fastapi.security import HTTPBearer
+#from fastapi.security import HTTPBearer
 
 #pathing
 db_url : str                    = "sqlite.db"
@@ -17,10 +17,14 @@ SALT_ROUNDS : int       = 12
 JWT_SECRET_KEY : str                        = "enter_key_here"
 JWT_ALGORITHM : str                         = "HS256"
 JWT_ENCODING : str                          = "utf-8"
-auth_schema                                 = HTTPBearer()
+
+JWT_NAME : str                              = "fastapi_project0_token"
+JWT_SECURE : bool                           = False #can only be set to true, when https is implemented
+
+#auth_schema                                 = HTTPBearer()
 
 JWT_ISS : str                               = "www.sample_url.com"
-JWT_ACCESS_TOKEN_EXPIRE_MINUTES : int       = 43200 # == 30 days
+JWT_ACCESS_TOKEN_EXPIRE_SECONDS : int       = 2592000 # == 30 days
 
 #mailer settings (do not push to public repository)
 EMAIL_SENDER : str            = "mail_adress"

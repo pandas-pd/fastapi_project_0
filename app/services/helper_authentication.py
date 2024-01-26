@@ -4,7 +4,7 @@ from jose import jws, JWSError
 import time
 import json
 
-from settings import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_ACCESS_TOKEN_EXPIRE_MINUTES, JWT_ISS, JWT_ENCODING
+from settings import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_ACCESS_TOKEN_EXPIRE_SECONDS, JWT_ISS, JWT_ENCODING, JWT_ACCESS_TOKEN_EXPIRE_SECONDS
 
 
 class JWT_handler():
@@ -18,7 +18,7 @@ class JWT_handler():
     @staticmethod
     def issue_jwt(key_user : int, key_roles : list) -> bytes:
 
-        exp = int(time.time() + (JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60))
+        exp = int(time.time() + JWT_ACCESS_TOKEN_EXPIRE_SECONDS)
 
         claims : dict = {
             "iss"       : JWT_ISS,
@@ -38,12 +38,11 @@ class JWT_handler():
     @staticmethod
     def verify_jwt(token : object) -> dict:
 
-        #get Auth header field with bearer
-        jwt = token.credentials
+        print(token)
 
         #check integrety
         try:
-            jwt_encoded = jws.verify(token = jwt, key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
+            jwt_encoded = jws.verify(token = token, key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
         except:
             raise JWT_handler.credentials_exception
 
