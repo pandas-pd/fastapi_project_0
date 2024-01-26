@@ -2,6 +2,7 @@
 from fastapi import APIRouter, Response, status, Request
 from services.authentication import *
 from api.api_models import Authentication
+import json
 
 class Endpoints():
 
@@ -12,6 +13,7 @@ class Endpoints():
 
         response = Services.login(body = body, response = response)
         return response
+
 
     @router.post("/logout", tags = ["authentication"])
     def logout(request : Request, response : Response):

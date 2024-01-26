@@ -9,7 +9,7 @@ from services.helper_authentication import JWT_handler
 from services.helper_general import Validator
 from services.helper_password import Password_handler
 
-from settings import JWT_NAME, JWT_SECURE, JWT_ACCESS_TOKEN_EXPIRE_SECONDS
+from settings import JWT_NAME, JWT_SECURE, JWT_ACCESS_TOKEN_EXPIRE_SECONDS, JWT_HTTPONLY, JWT_SAMESITE
 
 
 class Services():
@@ -62,6 +62,8 @@ class Services():
             key = JWT_NAME,
             value = jwt,
             secure = JWT_SECURE,
+            httponly = JWT_HTTPONLY,
+            samesite = JWT_SAMESITE,
             max_age = JWT_ACCESS_TOKEN_EXPIRE_SECONDS,
         )
 

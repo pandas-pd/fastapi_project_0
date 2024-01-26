@@ -4,15 +4,15 @@ from jose import jws, JWSError
 import time
 import json
 
-from settings import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_ACCESS_TOKEN_EXPIRE_SECONDS, JWT_ISS, JWT_ENCODING, JWT_ACCESS_TOKEN_EXPIRE_SECONDS
+from settings import JWT_SECRET_KEY,JWT_ALGORITHM, JWT_ACCESS_TOKEN_EXPIRE_SECONDS, JWT_ISS, JWT_ENCODING, JWT_ACCESS_TOKEN_EXPIRE_SECONDS, JWT_NAME
 
 
 class JWT_handler():
 
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Invalid bearer",
-        headers={"Authorization": "bearer"},
+        detail="Invalid token",
+        headers={"Authorization": "cookie"},
     )
 
     @staticmethod
@@ -38,11 +38,9 @@ class JWT_handler():
     @staticmethod
     def verify_jwt(token : object) -> dict:
 
-        print(token)
-
         #check integrety
         try:
-            jwt_encoded = jws.verify(token = token, key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
+            jwt_encoded = jws.verify(token = token[JWT_NAME], key = JWT_SECRET_KEY, algorithms = JWT_ALGORITHM)
         except:
             raise JWT_handler.credentials_exception
 
