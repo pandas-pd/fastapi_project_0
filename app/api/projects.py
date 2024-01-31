@@ -31,7 +31,7 @@ class Endpoint():
         response = Read.projects()
         return response
 
-    @router.get("/project/project/public")
+    @router.get("/project/project/public", tags = ["projects"])
     def get_public_projects():
 
         response = Read.public_projects()
