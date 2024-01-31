@@ -6,7 +6,7 @@
 
     <link rel = "stylesheet" href = "../commonStyles.css">
     <link rel = "stylesheet" href = "account.css">
-    <script src="accountApiServices.js"></script>
+    <script src="../apiServices.js" defer></script>
 
 </head>
 
@@ -19,7 +19,7 @@
         <div class="login-form">
                 <input type = "text" id = "username" placeholder = "Username" required>
                 <input type = "password" id = "password" placeholder = "Password" required>
-                <input type = "submit" value = "Login" onclick="Authentication.login()">
+                <input type = "submit" value = "Login" onclick="API.login()">
         </div>
 
         <div class = "additional-links">

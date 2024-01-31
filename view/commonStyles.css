@@ -13,6 +13,7 @@
     --font-color-3: rgb(139, 83, 185);
 
     --font-family: 'Monaco', monospace;
+    --content-font-size : 16;
 
     --container-width: 800;
 
@@ -21,9 +22,24 @@
 
 /* ---------- body and main container ----------  */
 
+
+h1 {
+    font-size: 32;
+}
+
+h2{
+    font-size: 28;
+}
+
+h3{
+    font-size: 24;
+}
+
+
 body {
     background-color: var(--background-color-body);
     font-family: var(--font-family);
+    font-size: var(--content-font-size);
     color: var(--font-color-1);
     margin: 0;
 }
@@ -34,6 +50,18 @@ body {
     text-align: left;
     padding: 0;
     /*border: 1px solid #ccc;*/
+}
+
+/* ---------- interactive elements ----------  */
+
+input{
+    font-family: var(--font-family);
+    font-size: var(--content-font-size);
+}
+
+textarea:focus, input:focus{
+    outline: none !important;
+    border:2px solid var(--button-color-hover);
 }
 
 /* ---------- Header and navbar ----------  */
@@ -66,17 +94,11 @@ body {
     padding-bottom: 20;
     padding-right: 30;
     text-decoration: none;
-    transition: color 0.2s ease;
 }
 
 .nav-bar li a:hover{
     color: var(--font-color-3);
     font-weight: bold;
-}
-
-/* ---------- interactive elements ----------  */
-
-input{
-    font-family: var(--font-family);
+    transition: color 0.2s ease;
 }
 
