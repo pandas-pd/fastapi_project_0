@@ -1,4 +1,4 @@
-class API{
+export class API{
 
     static endpoint = "http://127.0.0.1:8080";
     static cookiePath = "";
@@ -28,11 +28,7 @@ class API{
         }
     }
 
-    static async login(){
-
-        //get items
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
+    static async login(username, password){
 
         //const do stuff
         console.log("bevor call");
@@ -41,7 +37,6 @@ class API{
             "/login",
             {"username" : username, "password" : password},
         );
-
         return response;
     }
 }

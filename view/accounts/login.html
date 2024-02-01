@@ -4,9 +4,12 @@
 
     <title>Joel Tauss</title>
 
+    <script type="module" src="../apiServices.js" defer></script>
+    <script type="module" src="./accounts.js" defer></script>
+    <script type="module" src="./eventHandler.js" defer></script>
+
     <link rel = "stylesheet" href = "../commonStyles.css">
     <link rel = "stylesheet" href = "account.css">
-    <script src="../apiServices.js" defer></script>
 
 </head>
 
@@ -19,7 +22,7 @@
         <div class="login-form">
                 <input type = "text" id = "username" placeholder = "Username" required>
                 <input type = "password" id = "password" placeholder = "Password" required>
-                <input type = "submit" value = "Login" onclick="API.login()">
+                <input type = "submit" value = "Login" id = "loginButton">
         </div>
 
         <div class = "additional-links">

@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 
-.login-form input[type="submit"]:focus, .login-form input[type="submit"]:hover {
+.login-form input[type="submit"]:hover {
     background-color: var(--button-color-hover);
 }
 
