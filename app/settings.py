@@ -34,8 +34,8 @@ JWT_HTTPONLY : bool                         = True
 JWT_SAMESITE: str                           = "strict"
 
 #mailer settings (do not push to public repository)
-EMAIL_SENDER : str                          = "mail_adress"
-EMAIL_PASSWORD : str                        = "mail_login"
+EMAIL_SENDER : str                          = "pythonmailer418@gmail.com"
+EMAIL_PASSWORD : str                        = "asdfasdf418"
 
 #other settings
 VERSION : float         = 1.0

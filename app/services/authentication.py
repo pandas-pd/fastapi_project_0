@@ -19,10 +19,12 @@ class Services():
 
         #verify inputs
         if (Validator.username_on_existing(username = body.username) == False):
-            raise HTTPException(status_code=401,detail="Bad username or password")
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return {"message" : "bad username or password"}
 
         if (Password_handler.password_match(password = body.password, username = body.username) == False):
-            raise HTTPException(status_code=401,detail="Bad username or password")
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return {"message" : "bad username or password"}
 
         #fetch user key and role to create jwt
 

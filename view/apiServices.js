@@ -27,11 +27,12 @@ export class API{
             return {"status" : "error", "data" : {}};
         }
     }
+}
+
+export class User{
 
     static async login(username, password){
 
-        //const do stuff
-        console.log("bevor call");
         const response = await API.callEndpoint(
             "POST",
             "/login",
@@ -39,4 +40,15 @@ export class API{
         );
         return response;
     }
+
+    static async resetPassword (username){
+
+        const response = await API.callEndpoint(
+            "POST",
+            "/users/reset_password",
+            {"username" : username},
+        );
+        return response;
+    }
+
 }

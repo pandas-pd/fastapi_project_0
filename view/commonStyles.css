@@ -5,12 +5,17 @@
 
     --background-color-navbar: rgb(40, 45, 55);
     --border-navbar: 1px solid rgb(255, 255, 255);
+
     --button-color:  rgba(139, 83, 185, 0.712);
     --button-color-hover : rgb(139, 83, 185);
+    --button-color-active : rgba(225, 225, 225, 0.6);
 
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
     --font-color-3: rgb(139, 83, 185);
+
+    --sucess-color: rgb(10, 165, 160);
+    --failure-color: rgb(255, 84, 84);
 
     --font-family: 'Monaco', monospace;
     --content-font-size : 16;
@@ -54,6 +59,8 @@ body {
 
 /* ---------- interactive elements ----------  */
 
+/*text input*/
+
 input{
     font-family: var(--font-family);
     font-size: var(--content-font-size);
@@ -63,6 +70,57 @@ textarea:focus, input:focus{
     outline: none !important;
     border:2px solid var(--button-color-hover);
 }
+
+/* buttons */
+
+button {
+    font-family: var(--font-family);
+    background-color: var(--button-color);
+    color: var(--font-color-1);
+    margin: 5;
+    padding: 10;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    border: none;
+    border-radius: var(--border-radius-button);
+    cursor: pointer;
+    overflow: hidden;
+    transition-duration: 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-color-hover);
+}
+
+button:after {
+    content: "";
+    background: var(--sucess-color);
+    display: block;
+    position: absolute;
+
+    border-radius: 20px;
+
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+
+    opacity: 0;
+    transition:  all 0.8s
+}
+
+button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+button:focus{
+    outline: 0;
+}
+
 
 /* ---------- Header and navbar ----------  */
 
@@ -99,6 +157,6 @@ textarea:focus, input:focus{
 .nav-bar li a:hover{
     color: var(--font-color-3);
     font-weight: bold;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
 }
 
