@@ -23,12 +23,13 @@ app = FastAPI(
 )
 
 #add CORS middleware (for whitelisting frontend App)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins = ORIGINS,
     allow_credentials = True,
     allow_methods = ["*"],
-    allow_headers = ["*"],
+    #allow_headers = ["*"],
 )
 
 #include routes, add news to add to funcitonality

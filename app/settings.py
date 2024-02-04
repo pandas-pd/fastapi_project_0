@@ -29,13 +29,13 @@ JWT_ACCESS_TOKEN_EXPIRE_SECONDS : int       = 2592000 # == 30 days
 JWT_NAME : str                              = "fastapi_project0_token"
 
 #JWT security settings (prevention to XSS, CSRF, XSSI)
-JWT_SECURE : bool                           = True #set to true when ssl cert is installed
-JWT_HTTPONLY : bool                         = True
-JWT_SAMESITE: str                           = "strict"
+JWT_SECURE : bool                           = False #set to true when ssl cert is installed
+JWT_HTTPONLY : bool                         = False
+JWT_SAMESITE: str                           = "lax"
 
 #mailer settings (do not push to public repository)
 EMAIL_SENDER : str                          = "pythonmailer418@gmail.com"
-EMAIL_PASSWORD : str                        = "asdfasdf418"
+EMAIL_PASSWORD : str                        = "qmad ptld qkoy tlop"
 
 #other settings
 VERSION : float         = 1.0

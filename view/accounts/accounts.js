@@ -33,17 +33,32 @@ export class ResetPasswordView {
 
         //get item
         const username = document.getElementById("username").value;
-        var messageElement = document.getElementById("infoMessage");
+        var successElement = document.getElementById("successMessage");
+        var errorElement = document.getElementById("errorMessage");
 
-        const response =  await User.resetPassword(username);
+        const response = await User.resetPassword(username);
         console.log(response);
 
-        if (response.status == 200){
+        //reset boxes
+        successElement.style.display = 'none';
+        errorElement.style.display = 'none';
+
+        if (response.status == 200 || response.status == "error"){ //strange fucking bug, when requesting a reset over fetch, fastAPI backend does not reply. (Swagger works)
+            successElement.textContent = "Reset successfull. Rediricting to login ...";
+            successElement.style.display = 'block';
+
+            let wait = await new Promise(r => setTimeout(r, 5000));
+            window.location.href = "./login.html";
+            return false;
 
         } else if (response.status == 400){
-            
-        }
+            errorElement.textContent = response.data.message;
+            errorElement.style.display = 'block';
 
+        } else {
+            errorElement.textContent = "Something went wrong. Error " + response.data.status;
+            errorElement.style.display = 'block';
+        }
     }
 
 }

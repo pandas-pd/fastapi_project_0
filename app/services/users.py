@@ -266,9 +266,8 @@ class Update():
 
         #send new password to user
         E_mail.message(to = e_mail, subject = "password reset", body = f"Password was reset for user {body.username}. Your new initial password is:\n{password}")
-        del password
 
-        message : dict = {"message" : f"password reset successfull"}
+        message : dict = {"message" : "password reset successfull"}
         return message
 
 

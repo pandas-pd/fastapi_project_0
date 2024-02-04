@@ -37,8 +37,14 @@ button{
     color: var(--failure-color);
 }
 
-.info-banner{
+.success-banner{
     margin-top: 10;
+    color: var(--sucess-color);
+}
+
+.error-banner{
+    margin-top: 10;
+    color: var(--failure-color);
 }
 
 .additional-links{
