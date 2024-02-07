@@ -187,7 +187,7 @@ class Update():
         #validate inputs
         if (Validator.user(key = body.key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return{"message" : f"invalid user_key was given: {body.key}"}
+            return {"message" : f"invalid user_key was given: {body.key}"}
 
         if (Validator.username(username = body.username, initial = False, key_user = body.key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST

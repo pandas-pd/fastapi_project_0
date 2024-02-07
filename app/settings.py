@@ -38,6 +38,6 @@ EMAIL_SENDER : str                          = "pythonmailer418@gmail.com"
 EMAIL_PASSWORD : str                        = "qmad ptld qkoy tlop"
 
 #other settings
-VERSION : float         = 1.0
-TIME_ZONE : str         = None #not in use
-LANGUAGE : str          = "EN" #not in use
+VERSION : float                             = 1.0
+TIME_ZONE : str                             = None #not in use
+LANGUAGE : str                              = "EN" #not in use

@@ -44,7 +44,8 @@ class Controller():
 
         # DEFAULT ADMI user
         if (ui_setup_default_admin == "y"):
-            Data.admin_user()
+            ui_email : str = input("enter a mail adress for admin user: ", end = "")
+            Data.admin_user(ui_email)
 
         return
 
@@ -124,7 +125,7 @@ class Data():
         return
 
     @staticmethod
-    def admin_user():
+    def admin_user( e_mail : str):
 
         user_key : int = 100000
 
@@ -139,7 +140,7 @@ class Data():
         #declare user
         admin_user = users.Users(
             username        = Controller.default_admin_username,
-            e_mail          = "",
+            e_mail          = e_mail,
             salt            = s_salt,
             password_hash   = s_hashed_password,
             comment         = "created by setup script",

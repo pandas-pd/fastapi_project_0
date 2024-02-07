@@ -44,12 +44,10 @@ export class ResetPasswordView {
         errorElement.style.display = 'none';
 
         if (response.status == 200 || response.status == "error"){ //strange fucking bug, when requesting a reset over fetch, fastAPI backend does not reply. (Swagger works)
-            successElement.textContent = "Reset successfull. Rediricting to login ...";
+            successElement.textContent = "Reset successfull."; // https://stackoverflow.com/questions/67451129/express-and-fetch-typeerror-networkerror-when-attempting-to-fetch-resource
             successElement.style.display = 'block';
-
-            let wait = await new Promise(r => setTimeout(r, 5000));
+            //await new Promise(r => setTimeout(r, 2000));
             window.location.href = "./login.html";
-            return false;
 
         } else if (response.status == 400){
             errorElement.textContent = response.data.message;
