@@ -81,6 +81,17 @@ class Write():
         message : dict = {"message" : ur_key}
         return message
 
+    @staticmethod
+    def validate_username(body, response):
+
+        if (Validator.username(body.username) == False):
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return {"message" : "username is invalid or already exists"}
+
+        else:
+            response.status_code = status.HTTP_200_OK
+            return {"message" : "username is valid and available"}
+
 
 class Read():
 

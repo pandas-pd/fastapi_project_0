@@ -56,6 +56,9 @@ class Projects():
 
 class Users():
 
+    class validate_username(BaseModel):
+        username : str
+
     class add_user(BaseModel):
         username : str
         e_mail : str

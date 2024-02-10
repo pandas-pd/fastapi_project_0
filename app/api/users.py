@@ -12,6 +12,12 @@ class Endpoint():
     router = APIRouter()
 
     #Users
+    @router.post("/users/validate_username", tags = ["user"])
+    def validate_username(body: Users.validate_username, response : Response):
+
+        response = Write.validate_username(body = body, response = response)
+        return response
+
     @router.post("/users/user", tags = ["user"])
     def add_user(body : Users.add_user, response : Response):
 
