@@ -58,5 +58,95 @@ export class ResetPasswordView {
             errorElement.style.display = 'block';
         }
     }
+}
+
+export class CreateAccountView {
+
+    static async setErrorMessage(message){
+
+        //retrieve element
+        var errorElement = document.getElementById("errorMessage");
+
+        //set properties and message
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+
+    static async resetErrorMessage(){
+
+        //retrieve element
+        var errorElement = document.getElementById("errorMessage");
+
+        //set elemt
+        errorElement.style.display = 'none';
+    }
+
+    static async validateUseranme(){
+
+        //reset to default
+        CreateAccountView.resetErrorMessage();
+
+        //wait for ui to finish processing
+        await new Promise(r => setTimeout(r, 1));
+
+        //get item
+        const username = document.getElementById("username").value;
+        var usernameLabel = document.getElementById("usernameLabel");
+
+        //handle empty input
+        if (username.length == 0){
+            usernameLabel.style.color = CssProperties.fontColors.fontColorDefault;
+            return;
+        }
+
+        //verify username
+        const response = await User.validateUsername(username);
+
+        //handle response
+        if (response.status == 200){
+            usernameLabel.style.color = CssProperties.fontColors.fontColorSuccess;
+        } else if (response.status == 400){
+            usernameLabel.style.color = CssProperties.fontColors.fontColorFailure;
+            CreateAccountView.setErrorMessage("Username already exists or is invalid");
+        }
+    }
+
+    static async validateEmail(){
+        console.log("email trigger");
+    }
+
+    static async validateEmailConfirm(){
+        console.log("emailConfirm trigger");
+    }
+
+    static async createAccount(){
+
+        //get items
+        const username          = document.getElementById("username").value;
+        const email             = document.getElementById("email").value;
+        const emailConfirm      = document.getElementById("emailConfirm").value;
+        const password          = document.getElementById("password").value;
+
+        //stuff
+    }
+}
+
+export class CssProperties{
+
+    static fontColors = undefined;
+
+    static async setFontColor(){
+
+        // Get the computed style of the hidden div
+        const rootStyles = getComputedStyle(document.documentElement);
+
+        // Retrieve the values of CSS variables
+        const fontColorDefault = rootStyles.getPropertyValue("--font-color-1");
+        const fontColorSuccess = rootStyles.getPropertyValue("--success-color");
+        const fontColorFailure = rootStyles.getPropertyValue("--failure-color");
+
+        CssProperties.fontColors = {"fontColorDefault" : fontColorDefault, "fontColorSuccess" : fontColorSuccess, "fontColorFailure" : fontColorFailure};
+        return;
+    }
 
 }

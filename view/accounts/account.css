@@ -24,13 +24,42 @@ button{
     width: 100%;
 }
 
-.login-form input[type="text"],
-.login-form input[type="password"] {
+.account-form input[type="text"],
+.account-form input[type="password"] {
     width: 100%;
     padding: 10;
     margin: 5;
     border-radius: var(--border-radius-button);
 }
+
+/* ---------------- create account form --------------- */
+
+.account-form-create {
+    display : flex;
+    grid-gap : 0;
+}
+
+.account-form-create input[type="text"],
+.account-form-create input[type="password"] {
+    width: 100%;
+    padding: 10;
+    margin: 5;
+    border-radius: var(--border-radius-button);
+}
+
+.account-form-create label{
+    width: 50%;
+    align-self: center;
+    text-align: right;
+    margin-left: -50%;
+    margin-right: 5;
+}
+
+.account-form-create label:after{
+    content: " :";
+}
+
+/* info banners */
 
 .login-banner{
     margin-top: 10;
@@ -39,13 +68,15 @@ button{
 
 .success-banner{
     margin-top: 10;
-    color: var(--sucess-color);
+    color: var(--success-color);
 }
 
 .error-banner{
     margin-top: 10;
     color: var(--failure-color);
 }
+
+/* Links in Login form */
 
 .additional-links{
     margin-top: 10;

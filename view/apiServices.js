@@ -59,4 +59,14 @@ export class User{
         return response;
     }
 
+    static async validateUsername(username){
+
+        const response = await API.callEndpoint(
+            "POST",
+            "/users/validate_username",
+            {"username": username},
+        );
+        return response;
+    }
+
 }

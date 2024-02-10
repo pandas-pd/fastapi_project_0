@@ -12,7 +12,7 @@
     <script type="module" src="./eventHandler.js" defer></script>
 
     <link rel = "stylesheet" href = "../commonStyles.css">
-    <link rel = "stylesheet" href = "account.css">
+    <link rel = "stylesheet" href = "./account.css">
 
 </head>
 
@@ -26,23 +26,32 @@
 
     <div class = "centered-fields">
 
-        <h1>Reset Password</h1>
+        <h1>Create Account</h1>
+
         <div>
-            <p>
-                A new password for the given user will be generated and sent to the E-Mail linked to the account.
-                After a successfull reset, you will able to change your password in the linked menu below.
-            </p>
-        </div>
+            <form id = "createAccountForm" onsubmit="return false">
 
-        <div class = "login-form">
-            <form id = "passwordResetForm" onsubmit="return false">
-                <input type = "text" id = "username" placeholder = "Username" required>
-                <button type = "submit">Reset Password</button>
+                <div class = "account-form-create">
+                    <label id = "usernameLabel" for = "username">Username</label>
+                    <input type = "text" id = "username" placeholder = "Username" name = "asdf" required>
+                </div>
+                <div class = "account-form-create">
+                    <label for = "email">E-Mail</label>
+                    <input type = "text" id  = "email" placeholder = "E-Mail" required>
+                </div>
+                <div class = "account-form-create">
+                    <label for = "emailConfirm">Confirm E-Mail</label>
+                    <input type = "text" id  = "emailConfirm" placeholder = "E-Mail" required>
+                </div>
+                <div class = "account-form-create">
+                    <label for="password">Password</label>
+                    <input type = "password" id = "password" placeholder = "Password" required>
+                </div>
+                <div class = "account-form-create">
+                    <button type = "submit">Create Account</button>
+                </div>
+
             </form>
-        </div>
-
-        <div class = "success-banner">
-            <p id = "successMessage" style="display: none;"></p>
         </div>
 
         <div class = "error-banner">

@@ -14,7 +14,7 @@
     --font-color-2: rgba(225, 225, 225, 0.6);
     --font-color-3: rgb(139, 83, 185);
 
-    --sucess-color: rgb(10, 165, 160);
+    --success-color: rgb(10, 165, 160);
     --failure-color: rgb(255, 84, 84);
 
     --font-family: 'Monaco', monospace;
@@ -95,7 +95,7 @@ button:hover {
 
 button:after {
     content: "";
-    background: var(--sucess-color);
+    background: var(--success-color);
     display: block;
     position: absolute;
 
