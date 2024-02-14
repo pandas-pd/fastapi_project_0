@@ -21,9 +21,10 @@ else if (currentPath == "/view/accounts/createAccount.html"){
     document.getElementById("username").addEventListener("keydown", CreateAccountView.validateUseranme);
     document.getElementById("email").addEventListener("keydown", CreateAccountView.validateEmail);
     document.getElementById("emailConfirm").addEventListener("keydown", CreateAccountView.validateEmailConfirm);
+    document.getElementById("password").addEventListener("keydown", CreateAccountView.validatePassword);
 
     //form submit
-    document.getElementById("email").addEventListener("submit", CreateAccountView.createAccount);
+    document.getElementById("createAccountForm").addEventListener("submit", CreateAccountView.createAccount);
 
 }
 

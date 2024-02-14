@@ -96,7 +96,7 @@ export class CreateAccountView {
         //handle empty input
         if (username.length == 0){
             usernameLabel.style.color = CssProperties.fontColors.fontColorDefault;
-            return;
+            return false;
         }
 
         //verify username
@@ -105,29 +105,134 @@ export class CreateAccountView {
         //handle response
         if (response.status == 200){
             usernameLabel.style.color = CssProperties.fontColors.fontColorSuccess;
+            return true;
+
         } else if (response.status == 400){
             usernameLabel.style.color = CssProperties.fontColors.fontColorFailure;
             CreateAccountView.setErrorMessage("Username already exists or is invalid");
+            return false;
+
         }
     }
 
     static async validateEmail(){
-        console.log("email trigger");
+        //has some flaws but works good enough
+
+        //reset to default
+        await new Promise(r => setTimeout(r, 1));
+
+        //fetch elements
+        const email = document.getElementById("email").value;
+        var emailLabel = document.getElementById("emailLabel");
+
+        //handle empty input
+        if (email.length == 0){
+            emailLabel.style.color = CssProperties.fontColors.fontColorDefault;
+            return false;
+        }
+
+        //@ verification
+        let atIndex = email.indexOf("@");
+        let providerSuffix = email.slice(atIndex);
+
+        if (atIndex == -1){
+            emailLabel.style.color = CssProperties.fontColors.fontColorFailure;
+            return false;
+        }
+
+        //dot verification
+        let dotIndex = providerSuffix.indexOf(".");
+        let invertedDotIndex = dotIndex - (providerSuffix.length);
+
+        if (dotIndex == -1 || invertedDotIndex > -3){
+            emailLabel.style.color = CssProperties.fontColors.fontColorFailure;
+            return false;
+
+        } else {
+            emailLabel.style.color = CssProperties.fontColors.fontColorSuccess;
+            return true;
+        }
     }
 
     static async validateEmailConfirm(){
-        console.log("emailConfirm trigger");
+
+        //await last input to load
+        await new Promise(r => setTimeout(r, 1));
+
+        //get items
+        const email = document.getElementById("email").value;
+        const emailConfirm = document.getElementById("emailConfirm").value;
+        var emailConfirmLabel = document.getElementById("emailConfirmLabel");
+
+        if (emailConfirm.length == 0){
+            emailConfirmLabel.style.color = CssProperties.fontColors.fontColorDefault;
+            return false;
+
+        } else if (email != emailConfirm){
+             emailConfirmLabel.style.color = CssProperties.fontColors.fontColorFailure;
+             return false;
+
+        } else if (email == emailConfirm) {
+            emailConfirmLabel.style.color = CssProperties.fontColors.fontColorSuccess;
+            return true;
+        }
+
+    }
+
+    static async validatePassword(){
+
+        //await last input to load
+        CreateAccountView.resetErrorMessage()
+        await new Promise(r => setTimeout(r, 1));
+
+        //get elemts
+        const password = document.getElementById("password").value;
+        var passwordLabel = document.getElementById("passwordLabel");
+        const dumbPasswords = ["password", "1234"];
+
+        if (password.length == 0){
+            passwordLabel.style.color = CssProperties.fontColors.fontColorDefault;
+            return false;
+
+        } else if (dumbPasswords.includes(password)){
+            passwordLabel.style.color = CssProperties.fontColors.fontColorFailure;
+            CreateAccountView.setErrorMessage("Really, that is your password?");
+            return false;
+
+        } else if (password.length < 6){
+            passwordLabel.style.color = CssProperties.fontColors.fontColorFailure;
+            CreateAccountView.setErrorMessage("Password must be at least 6 characters long");
+            return false;
+
+        } else {
+            passwordLabel.style.color = CssProperties.fontColors.fontColorSuccess;
+            return true;
+        }
     }
 
     static async createAccount(){
 
+        //reset to default
+        CreateAccountView.resetErrorMessage();
+
         //get items
         const username          = document.getElementById("username").value;
         const email             = document.getElementById("email").value;
-        const emailConfirm      = document.getElementById("emailConfirm").value;
         const password          = document.getElementById("password").value;
 
-        //stuff
+        //check frontend validations
+        if (    await CreateAccountView.validateUseranme() == false ||
+                await CreateAccountView.validateEmail() == false ||
+                await CreateAccountView.validateEmailConfirm() == false ||
+                await CreateAccountView.validatePassword() == false
+        ){
+            CreateAccountView.setErrorMessage("Validation failed. Check input fields.");
+            return;
+        }
+
+        console.log("all checks passed");
+        return;
+
     }
 }
 
