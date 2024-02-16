@@ -4,7 +4,7 @@ export class API{
     static cookiePath = "";
     static header = {
         "Content-Type": "application/json",
-        "Cache-Control": "max-age=3600", // Cache for 1 hour;
+        "Cache-Control": "max-age=7200", // Cache for 1 hour;
     }
 
     static async callEndpoint(method, call, body){
