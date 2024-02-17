@@ -1,19 +1,19 @@
 .centered-fields{
-    max-width: 400;
-    margin: 0 auto;
+    max-width: 400px;
+    margin: 0px auto;
     text-align: center;
-    padding-top: 20;
-    /*border: 1px solid #ccc;*/
+    padding-top: 20px;
+    border: 1px solid #ccc;
 }
 
-/* ---------- Login form ---------- */
+/* ---------- general ---------- */
 
 .nav-bar{
-    max-width: 400;
+    max-width: 400px;
 }
 
 .nav-bar li a{
-    padding-right: 0;
+    padding-right: 0px;
 }
 
 .nav-bar li:last-child {
@@ -21,38 +21,44 @@
 }
 
 button{
-    width: 100%;
+    width: 95%;
+}
+
+/* ----------------- Login form ----------------*/
+
+.account-form {
+    display : flex;
+    grid-gap : 0px;
 }
 
 .account-form input[type="text"],
 .account-form input[type="password"] {
-    width: 100%;
-    padding: 10;
-    margin: 5;
+    padding: 10px;
+    margin: 5px;
     border-radius: var(--border-radius-button);
+    width: 90%;
 }
 
 /* ---------------- create account form --------------- */
 
 .account-form-create {
     display : flex;
-    grid-gap : 0;
+    grid-gap : 0px;
 }
 
 .account-form-create input[type="text"],
 .account-form-create input[type="password"] {
-    width: 100%;
-    padding: 10;
-    margin: 5;
+    padding: 10px;
+    margin: 5px;
     border-radius: var(--border-radius-button);
+    width: 90%;
 }
 
 .account-form-create label{
     width: 50%;
-    align-self: center;
     text-align: right;
+    align-self: center;
     margin-left: -50%;
-    margin-right: 5;
 }
 
 .account-form-create label:after{
@@ -62,30 +68,30 @@ button{
 /* info banners */
 
 .login-banner{
-    margin-top: 10;
+    margin-top: 10px;
     color: var(--failure-color);
 }
 
 .success-banner{
-    margin-top: 10;
+    margin-top: 10px;
     color: var(--success-color);
 }
 
 .error-banner{
-    margin-top: 10;
+    margin-top: 10px;
     color: var(--failure-color);
 }
 
 /* Links in Login form */
 
 .additional-links{
-    margin-top: 10;
+    margin-top: 10px;
 }
 
 .additional-links a {
     color: var(--font-color-2);
-    padding-left: 20;
-    padding-right: 20;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .additional-links a:hover, a:active, a:focus{

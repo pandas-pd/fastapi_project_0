@@ -69,4 +69,19 @@ export class User{
         return response;
     }
 
+    static async createAccount(username, email, password){
+
+        const response = await API.callEndpoint(
+            "POST",
+            "/users/user",
+            {
+                "username": username,
+                "e_mail": email,
+                "password": password,
+                "comment": "",
+            },
+        );
+        return response;
+    }
+
 }

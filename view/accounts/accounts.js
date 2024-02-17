@@ -231,6 +231,10 @@ export class CreateAccountView {
         }
 
         console.log("all checks passed");
+        const response = await User.createAccount(username, email, password);
+
+        console.log(response);
+
         return;
 
     }

@@ -20,7 +20,7 @@
     --font-family: 'Monaco', monospace;
     --content-font-size : 16;
 
-    --container-width: 800;
+    --container-width: 800px;
 
     --border-radius-button: 5px;
 }
@@ -51,9 +51,9 @@ body {
 
 .centered-container{
     max-width: var(--container-width);
-    margin: 0 auto;
+    margin: 0px auto;
     text-align: left;
-    padding: 0;
+    padding: 0px;
     /*border: 1px solid #ccc;*/
 }
 
@@ -77,8 +77,8 @@ button {
     font-family: var(--font-family);
     background-color: var(--button-color);
     color: var(--font-color-1);
-    margin: 5;
-    padding: 10;
+    margin: 5px;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
     position: relative;
@@ -111,14 +111,14 @@ button:after {
 }
 
 button:active:after {
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     opacity: 1;
     transition: 0s
 }
 
 button:focus{
-    outline: 0;
+    outline: 0px;
 }
 
 
@@ -131,8 +131,8 @@ button:focus{
 
 .nav-bar{
     max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0;
+    margin: 0px auto;
+    padding: 0px;
     list-style-type: none;
     overflow: hidden;
     background-color: var(--background-color-navbar);
@@ -148,9 +148,9 @@ button:focus{
 .nav-bar li a{
     display: block;
     color: var(--font-color-2);
-    padding-top: 20;
-    padding-bottom: 20;
-    padding-right: 30;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 30px;
     text-decoration: none;
 }
 
