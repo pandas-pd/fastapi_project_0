@@ -62,29 +62,30 @@ export class ResetPasswordView {
 
 export class CreateAccountView {
 
-    static async setErrorMessage(message){
+    static async setMessage(message, color){
 
         //retrieve element
-        var errorElement = document.getElementById("errorMessage");
+        var messageElement = document.getElementById("message");
 
         //set properties and message
-        errorElement.textContent = message;
-        errorElement.style.display = 'block';
+        messageElement.textContent = message;
+        messageElement.style.color = color;
+        messageElement.style.display = 'block';
     }
 
-    static async resetErrorMessage(){
+    static async resetMessage(){
 
         //retrieve element
-        var errorElement = document.getElementById("errorMessage");
+        var messageElement = document.getElementById("message");
 
         //set elemt
-        errorElement.style.display = 'none';
+        messageElement.style.display = 'none';
     }
 
     static async validateUseranme(){
 
         //reset to default
-        CreateAccountView.resetErrorMessage();
+        CreateAccountView.resetMessage();
 
         //wait for ui to finish processing
         await new Promise(r => setTimeout(r, 1));
@@ -109,7 +110,7 @@ export class CreateAccountView {
 
         } else if (response.status == 400){
             usernameLabel.style.color = CssProperties.fontColors.fontColorFailure;
-            CreateAccountView.setErrorMessage("Username already exists or is invalid");
+            CreateAccountView.setMessage("Username already exists or is invalid", CssProperties.fontColors.fontColorFailure);
             return false;
 
         }
@@ -182,7 +183,7 @@ export class CreateAccountView {
     static async validatePassword(){
 
         //await last input to load
-        CreateAccountView.resetErrorMessage()
+        CreateAccountView.resetMessage()
         await new Promise(r => setTimeout(r, 1));
 
         //get elemts
@@ -196,12 +197,12 @@ export class CreateAccountView {
 
         } else if (dumbPasswords.includes(password)){
             passwordLabel.style.color = CssProperties.fontColors.fontColorFailure;
-            CreateAccountView.setErrorMessage("Really, that is your password?");
+            CreateAccountView.setMessage("Really, that is your password?", CssProperties.fontColors.fontColorFailure);
             return false;
 
         } else if (password.length < 6){
             passwordLabel.style.color = CssProperties.fontColors.fontColorFailure;
-            CreateAccountView.setErrorMessage("Password must be at least 6 characters long");
+            CreateAccountView.setMessage("Password must be at least 6 characters long", CssProperties.fontColors.fontColorFailure);
             return false;
 
         } else {
@@ -213,7 +214,7 @@ export class CreateAccountView {
     static async createAccount(){
 
         //reset to default
-        CreateAccountView.resetErrorMessage();
+        CreateAccountView.resetMessage();
 
         //get items
         const username          = document.getElementById("username").value;
@@ -226,17 +227,14 @@ export class CreateAccountView {
                 await CreateAccountView.validateEmailConfirm() == false ||
                 await CreateAccountView.validatePassword() == false
         ){
-            CreateAccountView.setErrorMessage("Validation failed. Check input fields.");
+            CreateAccountView.setMessage("Validation failed. Check input fields.", CssProperties.fontColors.fontColorFailure);
             return;
         }
 
         console.log("all checks passed");
         const response = await User.createAccount(username, email, password);
-
-        console.log(response);
-
+        console.log(response.data);
         return;
-
     }
 }
 
