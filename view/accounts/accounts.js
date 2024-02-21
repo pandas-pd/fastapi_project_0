@@ -211,7 +211,7 @@ export class CreateAccountView {
         }
     }
 
-    static async createAccount(){
+    static async createAccount(e){
 
         //reset to default
         CreateAccountView.resetMessage();
@@ -231,10 +231,26 @@ export class CreateAccountView {
             return;
         }
 
+        //debug
         console.log("all checks passed");
         const response = await User.createAccount(username, email, password);
-        console.log(response.data);
-        return;
+
+        //debug
+        console.log(response);
+
+        if (response.status == 200){
+            CreateAccountView.setMessage("Account created. Redirecting to login page.", CssProperties.fontColors.fontColorSuccess);
+            await new Promise(r => setTimeout(r, 2000));
+            window.location.href = "./login.html";
+
+        } else if (response.status == 400){
+            CreateAccountView.setMessage(response.data.message, CssProperties.fontColors.fontColorFailure);
+
+        } else {
+            CreateAccountView.setMessage("Something went wrong", CssProperties.fontColors.fontColorFailure);
+        }
+
+        //return;
     }
 }
 
