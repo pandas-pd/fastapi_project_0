@@ -177,7 +177,6 @@ export class CreateAccountView {
             emailConfirmLabel.style.color = CssProperties.fontColors.fontColorSuccess;
             return true;
         }
-
     }
 
     static async validatePassword(){
@@ -211,7 +210,7 @@ export class CreateAccountView {
         }
     }
 
-    static async createAccount(e){
+    static async createAccount(){
 
         //reset to default
         CreateAccountView.resetMessage();
@@ -236,12 +235,12 @@ export class CreateAccountView {
         const response = await User.createAccount(username, email, password);
 
         //debug
-        console.log(response);
+        console.log(response, response.data);
 
         if (response.status == 200){
             CreateAccountView.setMessage("Account created. Redirecting to login page.", CssProperties.fontColors.fontColorSuccess);
-            await new Promise(r => setTimeout(r, 2000));
-            window.location.href = "./login.html";
+            //await new Promise(r => setTimeout(r, 50000)).then(window.location.href = "./login.html");
+            setTimeout(function(){ window.location.href = "./login.html"}, 2000);
 
         } else if (response.status == 400){
             CreateAccountView.setMessage(response.data.message, CssProperties.fontColors.fontColorFailure);
@@ -271,5 +270,4 @@ export class CssProperties{
         CssProperties.fontColors = {"fontColorDefault" : fontColorDefault, "fontColorSuccess" : fontColorSuccess, "fontColorFailure" : fontColorFailure};
         return;
     }
-
 }

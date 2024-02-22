@@ -18,7 +18,7 @@ DATABASE_URL : str                          = "sqlite:///" + os.path.join(settin
 
 #password settings
 ENCODING  : str                             = "utf-8"
-SALT_ROUNDS : int                           = 12
+SALT_ROUNDS : int                           = 6
 
 #JWT general settings (do not push into public repository)
 JWT_SECRET_KEY : str                        = "enter_key_here"

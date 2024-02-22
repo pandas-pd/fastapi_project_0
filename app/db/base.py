@@ -13,7 +13,8 @@ except:
     from app.settings import DATABASE_URL
 
 # Create a SQLite database engine
-engine = create_engine(DATABASE_URL, echo=True)  # 'echo=True' for debugging
+engine = create_engine(DATABASE_URL, echo=False)  # 'echo=True' for debugging
+engine.execution_options(autocommit=True)
 
 # Create a session to interact with the database
 Session = sessionmaker(bind=engine)
