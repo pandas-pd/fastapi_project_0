@@ -16,10 +16,6 @@ except:
 engine = create_engine(DATABASE_URL, echo=False)  # 'echo=True' for debugging
 engine.execution_options(autocommit=True)
 
-# Create a session to interact with the database
-Session = sessionmaker(bind=engine)
-session = Session()
-
 # Define a declarative base class
 Base = declarative_base()
 
@@ -31,3 +27,7 @@ from db.models import users
 
 # Database setup. Create the database and tables if they don't exist
 Base.metadata.create_all(bind=engine)
+
+# Create a session to interact with the database
+Session = sessionmaker(bind=engine)
+session = Session()

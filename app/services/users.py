@@ -39,7 +39,7 @@ class Write():
             timestamp       = int(time.time())
         )
 
-        #session.add(new_us)
+        session.add(new_us)
         session.commit()
 
         message : dict = {"message" : us_key}
