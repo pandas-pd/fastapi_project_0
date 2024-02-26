@@ -22,13 +22,7 @@ class Controller():
     @staticmethod
     def main():
 
-        ui_setup_default_admin : str = input(f"""
-            setup a default admin user with admin role?
-            username:\t{Controller.default_admin_username}
-            password:\t{Controller.default_admin_password}
-            (y/n):\t""")
-
-        # ENUMS
+       # ENUMS
 
         #add new models here
         enum_models : list = [
@@ -42,9 +36,16 @@ class Controller():
 
         Controller.fill_enum()
 
+
+        #setup a defualt user
+        ui_setup_default_admin : str = input(f"""setup a default admin user with admin role?
+            username:\t{Controller.default_admin_username}
+            password:\t{Controller.default_admin_password}
+            (y/n):\t""")
+
         # DEFAULT ADMI user
         if (ui_setup_default_admin == "y"):
-            ui_email : str = input("enter a mail adress for admin user: ", end = "")
+            ui_email : str = input("enter a mail adress for admin user: ")
             Data.admin_user(ui_email)
 
         return
@@ -125,7 +126,7 @@ class Data():
         return
 
     @staticmethod
-    def admin_user( e_mail : str):
+    def admin_user(e_mail : str):
 
         user_key : int = 100000
 
