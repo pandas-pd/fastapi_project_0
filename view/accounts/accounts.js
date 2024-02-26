@@ -239,8 +239,8 @@ export class CreateAccountView {
 
         if (response.status == 200){
             CreateAccountView.setMessage("Account created. Redirecting to login page.", CssProperties.fontColors.fontColorSuccess);
-            //await new Promise(r => setTimeout(r, 50000)).then(window.location.href = "./login.html");
-            setTimeout(function(){ window.location.href = "./login.html"}, 2000);
+            //await new Promise(r => setTimeout(r, 2000));
+            window.location.href = "./login.html";
 
         } else if (response.status == 400){
             CreateAccountView.setMessage(response.data.message, CssProperties.fontColors.fontColorFailure);
