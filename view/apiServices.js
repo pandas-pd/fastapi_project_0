@@ -83,4 +83,13 @@ export class User{
         );
         return response;
     }
+
+    static async getUser(){
+
+        const response = await API.callEndpoint(
+            "GET",
+            "/users/user",
+        );
+        return response;
+    }
 }
