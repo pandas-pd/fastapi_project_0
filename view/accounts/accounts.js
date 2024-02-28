@@ -1,4 +1,4 @@
-import {User} from "../apiServices.js";
+import {User, Enum} from "../apiServices.js";
 
 export class LoginView {
 
@@ -7,12 +7,13 @@ export class LoginView {
         //get items
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        var messageElement = document.getElementById('login-message');
+        var messageElement = document.getElementById("login-message");
 
         //get response
         const response = await User.login(username, password);
 
         if (response.status == 200){
+            await LoginView.storeUserDate();
             window.location.href = "../index.html";
             messageElement.style.display = 'none';
 
@@ -24,6 +25,46 @@ export class LoginView {
             messageElement.textContent = "Something went wrong. Error " + response.data.status;
             messageElement.style.display = 'block';
         }
+    }
+
+    static async storeUserDate(){ //stores the user data form the logged in user to local storage to render to user button in header
+
+        //get user infromation and set object format
+        const responseUser = await User.getUser();
+        const responseEnum = await Enum.userRoles();
+
+        //parse user data
+        const username      = responseUser.data.username;
+        const email         = responseUser.data.e_mail;
+        var userRoles       = [];
+        var userRoleKeys    = [];
+
+        //parse role data
+
+        for (var i = 0; i < responseUser.data.roles.length; i++){
+
+            let roleKey = responseUser.data.roles[i].role;
+            const role = responseEnum.data[roleKey];
+            userRoles.push(role);
+            userRoleKeys.push(roleKey);
+        }
+
+        var userData = {
+            "username" : username,
+            "email" : email,
+            "roles" : userRoles,
+            "roleKeys" : userRoleKeys,
+        };
+
+        //save to local storage
+        sessionStorage.setItem("userData", JSON.stringify(userData));
+        console.log("successfully cached username");
+        return;
+
+        // Retrieve object from local storage
+        //var retrievedObj = JSON.parse(localStorage.getItem('user'));
+        //console.log(retrievedObj); // { name: 'John', age: 30 }
+
     }
 }
 
@@ -248,7 +289,6 @@ export class CreateAccountView {
         } else {
             CreateAccountView.setMessage("Something went wrong", CssProperties.fontColors.fontColorFailure);
         }
-
         //return;
     }
 }

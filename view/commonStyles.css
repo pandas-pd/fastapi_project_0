@@ -141,7 +141,8 @@ button:focus{
 .nav-bar li{
     float: left;
 }
-.nav-bar li:last-child {
+
+.nav-bar li:nth-last-child(-n+2) {
     float: right; /*used for the login button */
 }
 
@@ -154,9 +155,26 @@ button:focus{
     text-decoration: none;
 }
 
+/*hide item per defualt*/
+#usersNavBar{
+    display: none;
+}
+
+.nav-bar li img{
+    margin-top: 13px;
+    display: none; /*display: block;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-bar li img:hover{
+    background-color: var(--button-color);
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+}
+
 .nav-bar li a:hover{
     color: var(--font-color-3);
     font-weight: bold;
     transition: color 0.3s ease;
 }
-

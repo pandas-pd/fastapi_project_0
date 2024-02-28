@@ -27,5 +27,3 @@ else if (currentPath == "/view/accounts/createAccount.html"){
     document.getElementById("createAccountForm").addEventListener("submit", CreateAccountView.createAccount);
 
 }
-
-

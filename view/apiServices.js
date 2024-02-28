@@ -37,6 +37,19 @@ export class API{
     }
 }
 
+export class Enum{
+
+    static async userRoles(){
+
+        const response = await API.callEndpoint(
+            "GET",
+            "/enum/user_roles",
+        );
+        return response;
+    }
+
+}
+
 export class User{
 
     static async login(username, password){
