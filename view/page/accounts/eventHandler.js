@@ -1,18 +1,18 @@
 import {CreateAccountView, CssProperties, LoginView, ResetPasswordView} from './accounts.js';
 var currentPath = window.location.pathname;
+console.log(currentPath);
 
-
-if (currentPath == "/view/accounts/login.html"){
+if (currentPath == "/page/accounts/login.html"){
 
     document.getElementById("loginForm").addEventListener("submit", LoginView.login);
 }
 
-else if (currentPath == "/view/accounts/resetPassword.html"){
+else if (currentPath == "/page/accounts/resetPassword.html"){
 
     document.getElementById("passwordResetForm").addEventListener("submit", ResetPasswordView.resetPassword);
 }
 
-else if (currentPath == "/view/accounts/createAccount.html"){
+else if (currentPath == "/page/accounts/createAccount.html"){
 
     //set css colors
     CssProperties.setFontColor();

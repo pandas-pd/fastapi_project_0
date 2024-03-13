@@ -1,5 +1,14 @@
 # fastapi project 0 - Webapp: About me
 
+# Frontend
+The frontend runs on an NGINX server
+Setup:
+- Windows: https://medium.com/@chandramuthuraj/installing-nginx-on-windows-a-step-by-step-guide-6750575c63e2
+- Linux: https://medium.com/@mayrain1923/setup-nginx-on-debian-12-and-host-a-simple-static-website-f832e6761e63
+
+
+# Backend
+
 ## To be implemented
 - Cookie Auth: https://indominusbyte.github.io/fastapi-jwt-auth/usage/jwt-in-cookies/
     - Current Auth: HTTP Bearer (only suitable for Webservices, vulnerable to XSS)
