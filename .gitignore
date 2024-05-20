@@ -2,3 +2,4 @@
 /venv
 /app/sqlite.db
 *.pyc
+/view/node_modules
