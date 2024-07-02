@@ -4,7 +4,6 @@
 }
 
 .navbar li{
-    float: left;
     padding-top: 10px;
     padding-bottom: 20px;
     padding-right: 30px;
@@ -13,4 +12,8 @@
 .navbar li a{
     color: var(--font-color-2);
     text-decoration: none;
+}
+
+.navbar li:last-child{
+    float: right;
 }
