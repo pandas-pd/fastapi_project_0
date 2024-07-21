@@ -5,12 +5,12 @@
     --border-navbar: 1px solid rgb(255, 255, 255);
 
     --button-color:  rgba(140, 85, 185, 0.712);
-    --button-color-hover : rgb(140, 85, 185);
+    --button-color-hover : rgb(160, 100, 215);
     --button-color-active : rgba(225, 225, 225, 0.6);
 
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
-    --font-color-3: rgb(139, 83, 185);
+    --font-color-3: rgb(160, 100, 215);
 
     --success-color: rgb(10, 165, 160);
     --failure-color: rgb(255, 84, 84);
@@ -19,6 +19,7 @@
     --content-font-size : 16;
 
     --content-width: 1200px;
+    --margin-top: 20px
 
 }
 

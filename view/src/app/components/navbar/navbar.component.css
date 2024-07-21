@@ -1,17 +1,28 @@
 .navbar{
-    background-color: rgb(255, 0, 0);
     list-style-type: none;
+    text-align:left;
 }
 
 .navbar li{
+    float: left;
     padding-top: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     padding-right: 30px;
 }
+
 
 .navbar li a{
     color: var(--font-color-2);
     text-decoration: none;
+
+    color: white;
+    text-align: center;
+}
+
+.navbar li a:hover{
+    color: var(--font-color-3);
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .navbar li:last-child{
