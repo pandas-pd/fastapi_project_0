@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { SkillsComponent } from './components/skills/skills.component';
+import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, HomeComponent, NavbarComponent, SkillsComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+    ],
+
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'view';

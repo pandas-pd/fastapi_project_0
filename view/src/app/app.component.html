@@ -1,8 +1,17 @@
 <main>
+
     <header>
-        <app-navbar></app-navbar>
+        <nav>
+            <ul class="navbar">
+                <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+                <li><a routerLink="/skills" routerLinkActive="active">Skills</a></li>
+                <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            </ul>
+        </nav>
     </header>
-    <section style="padding-top: 40px;">
-        <app-home></app-home>
+
+    <section class="component-space">
+        <router-outlet></router-outlet>
     </section>
+
 </main>

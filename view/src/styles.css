@@ -1,8 +1,6 @@
 :root{
-    --background-color-body : rgb(40, 45, 55);
-
     --background-color-navbar: rgb(40, 45, 55);
-    --border-navbar: 1px solid rgb(255, 255, 255);
+    --background-color-body : rgb(40, 45, 55);
 
     --button-color:  rgba(140, 85, 185, 0.712);
     --button-color-hover : rgb(160, 100, 215);
@@ -19,9 +17,9 @@
     --content-font-size : 16;
 
     --content-width: 1200px;
-    --margin-top: 20px
-
 }
+
+/* ---------- body styling ----------*/
 
 body {
 
@@ -33,6 +31,50 @@ body {
     max-width: var(--content-width);
     margin: 0px auto;
     text-align: left;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
+}
 
+
+/* ---------- Navbar styling ---------- */
+.navbar{
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--font-color-1);
+
+    list-style-type: none;
+    text-align: left;
+    display: flow-root; /* prevents overlapping navbar with router-outlet components and rendering last child correctly*/
+}
+
+.navbar li{
+    float: left;
+    padding-right: 30px;
+}
+
+
+.navbar li a{
+    color: var(--font-color-2);
+    text-decoration: none;
+
+    color: white;
+    text-align: center;
+}
+
+.navbar li a:hover{
+    color: var(--font-color-3);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar li:last-child{
+    float: right;
+    padding-right: 0px;
+}
+
+
+/* ---------- general component space styling ---------- */
+.component-space{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
