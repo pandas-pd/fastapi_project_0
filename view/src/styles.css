@@ -9,6 +9,7 @@
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
     --font-color-3: rgb(160, 100, 215);
+    --font-color-4: rgba(140, 85, 185, 0.712);
 
     --success-color: rgb(10, 165, 160);
     --failure-color: rgb(255, 84, 84);
@@ -33,45 +34,6 @@ body {
     text-align: left;
     /*border: 1px solid #ccc;*/
 }
-
-
-/* ---------- Navbar styling ---------- */
-.navbar{
-
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--font-color-1);
-
-    list-style-type: none;
-    text-align: left;
-    display: flow-root; /* prevents overlapping navbar with router-outlet components and rendering last child correctly*/
-}
-
-.navbar li{
-    float: left;
-    padding-right: 30px;
-}
-
-
-.navbar li a{
-    color: var(--font-color-2);
-    text-decoration: none;
-
-    color: white;
-    text-align: center;
-}
-
-.navbar li a:hover{
-    color: var(--font-color-3);
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.navbar li:last-child{
-    float: right;
-    padding-right: 0px;
-}
-
 
 /* ---------- general component space styling ---------- */
 .component-space{

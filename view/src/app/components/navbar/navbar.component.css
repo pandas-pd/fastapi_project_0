@@ -1,0 +1,39 @@
+.navbar{
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--font-color-1);
+
+    list-style-type: none;
+    text-align: left;
+    display: flow-root; /* prevents overlapping navbar with router-outlet components and rendering last child correctly*/
+}
+
+.navbar li{
+    float: left;
+    padding-right: 30px;
+}
+
+
+.navbar li a{
+    color: var(--font-color-2);
+    text-decoration: none;
+
+    color: white;
+    text-align: center;
+}
+
+.navbar li a:hover{
+    color: var(--font-color-3);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar li:last-child{
+    float: right;
+    padding-right: 0px;
+}
+
+.active-route{
+    color: var(--font-color-4)
+}
