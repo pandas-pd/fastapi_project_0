@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StyleService } from '../../services/style.service';
 
 
 @Component({
@@ -15,7 +16,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
+
+    private navbarDefaultColor: any = null;
+    private navbarHighlightColor: any = null;
+
+    constructor(private styleService: StyleService) {}
+
+    ngOnInit(): void {
+        this.navbarDefaultColor    = this.styleService.getCSSVariableValue('--font-color-1');
+        this.navbarHighlightColor  = this.styleService.getCSSVariableValue('--font-color-3');
+    }
 
     highlightTab(event: Event): void{
 
@@ -28,11 +39,11 @@ export class NavbarComponent {
             const aArray: HTMLElement[] = Array.from(aElements) as HTMLElement[];
 
             //reset color
-            aArray.forEach(a => a.style.color = 'white');
+            aArray.forEach(a => a.style.color = this.navbarDefaultColor);
         }
 
         //fetch caller element
-        const clickedElement    = event.target as HTMLElement;
-        clickedElement.style.color = 'red';
+        const clickedElement            = event.target as HTMLElement;
+        clickedElement.style.color      = this.navbarHighlightColor;
     }
 }

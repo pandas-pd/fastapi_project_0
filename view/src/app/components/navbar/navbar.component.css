@@ -24,7 +24,6 @@
 }
 
 .navbar li a:hover{
-    color: var(--font-color-3);
     font-weight: bold;
     transition: color 0.3s ease;
 }
