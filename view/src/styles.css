@@ -18,6 +18,7 @@
     --content-font-size : 16;
 
     --content-width: 1200px;
+    --border-radius-button: 5px
 }
 
 /* ---------- body styling ----------*/
@@ -31,12 +32,78 @@ body {
 
     max-width: var(--content-width);
     margin: 0px auto;
-    text-align: left;
+    /*text-align: left;*/
     /*border: 1px solid #ccc;*/
 }
 
 /* ---------- general component space styling ---------- */
+
 .component-space{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+/* ---------- interactive elements ----------  */
+
+/*text input*/
+
+input{
+    font-family: var(--font-family);
+    font-size: var(--content-font-size);
+}
+
+textarea:focus, input:focus{
+    outline: none !important;
+    border:2px solid var(--button-color-hover);
+    border-radius: var(--border-radius-button);
+}
+
+/* buttons */
+
+button {
+    font-family: var(--font-family);
+    background-color: var(--button-color);
+    color: var(--font-color-1);
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    border: none;
+    border-radius: var(--border-radius-button);
+    cursor: pointer;
+    overflow: hidden;
+    transition-duration: 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-color-hover);
+}
+
+button:after {
+    content: "";
+    background: var(--success-color);
+    display: block;
+    position: absolute;
+
+    border-radius: 20px;
+
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+
+    opacity: 0;
+    transition:  all 0.8s
+}
+
+button:active:after {
+    padding: 0px;
+    margin: 0px;
+    opacity: 1;
+    transition: 0s
+}
+
+button:focus{
+    outline: 0px;
 }
