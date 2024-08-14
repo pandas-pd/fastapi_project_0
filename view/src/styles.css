@@ -18,7 +18,9 @@
     --content-font-size : 16;
 
     --content-width: 1200px;
-    --border-radius-button: 5px
+    --border-radius-button: 5px;
+
+    --forms-top-margin: 40px;
 }
 
 /* ---------- body styling ----------*/
