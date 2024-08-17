@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { getCookie } from '../utils/cookie';
+//import { getCookie } from '../utils/cookie';
 
 
 
@@ -18,9 +18,15 @@ export class AuthService {
 
     //funcitonality
 
+        /*
     isLoggedIn(): Observable<boolean> {
 
         const cookieValues : any = getCookie(this.cookieName);
         return of(cookieValues !== null);
+    }
+        */
+
+    login(username:string, password:string){
+        console.log("hello from auth services");
     }
 }

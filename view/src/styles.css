@@ -75,7 +75,7 @@ button {
     border-radius: var(--border-radius-button);
     cursor: pointer;
     overflow: hidden;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
 }
 
 button:hover {
@@ -108,4 +108,15 @@ button:active:after {
 
 button:focus{
     outline: 0px;
+}
+
+
+/* links */
+
+a{
+    color: var(--font-color-2);
+}
+
+a:hover {
+    color: var(--font-color-3);
 }

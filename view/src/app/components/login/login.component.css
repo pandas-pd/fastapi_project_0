@@ -21,3 +21,16 @@ h1{
     margin: 5px;
     width: 90%;
 }
+
+.account-form button{
+    width: 385px;
+}
+
+.additional-links {
+    margin-top: 10px;
+}
+
+.additional-links a{
+    padding-left: 20px;
+    padding-right: 20px;
+}
