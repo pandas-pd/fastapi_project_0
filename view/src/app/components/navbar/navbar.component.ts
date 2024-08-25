@@ -18,8 +18,8 @@ import { StyleService } from '../../services/style.service';
 
 export class NavbarComponent implements OnInit{
 
-    private navbarDefaultColor: any = null;
-    private navbarHighlightColor: any = null;
+    private navbarDefaultColor: any;
+    private navbarHighlightColor: any;
 
     constructor(private styleService: StyleService) {}
 

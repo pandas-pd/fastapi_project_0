@@ -14,7 +14,7 @@ export class AuthService {
     //class variabel
     private cookieName : string = 'fastapi_project0_token';
 
-    constructor(private http: HttpClient) {}
+    constructor() {}
 
     //funcitonality
 
@@ -26,7 +26,7 @@ export class AuthService {
     }
         */
 
-    login(username:string, password:string){
+    async login(username:string, password:string){
         console.log("hello from auth services");
     }
 }

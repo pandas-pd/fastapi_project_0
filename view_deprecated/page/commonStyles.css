@@ -30,6 +30,7 @@
 
 h1 {
     font-size: 32;
+    margin: 20px;
 }
 
 h2{
@@ -74,6 +75,7 @@ textarea:focus, input:focus{
 /* buttons */
 
 button {
+    font-size: var(--content-font-size);
     font-family: var(--font-family);
     background-color: var(--button-color);
     color: var(--font-color-1);
@@ -107,7 +109,7 @@ button:after {
     margin-top: -120%;
 
     opacity: 0;
-    transition:  all 0.8s
+    transition:  all 1s
 }
 
 button:active:after {
@@ -156,7 +158,7 @@ button:focus{
 }
 
 /*hide item per defualt*/
-#usersNavBar{
+.usersNavBar{
     display: none;
 }
 
@@ -178,3 +180,5 @@ button:focus{
     font-weight: bold;
     transition: color 0.3s ease;
 }
+
+/* ----------------- forms ------------------*/
