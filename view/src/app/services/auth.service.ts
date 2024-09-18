@@ -12,7 +12,15 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
 
     //class variabel
-    private cookieName : string = 'fastapi_project0_token';
+    private cookieName : string     = 'fastapi_project0_token';
+    private endpoint : string       = "http://127.0.0.1:8080";
+    private cookiePath : string     = "";
+
+    private header : object = {
+        "Content-Type": "application/json",
+        "Cache-Control": "max-age=7200", // Cache for 1 hour;
+    };
+
 
     constructor() {}
 
