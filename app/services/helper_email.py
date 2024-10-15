@@ -1,6 +1,5 @@
 import smtplib
 from email.mime.text import MIMEText
-import cdsapi
 
 from settings import EMAIL_SENDER, EMAIL_PASSWORD
 
