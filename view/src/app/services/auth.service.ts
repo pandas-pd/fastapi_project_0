@@ -35,6 +35,6 @@ export class AuthService {
         */
 
     async login(username:string, password:string){
-        console.log("hello from auth services");
+        console.log(username, password);
     }
 }

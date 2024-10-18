@@ -12,23 +12,24 @@ import { OnInit } from '@angular/core';
 
 export class LoginComponent implements OnInit {
 
-    private usernameFiled: HTMLElement | undefined | null;
-    private passwordField: HTMLElement | undefined | null;
+    private usernameFiled: HTMLInputElement | null = null;
+    private passwordField: HTMLInputElement | null = null;
 
     constructor(private authService:AuthService) {
     }
 
     ngOnInit(): void {
-        this.usernameFiled = document.getElementById('username');
-        this.passwordField = document.getElementById('password');
+        this.usernameFiled = document.getElementById('username') as HTMLInputElement;
+        this.passwordField = document.getElementById('password') as HTMLInputElement;
     }
 
     async login() {
 
         //get field contents
-        const username: any = this.usernameFiled?.textContent;
-        const password: any = this.passwordField?.textContent;
+        const username: any = this.usernameFiled?.value;
+        const password: any = this.passwordField?.value;
 
+        //send to service to get jwt token
         var response = await this.authService.login(username, password);
     }
 
