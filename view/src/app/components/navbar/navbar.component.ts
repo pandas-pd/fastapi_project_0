@@ -72,7 +72,6 @@ export class NavbarComponent implements OnInit, OnDestroy{
 
         //fetch id
         let aId : string = this.urlTabMap[currentUrl];
-        console.log(currentUrl, aId);
 
         //restet style
         const ulElement = document.getElementById('navbarUl');
