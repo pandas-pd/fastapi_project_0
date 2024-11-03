@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 //import { getCookie } from '../utils/cookie';
 
 
@@ -11,10 +12,6 @@ import { Observable, of } from 'rxjs';
 
 export class AuthService {
 
-    //class variabel
-    private cookieName : string     = 'fastapi_project0_token';
-    private endpoint : string       = "http://127.0.0.1:8080";
-    private cookiePath : string     = "";
 
     private header : object = {
         "Content-Type": "application/json",
@@ -36,5 +33,6 @@ export class AuthService {
 
     async login(username:string, password:string){
         console.log(username, password);
+        
     }
 }
