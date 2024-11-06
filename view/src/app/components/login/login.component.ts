@@ -23,14 +23,17 @@ export class LoginComponent implements OnInit {
         this.passwordField = document.getElementById('password') as HTMLInputElement;
     }
 
-    async login() {
+    login() {
 
         //get field contents
         const username: any = this.usernameFiled?.value;
         const password: any = this.passwordField?.value;
 
         //send to service to get jwt token
-        var response = await this.authService.login(username, password);
+        this.authService.login(username, password);
+
+        return
+
     }
 
 }

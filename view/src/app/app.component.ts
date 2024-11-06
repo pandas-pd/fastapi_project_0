@@ -15,7 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
         RouterOutlet,
 
         //component imports not included in router
-        NavbarComponent
+        NavbarComponent,
     ],
 
     templateUrl: './app.component.html',
