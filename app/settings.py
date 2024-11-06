@@ -9,7 +9,7 @@ PORT                                        = 8080  # Default HTTPS port
 MODULE_NAME                                 = "main:app" #name of main file (do not change)
 
 #whitelis for accessing the api, change for prod
-ORIGINS                                      = ["*"] #add ip of webserver of web page to restrict access
+ORIGINS                                      = ["http://localhost:4200"] #add ip of webserver of web page to restrict access
 
 #db pathing
 db_url : str                                = "sqlite.db"
@@ -29,9 +29,9 @@ JWT_ACCESS_TOKEN_EXPIRE_SECONDS : int       = 2592000 # == 30 days
 JWT_NAME : str                              = "fastapi_project0_token"
 
 #JWT security settings (prevention to XSS, CSRF, XSSI)
-JWT_SECURE : bool                           = False #set to true when ssl cert is installed
-JWT_HTTPONLY : bool                         = False
-JWT_SAMESITE: str                           = "lax"
+JWT_SECURE : bool                           = True #set to true when ssl cert is installed
+JWT_HTTPONLY : bool                         = True
+JWT_SAMESITE: str                           = "None" #Strict, Lax, None
 
 #mailer settings (do not push to public repository)
 EMAIL_SENDER : str                          = "pythonmailer418@gmail.com"
