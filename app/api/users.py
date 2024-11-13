@@ -52,12 +52,12 @@ class Endpoint():
         return response
 
     @router.delete("/users/user", tags = ["user"])
-    def delete_user(body : Users.delete_user, response : Response, request : Request):
+    def delete_user(key : int, response : Response, request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
-        Services.permission_handler(claims = claims, required_roles = [], user_dependent = True, key_user = body.key) #This is an ID10T solution
+        Services.permission_handler(claims = claims, required_roles = [], user_dependent = True, key_user = key) #This is an ID10T solution
 
-        response = Delete.user(body = body, response = response)
+        response = Delete.user(key, response = response)
         return response
 
 
@@ -81,12 +81,12 @@ class Endpoint():
         return response
 
     @router.delete("/users/role", tags = ["role"])
-    def delete_role(body : Users.delete_role, response : Response, request : Request):
+    def delete_role(key : int, response : Response, request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
         Services.permission_handler(claims = claims, required_roles = [0])
 
-        response = Delete.role(body = body, response = response)
+        response = Delete.role(key = key, response = response)
         return response
 
 

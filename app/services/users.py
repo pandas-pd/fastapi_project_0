@@ -285,36 +285,36 @@ class Update():
 class Delete():
 
     @staticmethod
-    def user(body, response):
+    def user(key, response):
 
         #validate inputs
-        if (Validator.user(key = body.key) == False):
+        if (Validator.user(key = key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return{"message" : f"invalid user_key was given: {body.key}"}
+            return{"message" : f"invalid user_key was given: {key}"}
 
         #delete roles bond to User
-        id_us = Key_to_id.users(key = body.key)
+        id_us = Key_to_id.users(key = key)
         query = session.query(User_roles).filter(User_roles.fk_us == id_us).delete()
         session.commit()
 
         #delete user
-        query = session.query(Users).filter(Users.key == body.key).delete()
+        query = session.query(Users).filter(Users.key == key).delete()
         session.commit()
 
-        message : dict = {"message" : f"deleted user and realted role entries with user key: {body.key}"}
+        message : dict = {"message" : f"deleted user and realted role entries with user key: {key}"}
         return message
 
     @staticmethod
-    def role(body, response):
+    def role(key : int, response):
 
         #validate inputs
-        if (Validator.user_roles(key = body.key) == False):
+        if (Validator.user_roles(key = key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid role_key was goven: {body.key}"}
+            return {"message" : f"invalid role_key was goven: {key}"}
 
         #delete roles entry
-        query = session.query(User_roles).filter(User_roles.key == body.key).delete()
+        query = session.query(User_roles).filter(User_roles.key == key).delete()
         session.commit()
 
-        message : dict = {"message" : f"delted user role and with role key: {body.key}"}
+        message : dict = {"message" : f"delted user role and with role key: {key}"}
         return message

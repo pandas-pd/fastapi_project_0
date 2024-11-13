@@ -173,17 +173,17 @@ class Udpdate():
 class Delete():
 
     @staticmethod
-    def project(body, response):
+    def project(key : int, response):
 
         #delete entry
-        if (Validator.project(key = body.key) == False):
+        if (Validator.project(key = key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid project key was given: {body.key}"}
+            return {"message" : f"invalid project key was given: {key}"}
 
         #handle sequence
-        Sequence_logic.sequence_update_on_delete(key = body.key)
+        Sequence_logic.sequence_update_on_delete(key = key)
 
-        session.query(Projects).filter(Projects.key == body.key).delete()
+        session.query(Projects).filter(Projects.key == key).delete()
         session.commit()
 
-        return {"message" : f"deleted libray entry with key: {body.key}"}
+        return {"message" : f"deleted libray entry with key: {key}"}

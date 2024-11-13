@@ -13,7 +13,7 @@ class Endpoint():
 
     #project
 
-    @router.post("/project/project", tags = ["projects"])
+    @router.post("/projects/project", tags = ["projects"])
     def add_project(body : Projects.add_project, response : Response, request : Request): #Depends(JWT_handler.verify_jwt)
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
@@ -22,7 +22,7 @@ class Endpoint():
         response = Write.project(body = body, response = response)
         return response
 
-    @router.get("/project/project/all", tags = ["projects"])
+    @router.get("/projects/all", tags = ["projects"])
     def get_projects(request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
@@ -31,13 +31,13 @@ class Endpoint():
         response = Read.projects()
         return response
 
-    @router.get("/project/project/public", tags = ["projects"])
+    @router.get("/projects/public", tags = ["projects"])
     def get_public_projects():
 
         response = Read.public_projects()
         return response
 
-    @router.put("/project/project", tags = ["projects"])
+    @router.put("/projects/project", tags = ["projects"])
     def update_project(body: Projects.update_project, response : Response, request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
@@ -46,11 +46,12 @@ class Endpoint():
         response = Udpdate.project(body = body, response = response)
         return response
 
-    @router.delete("/project/project", tags = ["projects"])
-    def delete_project(body: Projects.delete_project, response: Response, request : Request):
+    @router.delete("/projects/project", tags = ["projects"])
+    def delete_project(key : int, response : Response, request : Request):
 
+        print(key)
         claims : dict = JWT_handler.verify_jwt(token =  request.cookies)
         Services.permission_handler(claims = claims, required_roles = [0,1])
 
-        response = Delete.project()
+        response = Delete.project(key = key, response= response)
         return response

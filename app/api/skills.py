@@ -39,12 +39,12 @@ class Endpoint():
         return response
 
     @router.delete("/skills/programming_language", tags = ["programming_language"])
-    def delete_programming_language(body : Skills.delete_programming_language, response : Response, request : Request):
+    def delete_programming_language(key : int, response : Response, request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
         Services.permission_handler(claims = claims, required_roles = [0])
 
-        response = Delete.programming_language(body, response)
+        response = Delete.programming_language(key, response)
         return response
 
     # Libraries
@@ -59,9 +59,9 @@ class Endpoint():
         return response
 
     @router.get("/skills/library/", tags = ["library"])
-    def get_libraries(key_programming_language : int, response : Response):
+    def get_libraries(key : int, response : Response):
 
-        response = Read.libraries(key_programming_language, response)
+        response = Read.libraries(key, response)
         return response
 
     @router.put("/skills/library", tags = ["library"])
@@ -74,10 +74,10 @@ class Endpoint():
         return response
 
     @router.delete("/skills/library", tags = ["library"])
-    def delete_library(body: Skills.delete_library, response : Response, request : Request):
+    def delete_library(key : int, response : Response, request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
         Services.permission_handler(claims = claims, required_roles = [0])
 
-        response = Delete.library(body, response)
+        response = Delete.library(key, response)
         return response

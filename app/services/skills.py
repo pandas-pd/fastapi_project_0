@@ -110,13 +110,13 @@ class Read():
         return response
 
     @staticmethod
-    def libraries(key_programming_language : int, response):
+    def libraries(key : int, response):
         """read all skills from the libraries table"""
 
         #validation
-        if (Validator.programming_language(key = key_programming_language) == False):
+        if (Validator.programming_language(key = key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid porgramming_language key was provided: {key_programming_language}"}
+            return {"message" : f"invalid porgramming_language key was provided: {key}"}
 
         query = select(
             Libraries.key,
@@ -127,7 +127,7 @@ class Read():
         ).select_from(Libraries
         ).join(Programming_languages, Libraries.programming_langauge, isouter = True
         ).join(Skill_level, Libraries.skill_level, isouter = True
-        ).filter(Programming_languages.key == key_programming_language)
+        ).filter(Programming_languages.key == key)
 
         content = session.execute(query).fetchall()
 
@@ -212,35 +212,35 @@ class Update():
 class Delete():
 
     @staticmethod
-    def programming_language(body, response):
+    def programming_language(key : int, response):
         """deletes all library entries as well"""
 
         #validate entry
-        if (Validator.programming_language(body.key) == False):
+        if (Validator.programming_language(key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid entry key was passed: {body.key}"}
+            return {"message" : f"invalid entry key was passed: {key}"}
 
         #deleting matching libraries
-        id_pl = Key_to_id.programming_languages(key = body.key)
+        id_pl = Key_to_id.programming_languages(key = key)
         session.query(Libraries).filter(Libraries.fk_pl == id_pl).delete()
         session.commit()
 
         #delete entry
-        session.query(Programming_languages).filter(Programming_languages.key == body.key).delete()
+        session.query(Programming_languages).filter(Programming_languages.key == key).delete()
         session.commit()
 
         #return
-        return {"message" : f"deleted programming_language entry with key: {body.key}"}
+        return {"message" : f"deleted programming_language entry with key: {key}"}
 
     @staticmethod
-    def library(body, response):
+    def library(key, response):
 
         #validate entry
-        if (Validator.library(key = body.key) == False):
+        if (Validator.library(key = key) == False):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message" : f"invalid entry key was passes: {body.key}"}
+            return {"message" : f"invalid entry key was passes: {key}"}
 
-        session.query(Libraries).filter(Libraries.key == body.key).delete()
+        session.query(Libraries).filter(Libraries.key == key).delete()
         session.commit()
 
-        return {"message" : f"deleted libray entry with key: {body.key}"}
+        return {"message" : f"deleted libray entry with key: {key}"}

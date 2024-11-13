@@ -14,9 +14,6 @@ class Skills():
         key_skill_level : int
         comment : Optional[str]
 
-    class delete_programming_language(BaseModel):
-        key : int
-
     class add_library(BaseModel):
         name : str
         key_programming_language : int
@@ -28,9 +25,6 @@ class Skills():
         name : str
         key_skill_level : Optional[int]
         comment : Optional[str]
-
-    class delete_library(BaseModel):
-        key : int
 
 class Projects():
 
@@ -51,9 +45,6 @@ class Projects():
         key_project_status : int
         is_public : bool
 
-    class delete_project(BaseModel):
-        key : int
-
 class Users():
 
     class validate_username(BaseModel):
@@ -71,16 +62,10 @@ class Users():
         e_mail : str
         comment : Optional[str]
 
-    class delete_user(BaseModel):
-        key : int
-
     class add_role(BaseModel):
         key_user : int
         key_role : int
         comment : Optional[str]
-
-    class delete_role(BaseModel):
-        key : int
 
 class Passwords():
 
