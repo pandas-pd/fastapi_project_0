@@ -20,15 +20,6 @@ export class AuthService {
 
     constructor(private http: HttpClient) {} //inject the http client
 
-    //funcitonality
-
-        /*
-    isLoggedIn(): Observable<boolean> {
-
-        const cookieValues : any = getCookie(this.cookieName);
-        return of(cookieValues !== null);
-    }
-        */
 
     loginCall(username:string, password:string): Observable<any>{
 
