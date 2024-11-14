@@ -24,7 +24,7 @@ SALT_ROUNDS : int                           = 6
 JWT_SECRET_KEY : str                        = "enter_key_here"
 JWT_ALGORITHM : str                         = "HS256"
 JWT_ENCODING : str                          = "utf-8"
-JWT_ISS : str                               = "www.sample_url.com"
+JWT_ISS : str                               = "www.sample_backend.com"
 JWT_ACCESS_TOKEN_EXPIRE_SECONDS : int       = 2592000 # == 30 days
 JWT_NAME : str                              = "fastapi_project0_token"
 
