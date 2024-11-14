@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { firstValueFrom, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 
@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 
 export class ApiService {
 
-    private header : object = {
+    private header : any = {
         'Content-Type': 'application/json',
         'Cache-Control': 'max-age=7200', // Cache for 1 hour;
     };
@@ -19,40 +19,35 @@ export class ApiService {
 
     constructor(private http:HttpClient) {}
 
-    private sendRequest(method:string, endpoint:string,body?:object, includeCredentials?:boolean): Observable<any>{
+    private sendRequest(method:string, endpoint:string,body:object | null, includeCredentials?:boolean): Observable<any>{
 
-        let httpMethod: any;
+        const url = environment.apiUrl.concat(endpoint);
 
         switch(method){
 
             case 'get':
-                httpMethod = this.http.get;
+                return this.http.get(url, {withCredentials: includeCredentials, headers:this.header});
                 break;
 
             case 'post':
-                httpMethod = this.http.post;
+                return this.http.post(url, body, {withCredentials: includeCredentials, headers:this.header});
                 break;
 
             case 'put':
-                httpMethod = this.http.put;
+                return this.http.put(url, body, {withCredentials: includeCredentials, headers:this.header});
                 break;
 
             case 'patch':
-                httpMethod = this.http.patch;
+                return this.http.patch(url, body, {withCredentials: includeCredentials, headers:this.header});
                 break;
 
             case 'delete':
-                httpMethod = this.http.delete;
+                return this.http.delete(url, {withCredentials: includeCredentials, headers:this.header});
                 break;
+
+            default:
+                throw new Error(`Unsupported HTTP method: ${method}`);
         }
-
-        const url = environment.apiUrl.concat(endpoint);
-
-        const response = httpMethod(
-            url,
-            body,
-            
-        )
     }
 
 
@@ -63,15 +58,28 @@ export class ApiService {
      * @param endpoint /endpoint
      * @param body /{'param' : 'value', ...}
      * @param includeCredentials 
-     * @retruns {'status': httpStatus, 'response' : responseObject}
+     * @retruns {'success' : success, 'status' : httpStatusCode, 'response' : response}
      */
-    request(method:string, endpoint:string,body?:object, includeCredentials:boolean = true): object{
+    async request(method:string, endpoint:string, body:object | null, includeCredentials:boolean = true): Promise<object>{
 
+        let result: Record<string, any> = {
+            success : null,
+            response : null
+        };
 
+        try {
+            const response = await firstValueFrom(
+                this.sendRequest(method,endpoint,body,includeCredentials)
+            );
+            result['success']   = true;
+            result['response']  = response;
 
-        const url = environment.apiUrl.concat('/login');
+        } catch (error) {
 
+            result['success']   = false;
+            console.log('error while contacting backend: ', error);
+        }
+
+        return result;
     }
-
-
 }
