@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -15,24 +15,24 @@ export class LoginComponent implements OnInit {
     private usernameFiled: HTMLInputElement | null = null;
     private passwordField: HTMLInputElement | null = null;
 
-    constructor(private authService:AuthService) {
-    }
+    constructor(private authService:AuthService){}
 
     ngOnInit(): void {
         this.usernameFiled = document.getElementById('username') as HTMLInputElement;
         this.passwordField = document.getElementById('password') as HTMLInputElement;
     }
 
-    login() {
+    async login(): Promise<void> {
 
         //get field contents
         const username: any = this.usernameFiled?.value;
         const password: any = this.passwordField?.value;
 
-        //send to service to get jwt token
-        this.authService.login(username, password);
+        const result : object = await this.authService.login(username, password);
+        console.log("this is result:");
+        console.log(result);
 
-        return
+        return;
 
     }
 
