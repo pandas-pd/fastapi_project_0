@@ -6,6 +6,8 @@
     --button-color-hover : rgb(160, 100, 215);
     --button-color-active : rgba(225, 225, 225, 0.6);
 
+    --popup-color: rgba(225, 225, 225, 0.6);
+
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
     --font-color-3: rgb(160, 100, 215);
