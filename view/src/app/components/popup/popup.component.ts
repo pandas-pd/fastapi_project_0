@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopupComponent implements OnInit{
 
-    isVisible = false;  // Control visibility of the popup
+    isVisible : boolean | null = false;  // Control visibility of the popup
     message = '';       // Message to display
     isSuccess = true;   // Success or failure state
 
@@ -18,7 +18,12 @@ export class PopupComponent implements OnInit{
 
     ngOnInit(): void {}
 
-    async showPopup(message: string, isSuccess: boolean, displayTime: number){
+    showPopup(message: string, isSuccess: boolean, displayTime: number | null){
+
+        // set a standard display time for consitance
+        if (displayTime == null){
+            displayTime = 3000;
+        }
 
         // update values to acess by service
         this.message        = message;
@@ -26,7 +31,13 @@ export class PopupComponent implements OnInit{
         this.isVisible      = true;
 
         setTimeout(() => {
-            this.isVisible = false;
+            this.hidePopup();
         }, displayTime);
     }
+
+
+    hidePopup(): void {
+        this.isVisible = false;
+    }
+
 }

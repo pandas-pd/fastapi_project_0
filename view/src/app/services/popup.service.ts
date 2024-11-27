@@ -17,7 +17,7 @@ export class PopupService {
 
 
     //used for showing message
-    show(message: string, isSuccess: boolean, displayTime: number): void {
+    show(message: string, isSuccess: boolean, displayTime: number | null): void {
 
         if (this.popupComponent){
             this.popupComponent.showPopup(message, isSuccess, displayTime);

@@ -2,11 +2,11 @@
     --background-color-navbar: rgb(40, 45, 55);
     --background-color-body : rgb(40, 45, 55);
 
-    --button-color:  rgba(140, 85, 185, 0.712);
-    --button-color-hover : rgb(160, 100, 215);
+    --button-color:         rgba(140, 85, 185, 0.712);
+    --button-color-hover :  rgb(160, 100, 215);
     --button-color-active : rgba(225, 225, 225, 0.6);
 
-    --popup-color: rgba(225, 225, 225, 0.6);
+
 
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
@@ -15,6 +15,7 @@
 
     --success-color: rgb(10, 165, 160);
     --failure-color: rgb(255, 84, 84);
+    --info-color:    rgba(225, 225, 225, 0.6);
 
     --font-family: 'Monaco', monospace;
     --content-font-size : 16;
@@ -66,6 +67,7 @@ textarea:focus, input:focus{
 
 button {
     font-family: var(--font-family);
+    font-size: var(--content-font-size);
     background-color: var(--button-color);
     color: var(--font-color-1);
     margin: 5px;

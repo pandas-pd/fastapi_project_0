@@ -1,13 +1,16 @@
 .popup-container {
+
+    padding: 10px;
+    width: 600px;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-radius: 5px;
+    color: var(--font-color-1);
+    font-size: var(--content-font-size);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 
     &.success {
         background-color: var(--success-color);
@@ -16,4 +19,34 @@
     &.failure {
         background-color: var(--failure-color);
     }
+
+    &.enter {
+        animation: fadeInSlideUp 0.3s ease-out forwards;
+    }
+}
+
+/* Keyframes for entering */
+@keyframes fadeInSlideUp {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+}
+
+.popup-close-button{
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    color: var(--font-color-2);
+    cursor: pointer;
+}
+
+.popup-close-button:hover{
+    color: var(--font-color-1);
 }

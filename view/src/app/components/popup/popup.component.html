@@ -1,3 +1,11 @@
-<div class="popup-container" *ngIf="isVisible" [class.success]="isSuccess" [class.failure]="!isSuccess">
-    <p>{{ message }}</p>
+<div
+    class="popup-container"
+
+    *ngIf="isVisible"
+    [class.enter]="isVisible"
+    [class.success]="isSuccess"
+    [class.failure]="!isSuccess"
+    >
+        <p>{{ message }}</p>
+        <a class="popup-close-button" (click)="hidePopup()">ⓧ</a>
 </div>

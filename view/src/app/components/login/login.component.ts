@@ -32,20 +32,16 @@ export class LoginComponent implements OnInit {
         const password: any = this.passwordField?.value;
 
         const result : any = await this.authService.login(username, password);
-        console.log("this is result:");
-        console.log(result);
-
+  
         //handle login
-        if (result.success == false){
-            console.log("Failed to login you bastard");
-            this.popupService.show('Operation successful!', true, 3000);
+        if (result.success == false && result["message"] == null){
+            this.popupService.show("Login failed", false, null);
         }
         else if (result.success == true){
+            this.popupService.show("Login successful", true, null);
             this.router.navigate(['/'])
         }
-
         return;
-
     }
 
 }
