@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { PopupComponent } from '../popup/popup.component';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
     selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     private usernameFiled: HTMLInputElement | null = null;
     private passwordField: HTMLInputElement | null = null;
 
-    constructor(private authService:AuthService, private router:Router){}
+    constructor(private authService:AuthService, private popupService: PopupService,private router:Router){}
 
     ngOnInit(): void {
         this.usernameFiled = document.getElementById('username') as HTMLInputElement;
@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
 
         //handle login
         if (result.success == false){
+            console.log("Failed to login you bastard");
+            this.popupService.show('Operation successful!', true, 3000);
         }
         else if (result.success == true){
             this.router.navigate(['/'])

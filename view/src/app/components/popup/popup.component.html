@@ -1,6 +1,3 @@
-<div *nfIg="visible" class="popup">
-    <div class="popup-center">
-        <h3>Lorem Ipsum</h3>
-        <button (click)="hidePopup()"></button>
-    </div>
+<div class="popup-container" *ngIf="isVisible" [class.success]="isSuccess" [class.failure]="!isSuccess">
+    <p>{{ message }}</p>
 </div>
