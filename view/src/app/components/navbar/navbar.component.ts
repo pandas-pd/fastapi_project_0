@@ -5,6 +5,7 @@ import { NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs';
 import { StyleService } from '../../services/style.service';
+import { CookieService } from '../../services/cookie.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
     private routerSubscription!: Subscription;
     private urlTabMap: any;
 
-    constructor(private styleService: StyleService, private router: Router) {}
+    constructor(private styleService:StyleService, private router:Router, private cookieService:CookieService) {}
 
     ngOnInit(): void {
 
@@ -54,10 +55,9 @@ export class NavbarComponent implements OnInit, OnDestroy{
 
         .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)) // Type guard here
         .subscribe((event: NavigationEnd) => {
-
             const currentUrl : string = event.urlAfterRedirects;
-            //console.log('URL changed to:', currentUrl);
             this.markTab(currentUrl);
+            this.checkCookie();
             });
         }
 
@@ -89,5 +89,10 @@ export class NavbarComponent implements OnInit, OnDestroy{
         let currentTab: any         = document.getElementById(aId);
         currentTab.style.color      = this.navbarHighlightColor;
     }
+
+
+    checkCookie(){
+        this.cookieService.isLoggedIn();
+    };
 
 }

@@ -31,9 +31,9 @@ class JWT_handler():
             payload = claims,
             key = JWT_SECRET_KEY,
             algorithm = JWT_ALGORITHM,
-            #headers = {"Partitioned":True},
         )
 
+        print(jwt)
         return jwt
 
     @staticmethod

@@ -24,13 +24,25 @@ SALT_ROUNDS : int                           = 6
 JWT_SECRET_KEY : str                        = "enter_key_here"
 JWT_ALGORITHM : str                         = "HS256"
 JWT_ENCODING : str                          = "utf-8"
-JWT_ISS : str                               = "www.sample_backend.com"
+JWT_ISS : str                               = "localhost"
 JWT_ACCESS_TOKEN_EXPIRE_SECONDS : int       = 2592000 # == 30 days
 JWT_NAME : str                              = "fastapi_project0_token"
 
 #JWT security settings (prevention to XSS, CSRF, XSSI)
+"""
+prod settings:
 JWT_SECURE : bool                           = True #set to true when ssl cert is installed
 JWT_HTTPONLY : bool                         = True
+JWT_SAMESITE: str                           = "None" #Strict, Lax, None
+
+dev settings:
+JWT_SECURE : bool                           = False #set to true when ssl cert is installed
+JWT_HTTPONLY : bool                         = True
+JWT_SAMESITE: str                           = "Lax" #Strict, Lax, None
+
+"""
+JWT_SECURE : bool                           = True #set to true when ssl cert is installed
+JWT_HTTPONLY : bool                         = False
 JWT_SAMESITE: str                           = "None" #Strict, Lax, None
 
 #mailer settings (do not push to public repository)
