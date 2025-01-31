@@ -3,7 +3,7 @@ import os
 #server seetings and params
 SSL_KEYFILE                                 = "path_to_your_ssl_keyfile.key"
 SSL_CERTFILE                                = "path_to_your_ssl_certfile.crt"
-SSL_PASSWORD                                = "ssl_password"
+SSL_PASSWORD                                = "asdf"
 
 HOST                                        = "127.0.0.1"
 PORT                                        = 8080  # Default HTTPS port
