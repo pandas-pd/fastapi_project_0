@@ -1,6 +1,6 @@
 /env
 /venv
 /app/sqlite.db
+/app/settings.py
 *.pyc
 /view/node_modules
-/app/settings.py
