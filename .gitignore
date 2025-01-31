@@ -3,3 +3,4 @@
 /app/sqlite.db
 *.pyc
 /view/node_modules
+/app/settings.py
