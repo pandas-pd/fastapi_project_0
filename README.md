@@ -3,8 +3,7 @@
 # Frontend
 The frontend runs on an NGINX server
 Setup:
-- Windows: https://medium.com/@chandramuthuraj/installing-nginx-on-windows-a-step-by-step-guide-6750575c63e2
-- Linux: https://medium.com/@mayrain1923/setup-nginx-on-debian-12-and-host-a-simple-static-website-f832e6761e63
+- Angular Version 17.2
 
 
 # Backend
@@ -37,6 +36,10 @@ Setup:
 - mock-up guis: https://moqups.com/
 
 ## Setup
+- install a sll cert
+    - see https://stackoverflow.com/questions/50625283/how-to-install-openssl-in-windows-10
+    - see https://medium.com/@coxpert/get-https-working-in-windows-10-11-with-localhost-dev-environment-8fc5e5c63652
+- add the sll to `settings.py`
 - run `setup_env.py`
 - run `setup_db.py`
 - create and overvrite the sample api key and secret in `settings.py`
