@@ -3,9 +3,9 @@ import os
 #rename to settings.py to use in prod, after add the values
 
 #server seetings and params
-SSL_KEYFILE                                 = "path_to_your_ssl_keyfile.key"
-SSL_CERTFILE                                = "path_to_your_ssl_certfile.crt"
-SSL_PASSWORD                                = "aaaaasdf"
+SSL_KEYFILE                                  = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "cert","test.txt")
+SSL_CERTFILE                                 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "cert","test.txt")
+SSL_PASSWORD                                 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "cert","test.txt")
 
 HOST                                        = "127.0.0.1"
 PORT                                        = 8080  # Default HTTPS port
