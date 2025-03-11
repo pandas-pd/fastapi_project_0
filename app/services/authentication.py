@@ -67,6 +67,7 @@ class Services():
             httponly = JWT_HTTPONLY,
             samesite = JWT_SAMESITE,
             max_age = JWT_ACCESS_TOKEN_EXPIRE_SECONDS,
+            path="/"
         )
 
         return {"message" : "Login successful"}
