@@ -10,5 +10,5 @@ uvicorn.run(
     port = PORT,
     ssl_keyfile = SSL_KEYFILE,
     ssl_certfile = SSL_CERTFILE,
-    ssl_keyfile_password = SSL_PASSWORD
+#    ssl_keyfile_password = SSL_PASSWORD
 )

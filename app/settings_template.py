@@ -1,18 +1,13 @@
 import os
 
-#rename to settings.py to use in prod, after add the values
-
 #server seetings and params
-SSL_KEYFILE                                  = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "cert","test.txt")
-SSL_CERTFILE                                 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "cert","test.txt")
-SSL_PASSWORD                                 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "cert","test.txt")
+SSL_KEYFILE                                  = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cert", "localhost-key.pem")
+SSL_CERTFILE                                 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cert" ,"localhost.pem")
+SSL_PASSWORD                                 = None
 
-HOST                                        = "127.0.0.1"
+HOST                                        = "localhost"
 PORT                                        = 8080  # Default HTTPS port
 MODULE_NAME                                 = "main:app" #name of main file (do not change)
-
-#whitelis for accessing the api, change for prod
-ORIGINS                                      = ["http://localhost:4200"] #add ip of webserver of web page to restrict access
 
 #db pathing
 db_url : str                                = "sqlite.db"
@@ -28,8 +23,22 @@ JWT_SECRET_KEY : str                        = "enter_key_here"
 JWT_ALGORITHM : str                         = "HS256"
 JWT_ENCODING : str                          = "utf-8"
 JWT_ISS : str                               = "localhost"
-JWT_ACCESS_TOKEN_EXPIRE_SECONDS : int       = 2592000 # == 30 days
+JWT_ACCESS_TOKEN_EXPIRE_SECONDS : int       = 3600*5 # == 30 days
 JWT_NAME : str                              = "fastapi_project0_token"
+
+JWT_SECURE : bool                           = True #set to true when ssl cert is installed
+JWT_HTTPONLY : bool                         = True
+JWT_SAMESITE: str                           = "None" #Strict, Lax, None
+
+#whitelis for accessing the api, change for prod
+ORIGINS                                      = [
+    "https://localhost:4200",  # Angular frontend
+    "https://127.0.0.1:4200", # If using HTTPS locally
+]
+
+ #add ip of webserver of web page to restrict access
+#ORIGINS                                      = ["*"] #add ip of webserver of web page to restrict access
+
 
 #JWT security settings (prevention to XSS, CSRF, XSSI)
 """
@@ -44,9 +53,7 @@ JWT_HTTPONLY : bool                         = True
 JWT_SAMESITE: str                           = "Lax" #Strict, Lax, None
 
 """
-JWT_SECURE : bool                           = True #set to true when ssl cert is installed
-JWT_HTTPONLY : bool                         = False
-JWT_SAMESITE: str                           = "None" #Strict, Lax, None
+
 
 #mailer settings (do not push to public repository)
 EMAIL_SENDER : str                          = "enter_mail_adress_here"
