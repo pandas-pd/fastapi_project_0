@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { ApiAuthService } from '../../services/api-auth.service';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PopupService } from '../../services/popup.service';
 import { SpinnerService } from '../../services/spinner.service';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [],
+    imports: [
+        RouterLink,
+        RouterLinkActive,
+    ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })
@@ -19,7 +22,7 @@ export class LoginComponent implements OnInit {
     private passwordField: HTMLInputElement | null = null;
 
     constructor(
-        private authService:AuthService,
+        private apiAuthService:ApiAuthService,
         private popupService:PopupService,
         private spinnerService:SpinnerService,
         private router:Router
@@ -38,14 +41,14 @@ export class LoginComponent implements OnInit {
         const password: any = this.passwordField?.value;
 
         this.spinnerService.show()
-        const result : any = await this.authService.login(username, password);
+        const result : any = await this.apiAuthService.login(username, password);
         this.spinnerService.hide()
 
         //handle login
-        if (result.success == false && result["message"] == null){
+        if (!result.success && result["message"] == null){
             this.popupService.show("Login failed", false, null);
         }
-        else if (result.success == true){
+        else if (result.success){
             this.popupService.show("Login successful", true, null);
             this.router.navigate(['/'])
         }
