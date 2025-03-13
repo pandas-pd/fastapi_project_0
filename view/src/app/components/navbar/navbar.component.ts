@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
         .subscribe((event: NavigationEnd) => {
             const currentUrl : string = event.urlAfterRedirects;
             this.markTab(currentUrl);
-            this.checkCookie();
+            this.cookieService.isLoggedIn();
             });
         }
 
@@ -89,10 +89,5 @@ export class NavbarComponent implements OnInit, OnDestroy{
         let currentTab: any         = document.getElementById(aId);
         currentTab.style.color      = this.navbarHighlightColor;
     }
-
-
-    checkCookie(){
-        this.cookieService.isLoggedIn();
-    };
 
 }

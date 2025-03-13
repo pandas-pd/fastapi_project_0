@@ -5,6 +5,7 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 
@@ -26,21 +27,24 @@ export const routes: Routes = [
         path: 'projects',
         loadComponent: () =>
             import('./components/projects/projects.component').then((c) => c.ProjectsComponent),
-        //component: SkillsComponent,
     },
 
     {
         path: 'users',
         loadComponent: () =>
             import('./components/users/users.component').then((c) => c.UsersComponent),
-        //component: SkillsComponent,
     },
 
     {
         path: 'login',
         loadComponent: () =>
             import('./components/login/login.component').then((c) => c.LoginComponent),
-        //component: SkillsComponent,
     },
+
+    {
+        path: 'reset-password',
+        loadComponent: () =>
+            import('./components/reset-password/reset-password.component').then((c) => c.ResetPasswordComponent),
+    }
 
 ];

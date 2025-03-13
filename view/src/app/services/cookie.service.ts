@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { DOCUMENT } from '@angular/common';
 import { Inject } from '@angular/core';
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -16,7 +17,10 @@ export class CookieService {
 
         for (let cookie of cookies) {
             const [name, value] = cookie.trim().split('=');
-            console.log('cookie: ', name, value);
+
+            if (name == environment.apiTokenName){
+                return true;
+            }
         }
 
         return false;
