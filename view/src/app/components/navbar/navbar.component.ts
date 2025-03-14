@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs';
 import { StyleService } from '../../services/style.service';
 import { CookieService } from '../../services/cookie.service';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-navbar',
@@ -14,6 +14,7 @@ import { CookieService } from '../../services/cookie.service';
     imports: [
         RouterLink,
         RouterLinkActive,
+        CommonModule,
   ],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css'
@@ -21,6 +22,8 @@ import { CookieService } from '../../services/cookie.service';
 
 
 export class NavbarComponent implements OnInit, OnDestroy{
+
+    isLoggedIn: boolean = false;
 
     private navbarDefaultColor: any;
     private navbarHighlightColor: any;
@@ -43,6 +46,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
             '/projects':        'navbarProjects',
             '/users':           'navbarUsers',
             '/login':           'navbarLogin',
+            '/account':         'navbarAccount'
         };
         this.urlTabMap = urlTabMap;
 
@@ -57,7 +61,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
         .subscribe((event: NavigationEnd) => {
             const currentUrl : string = event.urlAfterRedirects;
             this.markTab(currentUrl);
-            this.cookieService.isLoggedIn();
+            console.log(this.cookieService.isLoggedIn());
+            this.isLoggedIn = this.cookieService.isLoggedIn();
             });
         }
 

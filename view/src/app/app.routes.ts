@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-
 import { HomeComponent } from './components/home/home.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
+import { AccountComponent } from './components/account/account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-
+import { authGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -33,12 +33,20 @@ export const routes: Routes = [
         path: 'users',
         loadComponent: () =>
             import('./components/users/users.component').then((c) => c.UsersComponent),
+            canMatch: [authGuard]
     },
 
     {
         path: 'login',
         loadComponent: () =>
             import('./components/login/login.component').then((c) => c.LoginComponent),
+    },
+
+    {
+        path: 'account',
+        loadComponent: () =>
+            import('./components/account/account.component').then((c) => c.AccountComponent),
+            canMatch: [authGuard]
     },
 
     {

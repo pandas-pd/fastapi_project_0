@@ -3,7 +3,9 @@
         <li><a routerLink="/" routerLinkActive="active" id = "navbarHome">Home</a></li>
         <li><a routerLink="/skills" routerLinkActive="active" id = "navbarSkills">Skills</a></li>
         <li><a routerLink="/projects" routerLinkActive="active" id = "navbarProjects">Projects</a></li>
-        <li><a routerLink="/users" routerLinkActive="active" id = "navbarUsers">Users</a></li>
-        <li><a routerLink="/login" routerLinkActive="active" id = "navbarLogin">Login</a></li>
+
+        <li *ngIf="isLoggedIn"><a routerLink="/users" routerLinkActive="active" id = "navbarUsers">Users</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login" routerLinkActive="active" id = "navbarLogin">Login</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/account" routerLinkActive="active" id = "navbarAccount">Account</a></li>
     </ul>
 </nav>
