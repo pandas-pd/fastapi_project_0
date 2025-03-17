@@ -6,8 +6,6 @@
     --button-color-hover :  rgb(160, 100, 215);
     --button-color-active : rgba(225, 225, 225, 0.6);
 
-
-
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
     --font-color-3: rgb(160, 100, 215);
@@ -18,9 +16,9 @@
     --info-color:    rgba(225, 225, 225, 0.6);
 
     --font-family: 'Monaco', monospace;
-    --content-font-size : 16;
+    --content-font-size : 18;
 
-    --content-width: 1200px;
+    --content-width: 1000px;
     --border-radius-button: 5px;
 
     --forms-top-margin: 40px;
