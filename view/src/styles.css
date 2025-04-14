@@ -16,7 +16,9 @@
     --info-color:    rgba(225, 225, 225, 0.6);
 
     --font-family: 'Monaco', monospace;
-    --content-font-size : 18;
+    --h1-font-size : 32px;
+    --h2-font-size : 24px;
+    --content-font-size : 16px;
 
     --content-width: 1000px;
     --border-radius-button: 5px;
@@ -39,11 +41,23 @@ body {
     /*border: 1px solid #ccc;*/
 }
 
+h1{
+    font-size: var(--h1-font-size);
+}
+
+h2{
+    font-size: var(--h2-font-size);
+}
+
 /* ---------- general component space styling ---------- */
 
 .component-space{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+h1{
+    font-size: ;
 }
 
 /* ---------- interactive elements ----------  */

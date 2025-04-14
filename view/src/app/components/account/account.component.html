@@ -1,13 +1,17 @@
+<div class = "header">
+    <h1>Account</h1>
+</div>
+
 <div class="account-info">
     <h3>Account information</h3>
-    <p id="username">username</p>
-    <p id="e-mail">e-mail</p>
-    <p id="comment">comment</p>
-    <p id="last-edit">last edit</p>
+    <p id="username">Username: {{ accountData.response.username }}</p>
+    <p id="e-mail">E-mail: {{ accountData.response.e_mail }}</p>
+    <p id="comment">Comment: {{ accountData.response.comment }}</p>
+    <p id="last-edit">Last edit: {{ accountData.response.timestamp * 1000 | date:'medium' }}</p>
 </div>
 
 <div class="role-info">
-
+    <h2>Role information</h2>
 </div>
 
 <div class="button-space">

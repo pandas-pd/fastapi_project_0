@@ -75,7 +75,7 @@ export class ApiUsersService {
 
         const result : object = await this.api.request(
             'delete',
-            `/users/user?key${keyUser}`,
+            `/users/user?key=${keyUser}`,
             null
         );
         return result;
@@ -99,7 +99,7 @@ export class ApiUsersService {
 
         const result : object = await this.api.request(
             'delete',
-            `/users/role?key${keyRole}`,
+            `/users/role?key=${keyRole}`,
             null
         );
         return result;
@@ -110,7 +110,7 @@ export class ApiUsersService {
 
         const result : object = await this.api.request(
             'get',
-            `/users/roles?key_user${keyUser}`,
+            `/users/roles?key_user=${keyUser}`,
             null
         );
         return result;

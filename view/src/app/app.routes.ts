@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AccountComponent } from './components/account/account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { authGuard } from './guards/auth.guard';
+import { accountResolver } from './resolvers/account.resolver';
 
 
 export const routes: Routes = [
@@ -46,7 +47,8 @@ export const routes: Routes = [
         path: 'account',
         loadComponent: () =>
             import('./components/account/account.component').then((c) => c.AccountComponent),
-            canMatch: [authGuard]
+            canMatch: [authGuard],
+            resolve: {accountData: accountResolver}
     },
 
     {
