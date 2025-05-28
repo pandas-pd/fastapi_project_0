@@ -15,17 +15,24 @@ export class AccountComponent implements OnInit{
 
     accountData: any;
     roleData: any;
-    constructor(private route: ActivatedRoute, private apiUserService: ApiUsersService){}
+
+    constructor(
+        private route: ActivatedRoute,
+        private apiUserService: ApiUsersService,
+
+    ){}
 
     async ngOnInit(): Promise<void> {
 
         //bind resolved data
-        this.accountData = this.route.snapshot.data['accountData'];
-        console.log(this.accountData);
+        this.accountData            = this.route.snapshot.data['accountData']['user'];
+        const roleEnum : object     = this.route.snapshot.data['accountData']['roles'];
 
         //fetch role data
-        this.roleData = await this.apiUserService.getRoles(this.accountData.response.key);
-        console.log(this.roleData);
+        const userRoles : object    = await this.apiUserService.getRoles(this.accountData.response.key);
+
+        //parse role data
+        this.
 
     }
 

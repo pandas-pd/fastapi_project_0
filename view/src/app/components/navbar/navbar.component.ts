@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
         .subscribe((event: NavigationEnd) => {
             const currentUrl : string = event.urlAfterRedirects;
             this.markTab(currentUrl);
-            console.log(this.cookieService.isLoggedIn());
+            //console.log(this.cookieService.isLoggedIn());
             this.isLoggedIn = this.cookieService.isLoggedIn();
             });
         }
