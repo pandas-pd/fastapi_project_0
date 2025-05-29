@@ -2,18 +2,37 @@
     <h1>Account</h1>
 </div>
 
+
 <div class="account-info">
-    <h3>Account information</h3>
-    <p id="username">Username: {{ accountData.response.username }}</p>
-    <p id="e-mail">E-mail: {{ accountData.response.e_mail }}</p>
-    <p id="comment">Comment: {{ accountData.response.comment }}</p>
-    <p id="last-edit">Last edit: {{ accountData.response.timestamp * 1000 | date:'medium' }}</p>
+    <h2>Account information</h2>
+    <p id="username">Username: {{ accountData.username }}</p>
+    <p id="e-mail">E-mail: {{ accountData.e_mail }}</p>
+    <p id="comment">Comment: {{ accountData.comment }}</p>
+    <p id="last-edit">Last edit: {{ accountData.timestamp * 1000 | date:'medium' }}</p>
 </div>
+
 
 <div class="role-info">
     <h2>Role information</h2>
+    <table>
+
+        <tr>
+            <th>Role-Id</th>
+            <th>Role</th>
+            <th>Last edit</th>
+        </tr>
+
+        <tr *ngFor="let role of roleData">
+            <td>{{ role.key_user_role }}</td>
+            <td>{{ role.role }}</td>
+            <td>{{ role.timestamp * 1000 | date:'medium' }}</td>
+        </tr>
+
+    </table>
 </div>
 
-<div class="button-space">
 
+<div class="button-space">
+    <button>Edit Profile</button>
+    <button>Change password</button>
 </div>

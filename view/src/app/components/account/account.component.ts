@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiUsersService } from '../../services/api-users.service';
+import { EnumParserService } from '../../services/enum-parser.service';
 
 @Component({
     selector: 'app-account',
@@ -13,26 +14,24 @@ import { ApiUsersService } from '../../services/api-users.service';
 
 export class AccountComponent implements OnInit{
 
-    accountData: any;
-    roleData: any;
+    accountData: object | any;
+    roleData: Array<object> | any;
 
     constructor(
         private route: ActivatedRoute,
         private apiUserService: ApiUsersService,
-
+        private enumParser: EnumParserService
     ){}
 
     async ngOnInit(): Promise<void> {
 
         //bind resolved data
-        this.accountData            = this.route.snapshot.data['accountData']['user'];
-        const roleEnum : object     = this.route.snapshot.data['accountData']['roles'];
-
-        //fetch role data
-        const userRoles : object    = await this.apiUserService.getRoles(this.accountData.response.key);
+        this.accountData            = this.route.snapshot.data['accountData']['user']['response'];
+        const roleEnum : object     = this.route.snapshot.data['accountData']['roles']['response'];
 
         //parse role data
-        this.
+        this.roleData               = this.enumParser.roleParser(this.accountData.roles, roleEnum);
+        console.log(this.roleData);
 
     }
 
