@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ApiUsersService } from '../../services/api-users.service';
-import { SpinnerService } from '../../services/spinner.service';
 import { PopupService } from '../../services/popup.service';
 import { Router } from '@angular/router';
 
@@ -13,6 +12,8 @@ import { Router } from '@angular/router';
     templateUrl: './reset-password.component.html',
     styleUrl: './reset-password.component.css'
 })
+
+
 export class ResetPasswordComponent implements OnInit{
 
     private usernameField: HTMLInputElement | null = null;
@@ -21,7 +22,6 @@ export class ResetPasswordComponent implements OnInit{
     constructor(
         private apiUserService:ApiUsersService,
         private popupService:PopupService,
-        private spinnerService:SpinnerService,
         private router:Router,
     ){}
 
@@ -37,10 +37,7 @@ export class ResetPasswordComponent implements OnInit{
         const username: any = this.usernameField?.value;
 
         //validate and run transaction
-        this.spinnerService.show()
         const result : any = await this.apiUserService.resetPassword(username);
-        this.spinnerService.hide()
-
 
         //feedback
         if (result.success){

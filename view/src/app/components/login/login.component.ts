@@ -3,7 +3,6 @@ import { OnInit } from '@angular/core';
 import { ApiAuthService } from '../../services/api-auth.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PopupService } from '../../services/popup.service';
-import { SpinnerService } from '../../services/spinner.service';
 
 @Component({
     selector: 'app-login',
@@ -24,7 +23,6 @@ export class LoginComponent implements OnInit {
     constructor(
         private apiAuthService:ApiAuthService,
         private popupService:PopupService,
-        private spinnerService:SpinnerService,
         private router:Router
     ){}
 
@@ -40,9 +38,7 @@ export class LoginComponent implements OnInit {
         const username: any = this.usernameFiled?.value;
         const password: any = this.passwordField?.value;
 
-        this.spinnerService.show()
         const result : any = await this.apiAuthService.login(username, password);
-        this.spinnerService.hide()
 
         //handle login
         if (!result.success && result["message"] == null){

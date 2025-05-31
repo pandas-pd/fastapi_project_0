@@ -2,14 +2,18 @@
     --background-color-navbar: rgb(40, 45, 55);
     --background-color-body : rgb(40, 45, 55);
 
-    --button-color:         rgba(140, 85, 185, 0.712);
-    --button-color-hover :  rgb(160, 100, 215);
-    --button-color-active : rgba(225, 225, 225, 0.6);
-
     --font-color-1: rgb(255, 255, 255);
     --font-color-2: rgba(225, 225, 225, 0.6);
     --font-color-3: rgb(160, 100, 215);
     --font-color-4: rgba(140, 85, 185, 0.712);
+
+    --button-color:         rgba(140, 85, 185, 0.712);
+    --button-color-hover :  rgb(160, 100, 215);
+    --button-color-active : rgba(225, 225, 225, 0.6);
+
+    --secondary-button-color:         rgba(225, 225, 225, 0.3);
+    --secondary-button-color-hover :  rgba(225, 225, 225, 0.5);
+    --secondary-button-color-active : rgba(225, 225, 225, 0.6);
 
     --success-color: rgb(10, 165, 160);
     --failure-color: rgb(255, 84, 84);
@@ -21,7 +25,7 @@
     --content-font-size : 16px;
 
     --content-width: 1000px;
-    --border-radius-button: 5px;
+    --default-border-radius: 1px;
 
     --forms-top-margin: 40px;
 }
@@ -43,10 +47,13 @@ body {
 
 h1{
     font-size: var(--h1-font-size);
+    margin-bottom: 10px;
 }
 
 h2{
     font-size: var(--h2-font-size);
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 /* ---------- table styling ---------- */
@@ -88,12 +95,15 @@ th {
 input{
     font-family: var(--font-family);
     font-size: var(--content-font-size);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: var(--default-border-radius);
 }
 
 textarea:focus, input:focus{
     outline: none !important;
     border:2px solid var(--button-color-hover);
-    border-radius: var(--border-radius-button);
+    border-radius: var(--default-border-radius);
 }
 
 /* buttons */
@@ -103,13 +113,16 @@ button {
     font-size: var(--content-font-size);
     background-color: var(--button-color);
     color: var(--font-color-1);
-    margin: 5px;
+
+    margin-bottom: 10px;
     padding: 10px;
+
     text-align: center;
     text-decoration: none;
     position: relative;
+
     border: none;
-    border-radius: var(--border-radius-button);
+    border-radius: var(--default-border-radius);
     cursor: pointer;
     overflow: hidden;
     transition-duration: 0.2s;
@@ -145,6 +158,17 @@ button:active:after {
 
 button:focus{
     outline: 0px;
+}
+
+
+/* secondary-buttons */
+
+.secondary-button {
+    background-color: var(--secondary-button-color);
+}
+
+.secondary-button:hover {
+    background-color: var(--secondary-button-color-hover);
 }
 
 

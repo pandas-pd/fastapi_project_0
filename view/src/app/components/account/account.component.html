@@ -3,12 +3,27 @@
 </div>
 
 
-<div class="account-info">
-    <h2>Account information</h2>
-    <p id="username">Username: {{ accountData.username }}</p>
-    <p id="e-mail">E-mail: {{ accountData.e_mail }}</p>
-    <p id="comment">Comment: {{ accountData.comment }}</p>
-    <p id="last-edit">Last edit: {{ accountData.timestamp * 1000 | date:'medium' }}</p>
+<div class="account">
+
+    <div class="account-tag" id="username">
+        <p>Username:</p>
+        <p>E-mail:</p>
+        <p>Comment:</p>
+        <p>Last edit:</p>
+    </div>
+
+    <div class="account-info" id="e-mail">
+        <p>{{ accountData.username }}</p>
+        <p>{{ accountData.e_mail }}</p>
+        <p> {{ accountData.comment }}</p>
+        <p>{{ accountData.timestamp * 1000 | date:'medium' }}</p>
+    </div>
+
+    <div class="links">
+        <a routerLink="/account/change-password" routerLinkActive="active" id = "changePassword">Change password</a>
+    </div>
+
+
 </div>
 
 
@@ -34,5 +49,4 @@
 
 <div class="button-space">
     <button>Edit Profile</button>
-    <button>Change password</button>
 </div>

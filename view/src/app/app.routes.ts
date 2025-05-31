@@ -6,6 +6,7 @@ import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
 import { AccountComponent } from './components/account/account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { authGuard } from './guards/auth.guard';
 import { accountResolver } from './resolvers/account.resolver';
 
@@ -55,6 +56,12 @@ export const routes: Routes = [
         path: 'reset-password',
         loadComponent: () =>
             import('./components/reset-password/reset-password.component').then((c) => c.ResetPasswordComponent),
+    },
+
+    {
+        path: 'account/change-password',
+        loadComponent: () =>
+            import('./components/change-password/change-password.component').then((c) => c.ChangePasswordComponent),
     }
 
 ];

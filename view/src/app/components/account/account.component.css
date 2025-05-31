@@ -1,0 +1,21 @@
+.account{
+}
+
+.account-info, .account-tag{
+    display:inline-block;
+    margin-right: 75px;
+}
+
+.account-tag{
+    color: var(--font-color-2);
+    font-weight: bold;
+}
+
+.links{
+    margin-top: 10px;
+}
+
+.button-space{
+    margin-top: 30px;
+    text-align: right;
+}

@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { SpinnerService } from './spinner.service';
 
 
 @Injectable({
@@ -17,7 +18,10 @@ export class ApiService {
     };
 
 
-    constructor(private http:HttpClient) {}
+    constructor(
+        private http:HttpClient,
+        private spinnerService:SpinnerService,
+    ){}
 
     private sendRequest(method:string, endpoint:string,body:object | null, includeCredentials?:boolean): Observable<any>{
 
@@ -62,6 +66,8 @@ export class ApiService {
      */
     async request(method:string, endpoint:string, body:object | null, includeCredentials:boolean = true): Promise<object>{
 
+        this.spinnerService.show()
+
         let result: Record<string, any> = {
             success : null,
             response : null
@@ -79,6 +85,8 @@ export class ApiService {
             result['success']   = false;
             console.log('error while contacting backend: ', error);
         }
+
+        this.spinnerService.hide()
 
         return result;
     }
