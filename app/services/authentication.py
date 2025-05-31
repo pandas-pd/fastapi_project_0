@@ -86,7 +86,7 @@ class Services():
         role_permission : bool = False
 
         for role in claims["roles"]:
-            if (role in required_roles):
+            if (role in required_roles) or (required_roles == []):
                 role_permission = True
 
         if (role_permission == False):
