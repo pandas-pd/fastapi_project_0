@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink, Router, RouterLinkActive} from '@angular/router';
+import { ActivatedRoute, RouterLink, Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiUsersService } from '../../services/api-users.service';
 import { EnumParserService } from '../../services/enum-parser.service';
@@ -10,7 +10,6 @@ import { EnumParserService } from '../../services/enum-parser.service';
     imports: [
         CommonModule,
         RouterLink,
-        RouterLinkActive,
     ],
     templateUrl: './account.component.html',
     styleUrl: './account.component.css'
@@ -36,6 +35,10 @@ export class AccountComponent implements OnInit{
         //parse role data
         this.roleData               = this.enumParser.roleParser(this.accountData.roles, roleEnum);
         return;
+    }
+
+    changePassword(): void{
+
     }
 
 }

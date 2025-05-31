@@ -5,24 +5,19 @@
 
 <div class="account">
 
-    <div class="account-tag" id="username">
+    <div class="account-tag">
         <p>Username:</p>
         <p>E-mail:</p>
         <p>Comment:</p>
         <p>Last edit:</p>
     </div>
 
-    <div class="account-info" id="e-mail">
+    <div class="account-info">
         <p>{{ accountData.username }}</p>
         <p>{{ accountData.e_mail }}</p>
         <p> {{ accountData.comment }}</p>
         <p>{{ accountData.timestamp * 1000 | date:'medium' }}</p>
     </div>
-
-    <div class="links">
-        <a routerLink="/account/change-password" routerLinkActive="active" id = "changePassword">Change password</a>
-    </div>
-
 
 </div>
 
@@ -48,5 +43,6 @@
 
 
 <div class="button-space">
+    <button class="secondary-button" [routerLink]="['/account/change-password']">Change Password</button>
     <button>Edit Profile</button>
 </div>

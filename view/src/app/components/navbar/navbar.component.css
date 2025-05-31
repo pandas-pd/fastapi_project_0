@@ -2,7 +2,7 @@
 
     padding-top: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--font-color-1);
+    border-bottom: 2px solid var(--font-color-1);
 
     list-style-type: none;
     text-align: left;
@@ -12,13 +12,13 @@
 .navbar li{
     float: left;
     padding-right: 30px;
+    font-weight: bold;
 }
 
 
 .navbar li a{
     color: var(--font-color-2);
     text-decoration: none;
-
     color: white;
     text-align: center;
 }

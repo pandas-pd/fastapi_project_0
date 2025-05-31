@@ -10,9 +10,10 @@
     --button-color:         rgba(140, 85, 185, 0.712);
     --button-color-hover :  rgb(160, 100, 215);
     --button-color-active : rgba(225, 225, 225, 0.6);
+    --button-margin:        10px;
 
-    --secondary-button-color:         rgba(225, 225, 225, 0.3);
-    --secondary-button-color-hover :  rgba(225, 225, 225, 0.5);
+    --secondary-button-color:         rgba(225, 225, 225, 0.25);
+    --secondary-button-color-hover :  rgba(225, 225, 225, 0.4);
     --secondary-button-color-active : rgba(225, 225, 225, 0.6);
 
     --success-color: rgb(10, 165, 160);
@@ -62,7 +63,7 @@ table {
     border-bottom: 1px solid var(--font-color-2);
     padding-top: 5px;
     padding-bottom: 5px;
-    width: calc(var(--content-width) - 20px);
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: auto;
@@ -114,7 +115,6 @@ button {
     background-color: var(--button-color);
     color: var(--font-color-1);
 
-    margin-bottom: 10px;
     padding: 10px;
 
     text-align: center;

@@ -11,11 +11,11 @@
     font-weight: bold;
 }
 
-.links{
-    margin-top: 10px;
-}
-
 .button-space{
     margin-top: 30px;
     text-align: right;
+}
+
+button{
+    margin-left: var(--button-margin);
 }
