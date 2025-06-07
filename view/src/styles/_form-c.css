@@ -1,0 +1,81 @@
+/* custom classes */
+
+.form-c-div{
+    margin-top: var(--forms-top-margin);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+.form-c-grid{
+    display: grid;
+    grid-template-columns: 35% 1fr; /* Label: 150px, Input: fills the rest */
+    row-gap: 10px;
+    column-gap: 0px;
+    align-items: center;
+}
+
+.form-c-button-space{
+    margin-top: 10px;
+    width: 100%;
+    text-align: right;
+}
+
+
+
+/* default classes */
+
+.form-c h1{
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    border-bottom:1px dashed;
+}
+
+.form-c label{
+    text-align: left;
+    line-height: 1;
+    padding: 0;
+}
+
+.form-c input{
+    width: 100%;
+    height: auto; /* or omit it */
+    box-sizing: border-box;
+    margin: 0px; /* overwrite the deault value */
+}
+
+.form-c button{
+    margin-left: 10px;
+}
+
+
+
+/* sample code of structure:
+
+<div class="form-c-div">
+
+    <h1>headername</h1>
+
+    <form onsubmit="return false">
+        <div class="form-c-grid">
+
+            <label for="field1"></label>
+            <input id="field1">
+
+            ...
+
+        </div>
+    </form>
+
+    <div class="form-c-button-space">
+        <button></button>
+        <button></button>
+    </div>
+
+</div>
+
+
+*/

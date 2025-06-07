@@ -1,0 +1,7 @@
+a{
+    color: var(--font-color-2);
+}
+
+a:hover {
+    color: var(--font-color-3);
+}

@@ -1,0 +1,13 @@
+input{
+    font-family: var(--font-family);
+    font-size: var(--content-font-size);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: var(--default-border-radius);
+}
+
+textarea:focus, input:focus{
+    outline: none !important;
+    border:2px solid var(--button-color-hover);
+    border-radius: var(--default-border-radius);
+}

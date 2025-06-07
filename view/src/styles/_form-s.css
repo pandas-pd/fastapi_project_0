@@ -1,0 +1,44 @@
+/* custom element */
+
+.form-s-div{
+    margin-top: var(--forms-top-margin);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+
+/* default element */
+
+.form-s-div h1{
+    margin: 20px;
+}
+
+.form-s-div input[type="text"],
+.form-s-div input[type="password"] {
+    width: 90%;
+}
+
+.form-s-div button{
+    width: 385px;
+}
+
+/* sample code of structure
+
+<div class="form-s-div">
+
+    <h1></h1>
+
+    <div>
+        <form onsubmit="return false">
+            <input>
+            <button type = "submit" ></button>
+        </form>
+    </div>
+
+</div>
+
+*/

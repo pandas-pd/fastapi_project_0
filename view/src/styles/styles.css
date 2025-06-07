@@ -1,0 +1,50 @@
+@import './_head_body.css';
+@import './_tables.css';
+@import './_inputs.css';
+@import './_as.css';
+@import './_buttons.css';
+@import './_form-c.css';
+@import './_form-s.css';
+
+
+:root{
+    --background-color-navbar: rgb(40, 45, 55);
+    --background-color-body : rgb(40, 45, 55);
+
+    --font-color-1: rgb(255, 255, 255);
+    --font-color-2: rgba(225, 225, 225, 0.6);
+    --font-color-3: rgb(160, 100, 215);
+    --font-color-4: rgba(140, 85, 185, 0.712);
+
+    --button-color:         rgba(140, 85, 185, 0.712);
+    --button-color-hover :  rgb(160, 100, 215);
+    --button-color-active : rgba(225, 225, 225, 0.6);
+    --button-margin:        10px;
+
+    --secondary-button-color:         rgba(225, 225, 225, 0.25);
+    --secondary-button-color-hover :  rgba(225, 225, 225, 0.4);
+    --secondary-button-color-active : rgba(225, 225, 225, 0.6);
+
+    --success-color: rgb(10, 165, 160);
+    --failure-color: rgb(255, 84, 84);
+    --info-color:    rgba(225, 225, 225, 0.6);
+
+    --font-family: 'Monaco', monospace;
+    --h1-font-size : 32px;
+    --h2-font-size : 24px;
+    --content-font-size : 16px;
+
+    --content-width: 1000px;
+    --default-border-radius: 1px;
+
+    --forms-top-margin: 40px;
+}
+
+
+/* ---------- general component space styling ---------- */
+
+.component-space{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
