@@ -60,7 +60,7 @@ export class ChangePasswordComponent implements OnInit{
         };
 
         //ws calls
-        const userData: any = await this.apiUserService.getUser();
+        const userData: any = await this.apiUserService.getOwnUser();
         const result: any = await this.apiUserService.updatePassword(userData.response.key, passwordCurrent, passwordNew, 'password change over GUI');
 
         //handle response

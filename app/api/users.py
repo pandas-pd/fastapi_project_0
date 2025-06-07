@@ -19,7 +19,10 @@ class Endpoint():
         return response
 
     @router.post("/users/user", tags = ["user"])
-    def add_user(body : Users.add_user, response : Response):
+    def add_user(body : Users.add_user, response : Response, request : Request):
+
+        claims : dict = JWT_handler.verify_jwt(token = request.cookies)
+        Services.permission_handler(claims = claims, required_roles = [0], key_user = body.key) #This is an ID10T solution
 
         response = Write.user(body = body, response = response)
         return response
@@ -33,8 +36,20 @@ class Endpoint():
         response = Read.all_users()
         return response
 
+
     @router.get("/users/user", tags = ["user"])
-    def get_user(request : Request):
+    def get_user(key : int, request : Request):
+
+        claims : dict = JWT_handler.verify_jwt(token = request.cookies)
+        Services.permission_handler(claims = claims, required_roles = [0])
+
+        response = Read.user(key_user = key)
+        return response
+
+
+
+    @router.get("/users/own_user", tags = ["user"])
+    def get_own_user(request : Request):
 
         claims = JWT_handler.verify_jwt(token = request.cookies)
 
@@ -46,7 +61,7 @@ class Endpoint():
     def update_user(body : Users.update_user, response : Response, request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
-        Services.permission_handler(claims = claims, required_roles = [], user_dependent = True, key_user = body.key) #This is an ID10T solution
+        Services.permission_handler(claims = claims, required_roles = [0], user_dependent = False, key_user = body.key) #This is an ID10T solution
 
         response = Update.user(body = body, response = response)
         return response
@@ -55,7 +70,7 @@ class Endpoint():
     def delete_user(key : int, response : Response, request : Request):
 
         claims : dict = JWT_handler.verify_jwt(token = request.cookies)
-        Services.permission_handler(claims = claims, required_roles = [], user_dependent = True, key_user = key) #This is an ID10T solution
+        Services.permission_handler(claims = claims, required_roles = [0], user_dependent = False, key_user = key) #This is an ID10T solution
 
         response = Delete.user(key, response = response)
         return response

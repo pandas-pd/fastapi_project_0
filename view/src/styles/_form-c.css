@@ -1,6 +1,6 @@
 /* custom classes */
 
-.form-c-div{
+.form-c {
     margin-top: var(--forms-top-margin);
     max-width: 600px;
     margin-left: auto;
@@ -55,7 +55,7 @@
 
 /* sample code of structure:
 
-<div class="form-c-div">
+<div class="form-c">
 
     <h1>headername</h1>
 

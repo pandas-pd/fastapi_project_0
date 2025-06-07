@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
+import { StmtModifier } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -36,14 +37,26 @@ export class ApiUsersService {
     }
 
 
-    async getUser() : Promise<object> {
+    async getOwnUser() : Promise<object> {
 
         const result : object = await this.api.request(
             'get',
-            '/users/user',
+            '/users/own_user',
             null
         );
 
+        return result;
+    }
+
+
+
+    async getUser(keyUser:Number) : Promise<object> {
+
+        const result : object = await this.api.request(
+            'get',
+            `/users/user?key=${keyUser}`,
+            null
+        );
         return result;
     }
 

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink, Router} from '@angular/router';
+import { ActivatedRoute, RouterLink} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiUsersService } from '../../services/api-users.service';
 import { EnumParserService } from '../../services/enum-parser.service';
@@ -23,7 +23,7 @@ export class AccountComponent implements OnInit{
     constructor(
         private route: ActivatedRoute,
         private apiUserService: ApiUsersService,
-        private enumParser: EnumParserService
+        private enumParser: EnumParserService,
     ){}
 
     async ngOnInit(): Promise<void> {
@@ -35,10 +35,6 @@ export class AccountComponent implements OnInit{
         //parse role data
         this.roleData               = this.enumParser.roleParser(this.accountData.roles, roleEnum);
         return;
-    }
-
-    changePassword(): void{
-
     }
 
 }

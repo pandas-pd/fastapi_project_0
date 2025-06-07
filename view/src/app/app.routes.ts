@@ -5,10 +5,12 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
 import { AccountComponent } from './components/account/account.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { authGuard } from './guards/auth.guard';
 import { accountResolver } from './resolvers/account.resolver';
+import { profileResolver } from './resolvers/profile.resolver';
 
 
 export const routes: Routes = [
@@ -49,7 +51,7 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./components/account/account.component').then((c) => c.AccountComponent),
             canMatch: [authGuard],
-            resolve: {accountData: accountResolver}
+            resolve: {accountData: accountResolver},
     },
 
     {
@@ -62,6 +64,15 @@ export const routes: Routes = [
         path: 'account/change-password',
         loadComponent: () =>
             import('./components/change-password/change-password.component').then((c) => c.ChangePasswordComponent),
+            canMatch: [authGuard],
+    },
+
+    {
+        path: 'edit-user/:key',
+        loadComponent: () =>
+            import('./components/edit-profile/edit-profile.component').then((c) => c.EditProfileComponent),
+            canMatch: [authGuard],
+            resolve: {profileData: profileResolver},
     }
 
 ];

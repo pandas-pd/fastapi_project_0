@@ -78,6 +78,10 @@ export class NavbarComponent implements OnInit, OnDestroy{
         //fetch id
         let aId : string = this.urlTabMap[currentUrl];
 
+        if(aId == undefined){
+            return;
+        }
+
         //restet style
         const ulElement = document.getElementById('navbarUl');
 
@@ -93,6 +97,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
         //set new color
         let currentTab: any         = document.getElementById(aId);
         currentTab.style.color      = this.navbarHighlightColor;
+
+        return;
     }
 
 }

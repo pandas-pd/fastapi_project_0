@@ -10,7 +10,7 @@ export const accountResolver: ResolveFn<any> = () => {
     const apiEnumService = inject(ApiEnumService);
 
     return forkJoin({
-        user: apiUserService.getUser(),
+        user: apiUserService.getOwnUser(),
         roles: apiEnumService.getUserRoles()
     })
 };
