@@ -4,6 +4,7 @@ import { ApiUsersService } from '../../services/api-users.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PopupService } from '../../services/popup.service';
 import { Location } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-change-password',
@@ -11,16 +12,17 @@ import { Location } from '@angular/common';
     imports: [
         RouterLink,
         RouterLinkActive,
+        FormsModule,
     ],
     templateUrl: './change-password.component.html',
     styleUrl: './change-password.component.css'
 })
 
-export class ChangePasswordComponent implements OnInit{
+export class ChangePasswordComponent{
 
-    private passwordCurrentField:HTMLElement | any;
-    private passwordNewField:HTMLElement | any;
-    private passwordRepeatField:HTMLElement | any;
+    passwordCurrent!: string;
+    passwordNew!: string;
+    passwordRepeat! :string;
 
 
     constructor(
@@ -31,17 +33,10 @@ export class ChangePasswordComponent implements OnInit{
     ){}
 
 
-    ngOnInit(): void {
-        this.passwordCurrentField       = document.getElementById('current-password') as HTMLInputElement;
-        this.passwordNewField           = document.getElementById('new-password') as HTMLInputElement;
-        this.passwordRepeatField        = document.getElementById('repeat-password') as HTMLInputElement;
-    }
-
-
     private validatePasswordMatch(password:string, passwordRepeat:string): boolean {
 
         if (password != passwordRepeat){
-            this.popupService.show("Passwords do not match", false, null);
+            this.popupService.show('Passwords do not match', false, null);
             return false
         }
         return true;
@@ -49,35 +44,28 @@ export class ChangePasswordComponent implements OnInit{
 
     async changePassword(): Promise<void> {
 
-        //get field contents
-        const passwordCurrent: any          = this.passwordCurrentField?.value;
-        const passwordNew: any              = this.passwordNewField?.value;
-        const passwordRepeat: any           = this.passwordRepeatField?.value;
-
         //validations
-        if (this.validatePasswordMatch(passwordNew, passwordRepeat) === false){
+        if (this.validatePasswordMatch(this.passwordNew, this.passwordRepeat) === false){
             return;
         };
 
         //ws calls
         const userData: any = await this.apiUserService.getOwnUser();
-        const result: any = await this.apiUserService.updatePassword(userData.response.key, passwordCurrent, passwordNew, 'password change over GUI');
+        const result: any = await this.apiUserService.updatePassword(userData.response.key, this.passwordCurrent, this.passwordNew, 'password change over GUI');
 
         //handle response
-        if (!result.success && result["message"] == null){
-            this.popupService.show("Password change failed", false, null);
+        if (!result.success && result['message'] == null){
+            this.popupService.show('Password change failed', false, null);
         }
         else if (result.success){
-            this.popupService.show("New password set", true, null);
+            this.popupService.show('New password set', true, null);
             this.back();
         }
-        return;
-
         return;
     }
 
 
     back(): void {
-        this.location.back();
+        this.router.navigate(['/account']);
     }
 }

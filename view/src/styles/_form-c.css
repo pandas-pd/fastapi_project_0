@@ -59,7 +59,8 @@
 
     <h1>headername</h1>
 
-    <form onsubmit="return false">
+    <form (ngSubmit)="">
+
         <div class="form-c-grid">
 
             <label for="field1"></label>
@@ -68,12 +69,15 @@
             ...
 
         </div>
+
+        <div class="form-c-button-space">
+            <button></button>
+            <button></button>
+        </div>
+
     </form>
 
-    <div class="form-c-button-space">
-        <button></button>
-        <button></button>
-    </div>
+
 
 </div>
 

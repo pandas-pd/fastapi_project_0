@@ -33,7 +33,7 @@
     <h1></h1>
 
     <div>
-        <form onsubmit="return false">
+        <form (ngSubmit)="">
             <input>
             <button type = "submit" ></button>
         </form>

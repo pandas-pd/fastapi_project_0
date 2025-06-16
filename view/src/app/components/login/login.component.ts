@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
 import { ApiAuthService } from '../../services/api-auth.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PopupService } from '../../services/popup.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-login',
@@ -10,15 +10,16 @@ import { PopupService } from '../../services/popup.service';
     imports: [
         RouterLink,
         RouterLinkActive,
+        FormsModule
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-    private usernameFiled: HTMLInputElement | null = null;
-    private passwordField: HTMLInputElement | null = null;
+    username!: string;
+    password!: string;
 
     constructor(
         private apiAuthService:ApiAuthService,
@@ -26,19 +27,12 @@ export class LoginComponent implements OnInit {
         private router:Router
     ){}
 
-    ngOnInit(): void {
-        this.usernameFiled = document.getElementById('username') as HTMLInputElement;
-        this.passwordField = document.getElementById('password') as HTMLInputElement;
-    }
-
 
     async login(): Promise<void> {
 
         //get field contents
-        const username: any = this.usernameFiled?.value;
-        const password: any = this.passwordField?.value;
-
-        const result : any = await this.apiAuthService.login(username, password);
+        console.log(this.username, this.password);
+        const result : any = await this.apiAuthService.login(this.username, this.password);
 
         //handle login
         if (!result.success && result["message"] == null){

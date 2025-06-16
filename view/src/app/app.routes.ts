@@ -52,6 +52,7 @@ export const routes: Routes = [
             import('./components/account/account.component').then((c) => c.AccountComponent),
             canMatch: [authGuard],
             resolve: {accountData: accountResolver},
+            runGuardsAndResolvers: 'always'
     },
 
     {
@@ -73,6 +74,7 @@ export const routes: Routes = [
             import('./components/edit-profile/edit-profile.component').then((c) => c.EditProfileComponent),
             canMatch: [authGuard],
             resolve: {profileData: profileResolver},
+            runGuardsAndResolvers: 'always'
     }
 
 ];

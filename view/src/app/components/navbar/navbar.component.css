@@ -1,9 +1,17 @@
+.page-title{
+    color: var(--font-color-4);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
 .navbar{
 
     margin-top: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--font-color-1);
+    border-top: 2px solid var(--font-color-1);
 
     list-style-type: none;
     text-align: left;

@@ -3,21 +3,21 @@ import { OnInit } from '@angular/core';
 import { ApiUsersService } from '../../services/api-users.service';
 import { PopupService } from '../../services/popup.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
     selector: 'app-reset-password',
     standalone: true,
-    imports: [],
+    imports: [FormsModule],
     templateUrl: './reset-password.component.html',
     styleUrl: './reset-password.component.css'
 })
 
 
-export class ResetPasswordComponent implements OnInit{
+export class ResetPasswordComponent{
 
-    private usernameField: HTMLInputElement | null = null;
-
+    username! : string;
 
     constructor(
         private apiUserService:ApiUsersService,
@@ -26,18 +26,10 @@ export class ResetPasswordComponent implements OnInit{
     ){}
 
 
-    ngOnInit(): void {
-        this.usernameField = document.getElementById('username') as HTMLInputElement;
-    }
-
-
     async resetPassword(): Promise<void> {
 
-        //get field values
-        const username: any = this.usernameField?.value;
-
         //validate and run transaction
-        const result : any = await this.apiUserService.resetPassword(username);
+        const result : any = await this.apiUserService.resetPassword(this.username);
 
         //feedback
         if (result.success){

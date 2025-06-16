@@ -2,17 +2,28 @@
 
     <h1>Edit profile</h1>
 
-    <form onsubmit="return false">
+    <form (ngSubmit)="updateProfile()">
         <div class="form-c-grid">
 
             <label for="username">Username</label>
             <input id="username" name = "username" [(ngModel)]="profileData.username" type="text">
 
+            <label for="email">E-Mail</label>
+            <input id="email" name="e_mail" [(ngModel)]="profileData.e_mail" type="text">
+
+            <label for="comment">Comment</label>
+            <input id="comment" name="comment" [(ngModel)]="profileData.comment" type="text">
+
         </div>
+
+        <div class="form-c-button-space">
+            <button type="button" id="back" class="secondary-button"  (click)="back()">Back</button>
+            <button type="submit" id="submit">Save</button>
+        </div>
+
+
     </form>
 
-    <div class="form-c-button-space">
-        <button (click)="updateProfile()"></button>
-    </div>
+
 
 </div>
